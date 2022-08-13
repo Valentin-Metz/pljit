@@ -5,7 +5,7 @@
 using namespace std;
 //---------------------------------------------------------------------------
 int main() {
-    SourceCode code;
+    SourceCode code("hello");
     cout << "use for experiments" << endl;
 }
 //---------------------------------------------------------------------------
