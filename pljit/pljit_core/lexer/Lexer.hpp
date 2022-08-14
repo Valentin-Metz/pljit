@@ -13,6 +13,17 @@ class Lexer : public NonCopyable {
     std::size_t current_line_number = 0;
     std::size_t current_char_number = 0;
 
+    enum sections {
+        PRE_PARAM,
+        PARAM,
+        POST_PARAM,
+        VAR,
+        POST_VAR,
+        CONST,
+        POST_CONST,
+    };
+    sections section_index = PRE_PARAM;
+
     public:
     explicit Lexer(SourceCode& sourceCode) : source_code(sourceCode) {}
 
