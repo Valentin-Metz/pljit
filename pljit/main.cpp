@@ -3,12 +3,11 @@
 #include <iostream>
 
 //---------------------------------------------------------------------------
-using namespace std;
 //---------------------------------------------------------------------------
 int main() {
     SourceCode code("hello");
     Lexer lexer(code);
 
-    cout << "use for experiments" << endl;
+    std::cout << "use for experiments" << std::endl;
 }
 //---------------------------------------------------------------------------
