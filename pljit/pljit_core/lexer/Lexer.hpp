@@ -8,7 +8,10 @@
 #include <expected>
 
 class Lexer : public NonCopyable {
-    SourceCode& source_code;
+    const SourceCode& source_code;
+    std::size_t current_parser_position = 0;
+    std::size_t current_line_number = 0;
+    std::size_t current_char_number = 0;
 
     public:
     explicit Lexer(SourceCode& sourceCode) : source_code(sourceCode) {}
