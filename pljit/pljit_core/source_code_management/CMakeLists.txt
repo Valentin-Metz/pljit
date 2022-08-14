@@ -1,1 +1,1 @@
-add_library(source_code_management SourceCode.cpp)
+add_library(source_code_management SourceCode.cpp CompilationError.cpp)

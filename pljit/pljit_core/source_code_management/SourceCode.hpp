@@ -1,7 +1,7 @@
 #ifndef FINAL_SOURCE_CODE_H
 #define FINAL_SOURCE_CODE_H
 
-#include "../pljit_core_utility/NonCopyable.h"
+#include "../pljit_core_utility/NonCopyable.hpp"
 #include <string>
 #include <utility>
 

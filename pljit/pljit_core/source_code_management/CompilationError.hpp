@@ -1,0 +1,7 @@
+#ifndef PLJIT_COMPILATIONERROR_HPP
+#define PLJIT_COMPILATIONERROR_HPP
+
+class CompilationError {
+};
+
+#endif //PLJIT_COMPILATIONERROR_HPP
