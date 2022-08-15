@@ -15,6 +15,7 @@ class LexerToken {
         Declarator,
         Assignment,
         Arithmetic,
+        Bracket,
         Terminator,
     };
     const TokenType token_type;

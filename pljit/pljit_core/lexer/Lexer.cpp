@@ -1,6 +1,8 @@
 #include "Lexer.hpp"
 #include "../tokens/LexerArithmeticToken.hpp"
 #include "../tokens/LexerAssignmentToken.hpp"
+#include "../tokens/LexerBracketToken.hpp"
+#include "../tokens/LexerDeclaratorToken.hpp"
 #include "../tokens/LexerErrorToken.hpp"
 #include "../tokens/LexerIdentifierToken.hpp"
 #include "../tokens/LexerKeywordToken.hpp"
@@ -33,7 +35,7 @@ LexerToken Lexer::nextToken() {
 
         /// Declarator
         if (source_string_reference[current_parser_position] == '=') {
-            return LexerTerminatorToken(SourceCodeReference{current_parser_position++, 1});
+            return LexerDeclaratorToken(SourceCodeReference{current_parser_position++, 1});
         }
 
         /// Assignment
@@ -60,6 +62,16 @@ LexerToken Lexer::nextToken() {
                     return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::MULTIPLY);
                 case '/':
                     return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::DIVIDE);
+            }
+        }
+
+        /// Braces
+        if (source_string_reference[current_parser_position] == '(' || source_string_reference[current_parser_position] == ')') {
+            switch (source_string_reference[current_parser_position]) {
+                case '(':
+                    LexerBracketToken(SourceCodeReference{current_parser_position++, 1}, LexerBracketToken::OPEN);
+                case ')':
+                    LexerBracketToken(SourceCodeReference{current_parser_position++, 1}, LexerBracketToken::CLOSE);
             }
         }
 
