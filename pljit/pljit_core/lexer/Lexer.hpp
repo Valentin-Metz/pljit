@@ -5,7 +5,6 @@
 #include "../source_code_management/CompilationError.hpp"
 #include "../source_code_management/SourceCode.hpp"
 #include "../tokens/LexerToken.hpp"
-#include <expected>
 
 class Lexer : public NonCopyable {
     const SourceCode& source_code;
