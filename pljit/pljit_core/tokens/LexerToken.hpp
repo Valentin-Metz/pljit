@@ -12,6 +12,9 @@ class LexerToken {
         Identifier,
         Literal,
         Separator,
+        Declarator,
+        Assignment,
+        Arithmetic,
         Terminator,
     };
     const TokenType token_type;

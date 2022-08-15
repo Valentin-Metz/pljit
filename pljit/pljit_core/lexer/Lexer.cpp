@@ -1,4 +1,6 @@
 #include "Lexer.hpp"
+#include "../tokens/LexerArithmeticToken.hpp"
+#include "../tokens/LexerAssignmentToken.hpp"
 #include "../tokens/LexerErrorToken.hpp"
 #include "../tokens/LexerIdentifierToken.hpp"
 #include "../tokens/LexerKeywordToken.hpp"
@@ -27,6 +29,38 @@ LexerToken Lexer::nextToken() {
         if (source_string_reference[current_parser_position] == ',' ||
             source_string_reference[current_parser_position] == ';') {
             return LexerSeparatorToken(SourceCodeReference{current_parser_position++, 1});
+        }
+
+        /// Declarator
+        if (source_string_reference[current_parser_position] == '=') {
+            return LexerTerminatorToken(SourceCodeReference{current_parser_position++, 1});
+        }
+
+        /// Assignment
+        if (source_string_reference[current_parser_position] == ':') {
+            if (current_parser_position + 1 >= source_string_reference.length())
+                return LexerErrorToken(SourceCodeReference{current_parser_position, 0}, "Unexpected EOF in assignment");
+            if (source_string_reference[current_parser_position + 1] != '=')
+                return LexerErrorToken(SourceCodeReference{current_parser_position, 2}, "Unexpected token in assignment");
+            current_parser_position += 2;
+            return LexerAssignmentToken(SourceCodeReference{current_parser_position - 2, 2});
+        }
+
+        /// Arithmetic
+        if (source_string_reference[current_parser_position] == '+' ||
+            source_string_reference[current_parser_position] == '-' ||
+            source_string_reference[current_parser_position] == '*' ||
+            source_string_reference[current_parser_position] == '/') {
+            switch (source_string_reference[current_parser_position]) {
+                case '+':
+                    return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::PLUS);
+                case '-':
+                    return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::MINUS);
+                case '*':
+                    return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::MULTIPLY);
+                case '/':
+                    return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::DIVIDE);
+            }
         }
 
         /// Identifier or keyword
