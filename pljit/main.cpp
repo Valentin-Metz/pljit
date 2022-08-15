@@ -13,8 +13,11 @@ int main() {
                                     "RETURN density * volume\n"
                                     "END.";
 
-    SourceCode c{SourceCode(valid_source_code)};
+    SourceCode c{valid_source_code};
     Lexer l{c};
+    LexerToken token = l.nextToken();
+
+    if (token.i)
 
     std::cout << "success" << std::endl;
 }

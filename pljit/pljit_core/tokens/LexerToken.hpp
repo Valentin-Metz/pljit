@@ -5,7 +5,7 @@
 class LexerToken {
     const SourceCodeReference source_code_reference;
 
-    public:
+    protected:
     LexerToken(SourceCodeReference source_code_reference) : source_code_reference(source_code_reference) {}
 };
 

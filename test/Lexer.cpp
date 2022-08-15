@@ -1,5 +1,4 @@
 #include "../pljit/pljit_core/lexer/Lexer.hpp"
-#include "../pljit/pljit_core/source_code_management/SourceCode.hpp"
 #include <gtest/gtest.h>
 std::string valid_source_code = "PARAM width, height, depth;\n"
                                 "VAR volume;\n"
