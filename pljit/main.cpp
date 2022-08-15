@@ -17,8 +17,6 @@ int main() {
     Lexer l{c};
     LexerToken token = l.nextToken();
 
-    if (token.i)
-
     std::cout << "success" << std::endl;
 }
 //---------------------------------------------------------------------------

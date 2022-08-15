@@ -13,7 +13,7 @@ class LexerKeywordToken : public LexerToken {
         RETURN,
     };
     const KeywordType keyword_type;
-    LexerKeywordToken(KeywordType keyword_type, SourceCodeReference source_code_reference) : LexerToken(source_code_reference), keyword_type(keyword_type) {}
+    LexerKeywordToken(KeywordType keyword_type, SourceCodeReference source_code_reference) : LexerToken(source_code_reference, Keyword), keyword_type(keyword_type) {}
 };
 
 #endif //PLJIT_LEXERKEYWORDTOKEN_HPP

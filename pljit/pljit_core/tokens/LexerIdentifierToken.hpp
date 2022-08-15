@@ -4,7 +4,7 @@
 #include "LexerToken.hpp"
 class LexerIdentifierToken : public LexerToken {
     public:
-    LexerIdentifierToken(SourceCodeReference source_code_reference) : LexerToken(source_code_reference) {}
+    LexerIdentifierToken(SourceCodeReference source_code_reference) : LexerToken(source_code_reference, Identifier) {}
 };
 
 #endif //PLJIT_LEXERIDENTIFIERTOKEN_HPP

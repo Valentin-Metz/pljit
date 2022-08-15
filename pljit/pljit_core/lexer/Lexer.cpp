@@ -34,24 +34,24 @@ LexerToken Lexer::nextToken() {
             (source_string_reference[current_parser_position] >= 'a' && source_string_reference[current_parser_position] <= 'z')) {
             std::size_t token_start = current_parser_position++;
             while (true) {
-                if (current_parser_position <= source_string_reference.length())
+                if (current_parser_position >= source_string_reference.length())
                     return LexerErrorToken(SourceCodeReference{current_parser_position, 0}, "Unexpected EOF in token");
                 if ((source_string_reference[current_parser_position] >= 'A' && source_string_reference[current_parser_position] <= 'Z') ||
                     (source_string_reference[current_parser_position] >= 'a' && source_string_reference[current_parser_position] <= 'z')) {
                     ++current_parser_position;
                 } else {
                     /// Keyword
-                    if (source_string_reference.compare(token_start, current_parser_position - token_start, "PARAM"))
+                    if (source_string_reference.compare(token_start, current_parser_position - token_start, "PARAM") == 0)
                         return LexerKeywordToken(LexerKeywordToken::PARAM, SourceCodeReference{token_start, current_parser_position - token_start});
-                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "VAR"))
+                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "VAR") == 0)
                         return LexerKeywordToken(LexerKeywordToken::VAR, SourceCodeReference{token_start, current_parser_position - token_start});
-                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "CONST"))
+                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "CONST") == 0)
                         return LexerKeywordToken(LexerKeywordToken::CONST, SourceCodeReference{token_start, current_parser_position - token_start});
-                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "BEGIN"))
+                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "BEGIN") == 0)
                         return LexerKeywordToken(LexerKeywordToken::BEGIN, SourceCodeReference{token_start, current_parser_position - token_start});
-                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "END"))
+                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "END") == 0)
                         return LexerKeywordToken(LexerKeywordToken::END, SourceCodeReference{token_start, current_parser_position - token_start});
-                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "RETURN"))
+                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "RETURN") == 0)
                         return LexerKeywordToken(LexerKeywordToken::RETURN, SourceCodeReference{token_start, current_parser_position - token_start});
                     /// Identifier
                     else
