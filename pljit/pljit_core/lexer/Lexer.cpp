@@ -1,4 +1,5 @@
 #include "Lexer.hpp"
+#include "../tokens/LexerErrorToken.hpp"
 #include "../tokens/LexerIdentifierToken.hpp"
 #include "../tokens/LexerKeywordToken.hpp"
 #include "../tokens/LexerLiteralToken.hpp"
@@ -6,7 +7,7 @@
 #include "../tokens/LexerTerminatorToken.hpp"
 #include <cerrno>
 
-std::expected<LexerToken, CompilationError> Lexer::nextToken() {
+LexerToken Lexer::nextToken() {
     const std::string_view& source_string_reference = static_cast<std::string_view>(source_code);
     while (current_parser_position <= source_string_reference.length()) {
         // Skip whitespace
@@ -34,7 +35,7 @@ std::expected<LexerToken, CompilationError> Lexer::nextToken() {
             std::size_t token_start = current_parser_position++;
             while (true) {
                 if (current_parser_position <= source_string_reference.length())
-                    return std::unexpected(CompilationError(SourceCodeReference{current_parser_position, 0}, "Unexpected EOF in token"));
+                    return LexerErrorToken(SourceCodeReference{current_parser_position, 0}, "Unexpected EOF in token");
                 if ((source_string_reference[current_parser_position] >= 'A' && source_string_reference[current_parser_position] <= 'Z') ||
                     (source_string_reference[current_parser_position] >= 'a' && source_string_reference[current_parser_position] <= 'z')) {
                     ++current_parser_position;
@@ -67,10 +68,10 @@ std::expected<LexerToken, CompilationError> Lexer::nextToken() {
             // Parse and check errors
             const std::int64_t value{std::strtoll(&source_string_reference[current_parser_position], &end, 10)};
             if (errno == ERANGE) {
-                return std::unexpected(CompilationError(SourceCodeReference{current_parser_position, static_cast<size_t>(end - &source_string_reference[current_parser_position])}, "Literal is out of range"));
+                return LexerErrorToken(SourceCodeReference{current_parser_position, static_cast<size_t>(end - &source_string_reference[current_parser_position])}, "Literal is out of range");
             }
             if (errno) {
-                return std::unexpected(CompilationError(SourceCodeReference{current_parser_position, static_cast<size_t>(end - &source_string_reference[current_parser_position])}, "Literal parsing error: " + std::to_string(errno)));
+                return LexerErrorToken(SourceCodeReference{current_parser_position, static_cast<size_t>(end - &source_string_reference[current_parser_position])}, "Literal parsing error: " + std::to_string(errno));
             }
 
             // Generate token
@@ -81,7 +82,7 @@ std::expected<LexerToken, CompilationError> Lexer::nextToken() {
         }
 
         /// Unexpected character
-        return std::unexpected(CompilationError(SourceCodeReference{current_parser_position, 1}, "Unexpected character"));
+        return LexerErrorToken(SourceCodeReference{current_parser_position, 1}, "Unexpected character");
     }
-    return std::unexpected(CompilationError(SourceCodeReference{current_parser_position, 0}, "Unexpected EOF"));
+    return LexerErrorToken(SourceCodeReference{current_parser_position, 0}, "Unexpected EOF");
 }

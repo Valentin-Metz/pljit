@@ -1,9 +1,9 @@
 set(TEST_SOURCES
-    # add your source files here
-    Tester.cpp
-    )
+        # add your source files here
+        Tester.cpp
+        Lexer.cpp)
 
 add_executable(tester ${TEST_SOURCES})
 target_link_libraries(tester PUBLIC
-    pljit_core
-    GTest::GTest)
+        pljit_core
+        GTest::GTest)
