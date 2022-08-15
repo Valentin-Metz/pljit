@@ -57,3 +57,10 @@ TEST(LexerTest, LexerValidSource) {
     EXPECT_EQ(l.nextToken().token_type, LexerToken::Terminator);
     EXPECT_EQ(l.nextToken().token_type, LexerToken::Error);
 }
+
+TEST(LexerTest, LexerEmptySource) {
+    SourceCode c{SourceCode("")};
+    Lexer l{c};
+
+    EXPECT_EQ(l.nextToken().token_type, LexerToken::Error);
+}
