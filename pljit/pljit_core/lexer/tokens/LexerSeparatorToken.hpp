@@ -6,7 +6,12 @@ namespace lexer {
 
 class LexerSeparatorToken : public LexerToken {
     public:
-    LexerSeparatorToken(source_code::SourceCodeReference source_code_reference) : LexerToken(source_code_reference, Separator) {}
+    enum SeparatorType {
+        COMMA,
+        SEMICOLON,
+    };
+    const SeparatorType separator_type;
+    LexerSeparatorToken(source_code::SourceCodeReference source_code_reference, SeparatorType separator_type) : LexerToken(source_code_reference, Separator), separator_type(separator_type) {}
 };
 
 } // namespace lexer

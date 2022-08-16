@@ -31,10 +31,10 @@ LexerToken Lexer::nextToken() {
         }
 
         /// Separator
-        if (source_string_reference[current_parser_position] == ',' ||
-            source_string_reference[current_parser_position] == ';') {
-            return LexerSeparatorToken(SourceCodeReference{current_parser_position++, 1});
-        }
+        if (source_string_reference[current_parser_position] == ',')
+            return LexerSeparatorToken(SourceCodeReference{current_parser_position++, 1}, LexerSeparatorToken::COMMA);
+        if (source_string_reference[current_parser_position] == ';')
+            return LexerSeparatorToken(SourceCodeReference{current_parser_position++, 1}, LexerSeparatorToken::SEMICOLON);
 
         /// Declarator
         if (source_string_reference[current_parser_position] == '=') {
@@ -52,31 +52,20 @@ LexerToken Lexer::nextToken() {
         }
 
         /// Arithmetic
-        if (source_string_reference[current_parser_position] == '+' ||
-            source_string_reference[current_parser_position] == '-' ||
-            source_string_reference[current_parser_position] == '*' ||
-            source_string_reference[current_parser_position] == '/') {
-            switch (source_string_reference[current_parser_position]) {
-                case '+':
-                    return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::PLUS);
-                case '-':
-                    return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::MINUS);
-                case '*':
-                    return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::MULTIPLY);
-                case '/':
-                    return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::DIVIDE);
-            }
-        }
+        if (source_string_reference[current_parser_position] == '+')
+            return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::PLUS);
+        if (source_string_reference[current_parser_position] == '-')
+            return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::MINUS);
+        if (source_string_reference[current_parser_position] == '*')
+            return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::MULTIPLY);
+        if (source_string_reference[current_parser_position] == '/')
+            return LexerArithmeticToken(SourceCodeReference{current_parser_position++, 1}, LexerArithmeticToken::DIVIDE);
 
         /// Braces
-        if (source_string_reference[current_parser_position] == '(' || source_string_reference[current_parser_position] == ')') {
-            switch (source_string_reference[current_parser_position]) {
-                case '(':
-                    return LexerBracketToken(SourceCodeReference{current_parser_position++, 1}, LexerBracketToken::OPEN);
-                case ')':
-                    return LexerBracketToken(SourceCodeReference{current_parser_position++, 1}, LexerBracketToken::CLOSE);
-            }
-        }
+        if (source_string_reference[current_parser_position] == '(')
+            return LexerBracketToken(SourceCodeReference{current_parser_position++, 1}, LexerBracketToken::OPEN);
+        if (source_string_reference[current_parser_position] == ')')
+            return LexerBracketToken(SourceCodeReference{current_parser_position++, 1}, LexerBracketToken::CLOSE);
 
         /// Identifier or keyword
         if ((source_string_reference[current_parser_position] >= 'A' && source_string_reference[current_parser_position] <= 'Z') ||

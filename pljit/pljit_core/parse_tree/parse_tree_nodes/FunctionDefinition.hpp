@@ -4,16 +4,15 @@
 #include "../../lexer/Lexer.hpp"
 #include "CompoundStatement.hpp"
 #include "ConstantDeclaration.hpp"
-#include "ParameterDeclaration.hpp"
+#include "DeclaratorList.hpp"
 #include "TerminalSymbol.hpp"
-#include "VariableDeclaration.hpp"
 #include <optional>
 namespace parse_tree {
 
 class FunctionDefinition {
     public:
-    std::optional<ParameterDeclaration> parameter_declaration;
-    std::optional<VariableDeclaration> variable_declaration;
+    std::optional<DeclaratorList> parameter_declaration;
+    std::optional<DeclaratorList> variable_declaration;
     std::optional<ConstantDeclaration> constant_declaration;
     std::optional<CompoundStatement> compound_statement;
     std::optional<TerminalSymbol> terminator;
