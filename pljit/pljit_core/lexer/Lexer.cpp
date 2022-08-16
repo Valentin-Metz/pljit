@@ -10,6 +10,7 @@
 #include "tokens/LexerSeparatorToken.hpp"
 #include "tokens/LexerTerminatorToken.hpp"
 #include <cerrno>
+namespace lexer {
 
 LexerToken Lexer::nextToken() {
     const std::string_view& source_string_reference = static_cast<std::string_view>(source_code);
@@ -132,3 +133,5 @@ LexerToken Lexer::nextToken() {
     }
     return LexerErrorToken(SourceCodeReference{current_parser_position, 0}, "Unexpected EOF");
 }
+
+} // namespace lexer

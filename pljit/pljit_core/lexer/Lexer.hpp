@@ -4,6 +4,7 @@
 #include "../pljit_core_utility/NonCopyable.hpp"
 #include "../source_code_management/SourceCode.hpp"
 #include "./tokens/LexerToken.hpp"
+namespace lexer {
 
 class Lexer : public NonCopyable {
     const SourceCode& source_code;
@@ -14,5 +15,7 @@ class Lexer : public NonCopyable {
 
     LexerToken nextToken();
 };
+
+} // namespace lexer
 
 #endif //PLJIT_LEXER_HPP
