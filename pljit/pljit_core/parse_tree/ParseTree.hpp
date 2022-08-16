@@ -1,12 +1,16 @@
 #ifndef PLJIT_PARSETREE_HPP
 #define PLJIT_PARSETREE_HPP
 
-#include "../pljit_core_utility/Expected.hpp"
+#include "../lexer/Lexer.hpp"
+#include "parse_tree_nodes/FunctionDefinition.hpp"
+namespace parse_tree {
+
 class ParseTree {
-
+    const FunctionDefinition root;
     public:
-    static tl::expected
-
+    ParseTree(Lexer l);
 };
+
+} // namespace parse_tree
 
 #endif //PLJIT_PARSETREE_HPP
