@@ -5,9 +5,8 @@
 namespace lexer {
 
 class LexerToken {
-    const source_code::SourceCodeReference source_code_reference;
-
     public:
+    const source_code::SourceCodeReference source_code_reference;
     enum TokenType {
         Error,
         Keyword,

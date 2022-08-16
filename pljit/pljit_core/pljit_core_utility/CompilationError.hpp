@@ -6,12 +6,17 @@
 #include <string>
 #include <utility>
 class CompilationError {
-    const SourceCodeReference source_code_reference;
+    public:
+    const source_code::SourceCodeReference source_code_reference;
+    enum ErrorSource {
+        Lexer,
+        ParseTree,
+    };
+    const ErrorSource error_source;
     const std::string error_message;
 
-    public:
-    explicit CompilationError(SourceCodeReference source_code_reference, std::string error_message)
-        : source_code_reference(source_code_reference), error_message(std::move(error_message)) {}
+    explicit CompilationError(source_code::SourceCodeReference source_code_reference, ErrorSource error_source, std::string error_message)
+        : source_code_reference(source_code_reference), error_source(error_source), error_message(std::move(error_message)) {}
 };
 
 #endif //PLJIT_COMPILATIONERROR_HPP

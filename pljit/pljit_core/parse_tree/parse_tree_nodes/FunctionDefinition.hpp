@@ -12,11 +12,11 @@ namespace parse_tree {
 
 class FunctionDefinition {
     public:
-    const std::optional<ParameterDeclaration> parameter_declaration;
-    const std::optional<VariableDeclaration> variable_declaration;
-    const std::optional<ConstantDeclaration> constant_declaration;
-    const CompoundStatement compound_statement;
-    const TerminalSymbol terminator;
+    std::optional<ParameterDeclaration> parameter_declaration;
+    std::optional<VariableDeclaration> variable_declaration;
+    std::optional<ConstantDeclaration> constant_declaration;
+    std::optional<CompoundStatement> compound_statement;
+    std::optional<TerminalSymbol> terminator;
 
     FunctionDefinition(lexer::Lexer& l);
 };

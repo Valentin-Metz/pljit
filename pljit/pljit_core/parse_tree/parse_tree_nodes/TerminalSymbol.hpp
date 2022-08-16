@@ -4,6 +4,9 @@
 namespace parse_tree {
 
 class TerminalSymbol {
+    public:
+    const source_code::SourceCodeReference source_code_reference;
+    TerminalSymbol(source_code::SourceCodeReference source_code_reference) : source_code_reference(source_code_reference) {}
 };
 
 } // namespace parse_tree
