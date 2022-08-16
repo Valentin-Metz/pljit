@@ -36,7 +36,7 @@ FunctionDefinition::FunctionDefinition(Lexer& l) {
                         break;
                     }
 
-                    case LexerKeywordToken::END: // todo
+                    case LexerKeywordToken::END:
                     case LexerKeywordToken::RETURN: {
                         throw CompilationError(k.source_code_reference, CompilationError::ParseTree, "Unexpected keyword");
                     }
