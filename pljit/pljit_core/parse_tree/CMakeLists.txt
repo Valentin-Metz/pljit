@@ -1,0 +1,1 @@
+add_library(parse_tree ParseTree.cpp ParseTreeParsingResult.hpp ParseTreeParsingError.hpp ParseTreeParsingSuccess.hpp)

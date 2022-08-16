@@ -2,6 +2,8 @@
 #define PLJIT_LEXERERRORTOKEN_HPP
 
 #include "LexerToken.hpp"
+
+// This should be a https://en.cppreference.com/w/cpp/header/expected, but that requires GCC 12
 class LexerErrorToken : public LexerToken {
     const std::string error_message;
 
