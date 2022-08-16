@@ -1,1 +1,1 @@
-add_library(lexer Lexer.cpp)
+add_library(lexer Lexer.cpp tokens/LexerToken.hpp tokens/LexerSeparatorToken.hpp tokens/LexerTerminatorToken.hpp tokens/LexerToken.cpp tokens/LexerKeywordToken.hpp tokens/LexerIdentifierToken.hpp tokens/LexerLiteralToken.hpp tokens/LexerErrorToken.hpp tokens/LexerDeclaratorToken.hpp tokens/LexerAssignmentToken.hpp tokens/LexerArithmeticToken.hpp tokens/LexerBracketToken.hpp)

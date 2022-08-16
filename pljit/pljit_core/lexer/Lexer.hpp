@@ -2,9 +2,8 @@
 #define PLJIT_LEXER_HPP
 
 #include "../pljit_core_utility/NonCopyable.hpp"
-#include "../source_code_management/CompilationError.hpp"
 #include "../source_code_management/SourceCode.hpp"
-#include "../tokens/LexerToken.hpp"
+#include "./tokens/LexerToken.hpp"
 
 class Lexer : public NonCopyable {
     const SourceCode& source_code;

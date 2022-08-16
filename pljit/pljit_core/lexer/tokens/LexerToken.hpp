@@ -1,7 +1,7 @@
 #ifndef PLJIT_LEXERTOKEN_HPP
 #define PLJIT_LEXERTOKEN_HPP
 
-#include "../source_code_management/SourceCodeReference.hpp"
+#include "../../source_code_management/SourceCodeReference.hpp"
 class LexerToken {
     const SourceCodeReference source_code_reference;
 
