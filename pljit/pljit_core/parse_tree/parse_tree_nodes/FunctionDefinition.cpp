@@ -8,7 +8,15 @@ FunctionDefinition::FunctionDefinition(Lexer& l) {
 
     switch (t.token_type) {
         case lexer::LexerToken::Keyword: {
-            LexerKeywordToken k = static_cast<LexerKeywordToken>(t);
+            LexerKeywordToken& k = static_cast<LexerKeywordToken&>(t);
+            switch (k.keyword_type) {
+                case LexerKeywordToken::PARAM: break;
+                case LexerKeywordToken::VAR: break;
+                case LexerKeywordToken::CONST: break;
+                case LexerKeywordToken::BEGIN: break;
+                case LexerKeywordToken::END: break;
+                case LexerKeywordToken::RETURN: break;
+            }
         }
     }
 }
