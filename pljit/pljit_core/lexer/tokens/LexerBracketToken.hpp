@@ -11,7 +11,7 @@ class LexerBracketToken : public LexerToken {
         CLOSE,
     };
     const BracketType bracket_type;
-    LexerBracketToken(SourceCodeReference source_code_reference, BracketType bracket_type) : LexerToken(source_code_reference, Bracket), bracket_type(bracket_type) {}
+    LexerBracketToken(source_code::SourceCodeReference source_code_reference, BracketType bracket_type) : LexerToken(source_code_reference, Bracket), bracket_type(bracket_type) {}
 };
 
 } // namespace lexer

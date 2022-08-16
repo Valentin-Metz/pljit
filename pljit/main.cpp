@@ -9,10 +9,10 @@ int main(int argc, char *argv[]) {
     std::ifstream ifs(argv[1]);
     std::string valid_source((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
 
-    SourceCode c{valid_source};
-    Lexer l{c};
+    source_code::SourceCode c{valid_source};
+    lexer::Lexer l{c};
 
-    while (l.nextToken().token_type != LexerToken::Error) {}
+    while (l.nextToken().token_type != lexer::LexerToken::Error) {}
 
     std::cout << "success" << std::endl;
     return 0;

@@ -7,11 +7,11 @@
 namespace lexer {
 
 class Lexer : public NonCopyable {
-    const SourceCode& source_code;
+    const source_code::SourceCode& source_code;
     std::size_t current_parser_position = 0;
 
     public:
-    explicit Lexer(SourceCode& sourceCode) : source_code(sourceCode) {}
+    explicit Lexer(source_code::SourceCode& sourceCode) : source_code(sourceCode) {}
 
     LexerToken nextToken();
 };

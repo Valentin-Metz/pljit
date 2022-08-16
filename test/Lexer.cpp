@@ -8,6 +8,9 @@ std::string valid_source_code = "PARAM width, height, depth;\n"
                                 "RETURN density * volume\n"
                                 "END.";
 
+using namespace lexer;
+using namespace source_code;
+
 TEST(LexerTest, LexerValidSource) {
     SourceCode c{SourceCode(valid_source_code)};
     Lexer l{c};

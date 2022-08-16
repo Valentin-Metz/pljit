@@ -6,7 +6,7 @@ namespace lexer {
 
 class LexerIdentifierToken : public LexerToken {
     public:
-    LexerIdentifierToken(SourceCodeReference source_code_reference) : LexerToken(source_code_reference, Identifier) {}
+    LexerIdentifierToken(source_code::SourceCodeReference source_code_reference) : LexerToken(source_code_reference, Identifier) {}
 };
 
 } // namespace lexer

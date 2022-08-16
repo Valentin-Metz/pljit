@@ -8,7 +8,7 @@ namespace lexer {
 class LexerLiteralToken : public LexerToken {
     public:
     const std::int64_t value;
-    LexerLiteralToken(std::int64_t value, SourceCodeReference source_code_reference) : LexerToken(source_code_reference, Literal), value(value) {}
+    LexerLiteralToken(std::int64_t value, source_code::SourceCodeReference source_code_reference) : LexerToken(source_code_reference, Literal), value(value) {}
 };
 
 } // namespace lexer

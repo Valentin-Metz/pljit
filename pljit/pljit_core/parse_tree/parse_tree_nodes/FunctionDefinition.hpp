@@ -2,11 +2,12 @@
 #define PLJIT_FUNCTIONDEFINITION_HPP
 
 #include "../../lexer/Lexer.hpp"
+#include <optional>
 namespace parse_tree {
 
 class FunctionDefinition {
     public:
-    FunctionDefinition(Lexer& l){}
+    FunctionDefinition(lexer::Lexer& l);
 };
 
 } // namespace parse_tree

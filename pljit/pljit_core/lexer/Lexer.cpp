@@ -12,6 +12,8 @@
 #include <cerrno>
 namespace lexer {
 
+using namespace source_code;
+
 LexerToken Lexer::nextToken() {
     const std::string_view& source_string_reference = static_cast<std::string_view>(source_code);
     while (current_parser_position <= source_string_reference.length()) {
@@ -70,9 +72,9 @@ LexerToken Lexer::nextToken() {
         if (source_string_reference[current_parser_position] == '(' || source_string_reference[current_parser_position] == ')') {
             switch (source_string_reference[current_parser_position]) {
                 case '(':
-                    LexerBracketToken(SourceCodeReference{current_parser_position++, 1}, LexerBracketToken::OPEN);
+                    return LexerBracketToken(SourceCodeReference{current_parser_position++, 1}, LexerBracketToken::OPEN);
                 case ')':
-                    LexerBracketToken(SourceCodeReference{current_parser_position++, 1}, LexerBracketToken::CLOSE);
+                    return LexerBracketToken(SourceCodeReference{current_parser_position++, 1}, LexerBracketToken::CLOSE);
             }
         }
 

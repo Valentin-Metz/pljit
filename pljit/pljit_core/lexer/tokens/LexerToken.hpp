@@ -5,7 +5,7 @@
 namespace lexer {
 
 class LexerToken {
-    const SourceCodeReference source_code_reference;
+    const source_code::SourceCodeReference source_code_reference;
 
     public:
     enum TokenType {
@@ -23,7 +23,7 @@ class LexerToken {
     const TokenType token_type;
 
     protected:
-    LexerToken(SourceCodeReference source_code_reference, TokenType token_type) : source_code_reference(source_code_reference), token_type(token_type) {}
+    LexerToken(source_code::SourceCodeReference source_code_reference, TokenType token_type) : source_code_reference(source_code_reference), token_type(token_type) {}
 };
 
 } // namespace lexer

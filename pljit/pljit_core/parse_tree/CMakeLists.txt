@@ -1,1 +1,1 @@
-add_library(parse_tree ParseTree.hpp parse_tree_nodes/FunctionDefinition.cpp parse_tree_nodes/FunctionDefinition.hpp)
+add_library(parse_tree ParseTree.hpp parse_tree_nodes/FunctionDefinition.cpp parse_tree_nodes/FunctionDefinition.hpp parse_tree_nodes/ParameterDeclaration.cpp parse_tree_nodes/ParameterDeclaration.hpp)
