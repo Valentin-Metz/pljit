@@ -15,8 +15,12 @@ AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::L
                 throw CompilationError(t.source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken&>(t).error_message);
 
             /// additive-expression -> unary-expression -> primary-expression
-            case lexer::LexerToken::Identifier: break;
-            case lexer::LexerToken::Literal: break;
+            case lexer::LexerToken::Identifier:
+            case lexer::LexerToken::Literal: {
+                std::optional<std::pair<const TerminalSymbol, const AdditiveOperator>> o;
+                additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(AdditiveExpression(UnaryExpression(t, l, separator), l, separator))));
+                break;
+            }
 
             /// (+ | -) additive-expression -> unary-expression -> primary-expression
             /// (* | /) multiplicative-expression
@@ -48,7 +52,8 @@ AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::L
                 lexer::LexerBracketToken& b = static_cast<lexer::LexerBracketToken&>(t);
                 /// additive-expression -> unary-expression -> primary-expression
                 if (b.bracket_type == lexer::LexerBracketToken::OPEN) {
-                    // todo: open would be unary
+                    std::optional<std::pair<const TerminalSymbol, const AdditiveOperator>> o;
+                    additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(AdditiveExpression(UnaryExpression(t, l, separator), l, separator))));
                     break;
                 }
                 [[fallthrough]];
