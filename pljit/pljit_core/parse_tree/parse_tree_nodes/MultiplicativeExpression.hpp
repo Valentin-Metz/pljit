@@ -16,7 +16,7 @@ class MultiplicativeExpression {
     };
     const std::pair<TerminalSymbol, MultiplicativeOperator> multiplicativeOperator;
     const UnaryExpression unaryExpression;
-    MultiplicativeExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
+    MultiplicativeExpression(std::pair<TerminalSymbol, MultiplicativeOperator> multiplicativeOperator, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
 };
 
 } // namespace parse_tree
