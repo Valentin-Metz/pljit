@@ -41,6 +41,7 @@ static const std::vector<std::pair<const Statement, const TerminalSymbol>> gener
                 throw CompilationError(t.source_code_reference, CompilationError::ParseTree, "Expected ';' or 'END' keyword");
         }
     }
+    return statement_list;
 }
 
 StatementList::StatementList(lexer::Lexer& l) : statementList(generateStatementList(l)) {}
