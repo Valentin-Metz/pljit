@@ -5,15 +5,20 @@
 #include "MultiplicativeExpression.hpp"
 #include "TerminalSymbol.hpp"
 #include "UnaryExpression.hpp"
+#include <memory>
 #include <optional>
 #include <vector>
-#include <memory>
 namespace parse_tree {
 
 class AdditiveExpression {
     public:
-    MultiplicativeExpression multiplicativeExpression;
-    std::optional<std::pair<TerminalSymbol, std::unique_ptr<AdditiveExpression>>> additiveExpression;
+    enum AdditiveOperator {
+        PLUS,
+        MINUS,
+    };
+    //UnaryExpression unaryExpression;
+    //std::vector<MultiplicativeExpression> multiplicativeExpression;
+    //std::optional<std::pair<std::pair<const TerminalSymbol, const AdditiveOperator>, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
     AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
 };
 
