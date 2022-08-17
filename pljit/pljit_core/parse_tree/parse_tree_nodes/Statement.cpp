@@ -6,7 +6,7 @@
 namespace parse_tree {
 using namespace lexer;
 
-Statement::Statement(lexer::Lexer& l) {
+Statement::Statement(lexer::Lexer& l, std::optional<LexerToken>& separator) {
     LexerToken t{l.nextToken()};
     switch (t.token_type) {
         case LexerToken::Error:

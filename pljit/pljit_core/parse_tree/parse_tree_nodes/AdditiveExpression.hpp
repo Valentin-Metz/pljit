@@ -14,7 +14,7 @@ class AdditiveExpression {
     public:
     MultiplicativeExpression multiplicativeExpression;
     std::optional<std::pair<TerminalSymbol, std::unique_ptr<AdditiveExpression>>> additiveExpression;
-    AdditiveExpression(lexer::Lexer& l);
+    AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
 };
 
 } // namespace parse_tree

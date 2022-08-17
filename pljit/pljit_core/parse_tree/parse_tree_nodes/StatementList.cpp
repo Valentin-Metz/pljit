@@ -8,10 +8,10 @@ static const std::vector<std::pair<std::unique_ptr<const Statement>, const Termi
     std::vector<std::pair<std::unique_ptr<const Statement>, const TerminalSymbol>> statement_list;
     bool done = false;
     while (!done) {
-        std::optional<TerminalSymbol> separator;
+        std::optional<lexer::LexerToken> separator;
+        std::unique_ptr<Statement> statement = std::make_unique<Statement>(l, separator);
 
-        std::unique_ptr<Statement> statement = std::make_unique<Statement>(l);
-        lexer::LexerToken t{l.nextToken()};
+        lexer::LexerToken t = separator.value();
         switch (t.token_type) {
             case lexer::LexerToken::Error:
                 throw CompilationError(t.source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken&>(t).error_message);
