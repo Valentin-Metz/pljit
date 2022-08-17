@@ -16,13 +16,13 @@ FunctionDefinition::FunctionDefinition(Lexer& l) {
                     case LexerKeywordToken::PARAM: {
                         if (parameter_declaration || variable_declaration || constant_declaration || compound_statement)
                             throw CompilationError(k.source_code_reference, CompilationError::ParseTree, "Parameters must only be defined once - before variables, constants and compound statement");
-                        parameter_declaration.emplace(DeclaratorList(k.source_code_reference, l));
+                        parameter_declaration.emplace(ParameterDeclaration(k.source_code_reference, l));
                         break;
                     }
                     case LexerKeywordToken::VAR: {
                         if (variable_declaration || constant_declaration || compound_statement)
                             throw CompilationError(k.source_code_reference, CompilationError::ParseTree, "Variables must only be defined once - before constants and compound statement");
-                        parameter_declaration.emplace(DeclaratorList(k.source_code_reference, l));
+                        variable_declaration.emplace(VariableDeclaration(k.source_code_reference, l));
                         break;
                     }
                     case LexerKeywordToken::CONST: { // todo

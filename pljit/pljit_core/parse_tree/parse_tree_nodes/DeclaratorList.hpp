@@ -10,9 +10,8 @@ namespace parse_tree {
 
 class DeclaratorList {
     public:
-    const TerminalSymbol keyword;
     std::vector<std::pair<Identifier, TerminalSymbol>> declarator_list;
-    DeclaratorList(TerminalSymbol keyword, lexer::Lexer& l);
+    DeclaratorList(lexer::Lexer& l);
 };
 
 } // namespace parse_tree

@@ -7,7 +7,7 @@
 
 namespace parse_tree {
 
-DeclaratorList::DeclaratorList(TerminalSymbol keyword, lexer::Lexer& l) : keyword(keyword) {
+DeclaratorList::DeclaratorList(lexer::Lexer& l) {
     bool done = false;
     while (!done) {
         std::optional<Identifier> identifier;
