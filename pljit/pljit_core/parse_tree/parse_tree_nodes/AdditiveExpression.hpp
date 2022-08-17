@@ -2,6 +2,7 @@
 #define PLJIT_ADDITIVEEXPRESSION_HPP
 
 #include "../../lexer/Lexer.hpp"
+#include "ArithmeticSymbol.hpp"
 #include "MultiplicativeExpression.hpp"
 #include "TerminalSymbol.hpp"
 #include "UnaryExpression.hpp"
@@ -12,13 +13,9 @@ namespace parse_tree {
 
 class AdditiveExpression {
     public:
-    enum AdditiveOperator : int {
-        PLUS,
-        MINUS,
-    };
     UnaryExpression unaryExpression;
     std::vector<MultiplicativeExpression> multiplicativeExpression;
-    std::optional<std::pair<std::optional<std::pair<const TerminalSymbol, const AdditiveOperator>>, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
+    std::optional<std::pair<std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>>, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
     AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
     AdditiveExpression(UnaryExpression unaryExpression, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
 };

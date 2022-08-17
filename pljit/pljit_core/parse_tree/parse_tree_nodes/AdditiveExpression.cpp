@@ -17,7 +17,7 @@ AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::L
             /// additive-expression -> unary-expression -> primary-expression
             case lexer::LexerToken::Identifier:
             case lexer::LexerToken::Literal: {
-                std::optional<std::pair<const TerminalSymbol, const AdditiveOperator>> o;
+                std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>> o;
                 additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(AdditiveExpression(UnaryExpression(t, l, separator), l, separator))));
                 break;
             }
@@ -28,19 +28,19 @@ AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::L
                 lexer::LexerArithmeticToken& a = static_cast<lexer::LexerArithmeticToken&>(t);
                 switch (a.arithmetic_operator_type) {
                     case lexer::LexerArithmeticToken::PLUS: {
-                        additiveExpression.emplace(std::make_pair(std::make_pair(TerminalSymbol(a.source_code_reference), AdditiveOperator::PLUS), std::make_unique<const AdditiveExpression>(l, separator)));
+                        additiveExpression.emplace(std::make_pair(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::PLUS), std::make_unique<const AdditiveExpression>(l, separator)));
                         break;
                     }
                     case lexer::LexerArithmeticToken::MINUS: {
-                        additiveExpression.emplace(std::make_pair(std::make_pair(TerminalSymbol(a.source_code_reference), AdditiveOperator::MINUS), std::make_unique<const AdditiveExpression>(l, separator)));
+                        additiveExpression.emplace(std::make_pair(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::MINUS), std::make_unique<const AdditiveExpression>(l, separator)));
                         break;
                     }
                     case lexer::LexerArithmeticToken::MULTIPLY: {
-                        multiplicativeExpression.push_back(MultiplicativeExpression(std::make_pair(TerminalSymbol(a.source_code_reference), MultiplicativeExpression::MULTIPLY), l, separator));
+                        multiplicativeExpression.push_back(MultiplicativeExpression(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::MULTIPLY), l, separator));
                         break;
                     }
                     case lexer::LexerArithmeticToken::DIVIDE: {
-                        multiplicativeExpression.push_back(MultiplicativeExpression(std::make_pair(TerminalSymbol(a.source_code_reference), MultiplicativeExpression::DIVIDE), l, separator));
+                        multiplicativeExpression.push_back(MultiplicativeExpression(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::DIVIDE), l, separator));
                         break;
                     }
                 }
@@ -52,7 +52,7 @@ AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::L
                 lexer::LexerBracketToken& b = static_cast<lexer::LexerBracketToken&>(t);
                 /// additive-expression -> unary-expression -> primary-expression
                 if (b.bracket_type == lexer::LexerBracketToken::OPEN) {
-                    std::optional<std::pair<const TerminalSymbol, const AdditiveOperator>> o;
+                    std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>> o;
                     additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(AdditiveExpression(UnaryExpression(t, l, separator), l, separator))));
                     break;
                 }

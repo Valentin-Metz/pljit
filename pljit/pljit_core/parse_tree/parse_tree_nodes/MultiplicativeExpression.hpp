@@ -2,6 +2,7 @@
 #define PLJIT_MULTIPLICATIVEEXPRESSION_HPP
 
 #include "../../lexer/Lexer.hpp"
+#include "ArithmeticSymbol.hpp"
 #include "TerminalSymbol.hpp"
 #include "UnaryExpression.hpp"
 #include <memory>
@@ -10,13 +11,9 @@ namespace parse_tree {
 
 class MultiplicativeExpression {
     public:
-    enum MultiplicativeOperator {
-        MULTIPLY,
-        DIVIDE,
-    };
-    const std::pair<TerminalSymbol, MultiplicativeOperator> multiplicativeOperator;
+    const std::pair<const TerminalSymbol, const ArithmeticSymbol> multiplicativeOperator;
     const UnaryExpression unaryExpression;
-    MultiplicativeExpression(std::pair<TerminalSymbol, MultiplicativeOperator> multiplicativeOperator, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
+    MultiplicativeExpression(std::pair<TerminalSymbol, ArithmeticSymbol> multiplicativeOperator, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
 };
 
 } // namespace parse_tree
