@@ -23,9 +23,10 @@ FunctionDefinition::FunctionDefinition(Lexer& l) {
                         variable_declaration.emplace(VariableDeclaration(k.source_code_reference, l));
                         break;
                     }
-                    case LexerKeywordToken::CONST: { // todo
+                    case LexerKeywordToken::CONST: {
                         if (constant_declaration || compound_statement)
                             throw CompilationError(k.source_code_reference, CompilationError::ParseTree, "Constants must only be defined once - before the compound statement");
+                        constant_declaration.emplace(ConstantDeclaration(k.source_code_reference, l));
                         break;
                     }
                     case LexerKeywordToken::BEGIN: { // todo
