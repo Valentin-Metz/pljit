@@ -1,6 +1,7 @@
 #ifndef PLJIT_MULTIPLICATIVEEXPRESSION_HPP
 #define PLJIT_MULTIPLICATIVEEXPRESSION_HPP
 
+#include "../../lexer/Lexer.hpp"
 #include "TerminalSymbol.hpp"
 #include "UnaryExpression.hpp"
 #include <memory>
@@ -14,7 +15,7 @@ class MultiplicativeExpression {
         DIVIDE,
     };
     //const std::pair<TerminalSymbol, MultiplicativeOperator> multiplicativeOperator;
-    //const UnaryExpression unaryExpression;
+    const UnaryExpression unaryExpression;
     MultiplicativeExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
 };
 
