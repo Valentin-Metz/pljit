@@ -16,7 +16,7 @@ Statement::Statement(lexer::Lexer& l, std::optional<LexerToken>& separator) {
         case LexerToken::Keyword: {
             if (static_cast<LexerKeywordToken&>(t).keyword_type != LexerKeywordToken::RETURN)
                 throw CompilationError(t.source_code_reference, CompilationError::ParseTree, "Wrong keyword");
-            additiveExpression.emplace(t.source_code_reference, AdditiveExpression(l, separator));
+            additiveExpression.emplace(std::make_pair(t.source_code_reference, std::make_unique<AdditiveExpression>(l, separator)));
             break;
         }
         /// AssignmentExpression

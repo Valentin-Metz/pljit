@@ -12,7 +12,7 @@ namespace parse_tree {
 class Statement {
     public:
     std::optional<const AssignmentExpression> assignmentExpression;
-    std::optional<std::pair<const TerminalSymbol, const AdditiveExpression>> additiveExpression;
+    std::optional<std::pair<const TerminalSymbol, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
     Statement(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
 };
 

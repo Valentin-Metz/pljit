@@ -15,18 +15,22 @@ UnaryExpression::UnaryExpression(lexer::LexerToken t, lexer::Lexer& l, std::opti
             switch (a.arithmetic_operator_type) {
                 case lexer::LexerArithmeticToken::PLUS: {
                     modifier.emplace(std::make_pair(t.source_code_reference, ArithmeticSymbol::PLUS));
+                    primaryExpression.emplace(std::make_unique<PrimaryExpression>(l.nextToken(), l, separator));
                     break;
                 }
                 case lexer::LexerArithmeticToken::MINUS: {
+                    modifier.emplace(std::make_pair(t.source_code_reference, ArithmeticSymbol::MINUS));
+                    primaryExpression.emplace(std::make_unique<PrimaryExpression>(l.nextToken(), l, separator));
                     break;
                 }
                 default:
-                    break;
+                    throw CompilationError(t.source_code_reference, CompilationError::ParseTree, "Unexpected operator in unary-expression");
             }
             break;
         }
 
         default: {
+            primaryExpression.emplace(std::make_unique<PrimaryExpression>(l.nextToken(), l, separator));
             break;
         }
     }

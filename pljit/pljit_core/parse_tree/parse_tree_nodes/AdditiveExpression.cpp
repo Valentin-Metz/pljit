@@ -6,8 +6,8 @@
 
 namespace parse_tree {
 
-AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : AdditiveExpression(UnaryExpression(l, separator), l, separator) {}
-AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : unaryExpression(unaryExpression) {
+AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : AdditiveExpression(l.nextToken(), l, separator) {}
+AdditiveExpression::AdditiveExpression(lexer::LexerToken t, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : unaryExpression(t, l, separator) {
     while (!separator && !additiveExpression) {
         lexer::LexerToken t{l.nextToken()};
         switch (t.token_type) {
@@ -18,7 +18,7 @@ AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::L
             case lexer::LexerToken::Identifier:
             case lexer::LexerToken::Literal: {
                 std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>> o;
-                additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(AdditiveExpression(UnaryExpression(t, l, separator), l, separator))));
+                additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(AdditiveExpression(t, l, separator))));
                 break;
             }
 
@@ -36,11 +36,11 @@ AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::L
                         break;
                     }
                     case lexer::LexerArithmeticToken::MULTIPLY: {
-                        multiplicativeExpression.push_back(MultiplicativeExpression(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::MULTIPLY), l, separator));
+                        multiplicativeExpression.push_back(std::make_unique<MultiplicativeExpression>(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::MULTIPLY), l, separator));
                         break;
                     }
                     case lexer::LexerArithmeticToken::DIVIDE: {
-                        multiplicativeExpression.push_back(MultiplicativeExpression(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::DIVIDE), l, separator));
+                        multiplicativeExpression.push_back(std::make_unique<MultiplicativeExpression>(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::DIVIDE), l, separator));
                         break;
                     }
                 }
@@ -53,7 +53,7 @@ AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::L
                 /// additive-expression -> unary-expression -> primary-expression
                 if (b.bracket_type == lexer::LexerBracketToken::OPEN) {
                     std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>> o;
-                    additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(AdditiveExpression(UnaryExpression(t, l, separator), l, separator))));
+                    additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(t, l, separator)));
                     break;
                 }
                 [[fallthrough]];
