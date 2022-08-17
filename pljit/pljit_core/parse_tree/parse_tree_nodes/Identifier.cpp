@@ -16,5 +16,6 @@ static const TerminalSymbol generateIdentifier(lexer::Lexer& l) {
 }
 
 Identifier::Identifier(lexer::Lexer& l) : identifier(generateIdentifier(l)) {}
+Identifier::Identifier(TerminalSymbol identifier) : identifier(identifier) {}
 
 } // namespace parse_tree

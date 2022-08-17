@@ -10,6 +10,7 @@ class Literal {
     public:
     const std::pair<const TerminalSymbol, const std::int64_t> literal;
     Literal(lexer::Lexer& l);
+    Literal(std::pair<TerminalSymbol, std::int64_t> literal);
 };
 
 } // namespace parse_tree

@@ -14,6 +14,7 @@ class Factory {
     };
     static std::pair<const SeparatorType, const TerminalSymbol> produceSeparator(lexer::Lexer& l);
     static const TerminalSymbol produceDeclarator(lexer::Lexer& l);
+    static const TerminalSymbol produceAssignment(lexer::Lexer& l);
 };
 
 } // namespace parse_tree

@@ -2,10 +2,14 @@
 #define PLJIT_STATEMENTLIST_HPP
 
 #include "../../lexer/Lexer.hpp"
+#include "Statement.hpp"
+#include "TerminalSymbol.hpp"
+#include <vector>
 namespace parse_tree {
 
 class StatementList {
     public:
+    const std::vector<std::pair<const Statement, const TerminalSymbol>> statementList;
     StatementList(lexer::Lexer& l);
 };
 

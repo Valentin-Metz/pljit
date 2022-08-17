@@ -39,6 +39,7 @@ FunctionDefinition::FunctionDefinition(Lexer& l) {
                         throw CompilationError(k.source_code_reference, CompilationError::ParseTree, "Unexpected keyword");
                     }
                 }
+                break;
             }
             default:
                 throw CompilationError(t.source_code_reference, CompilationError::ParseTree, "Expected keyword");

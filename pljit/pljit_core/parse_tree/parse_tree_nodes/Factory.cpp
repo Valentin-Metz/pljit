@@ -33,5 +33,17 @@ const TerminalSymbol Factory::produceDeclarator(lexer::Lexer& l) {
             throw CompilationError(d.source_code_reference, CompilationError::ParseTree, "Expected declarator");
     }
 }
+const TerminalSymbol Factory::produceAssignment(lexer::Lexer& l) {
+    lexer::LexerToken a{l.nextToken()};
+    switch (a.token_type) {
+        case lexer::LexerToken::Error:
+            throw CompilationError(a.source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken&>(a).error_message);
+        case lexer::LexerToken::Assignment: {
+            return a.source_code_reference;
+        }
+        default:
+            throw CompilationError(a.source_code_reference, CompilationError::ParseTree, "Expected assignment");
+    }
+}
 
 } // namespace parse_tree

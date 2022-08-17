@@ -10,7 +10,6 @@ class CompoundStatement {
     public:
     const TerminalSymbol begin;
     const StatementList statementList;
-    const TerminalSymbol end;
     CompoundStatement(TerminalSymbol begin, lexer::Lexer& l);
 };
 

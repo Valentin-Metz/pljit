@@ -13,6 +13,7 @@ class Identifier {
     public:
     const TerminalSymbol identifier;
     Identifier(lexer::Lexer& l);
+    Identifier(TerminalSymbol identifier);
 };
 
 } // namespace parse_tree
