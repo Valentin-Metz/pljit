@@ -13,7 +13,7 @@ namespace parse_tree {
 class AdditiveExpression {
     public:
     MultiplicativeExpression multiplicativeExpression;
-    //std::optional<std::pair<TerminalSymbol, std::unique_ptr<AdditiveExpression>>> additiveExpression;
+    std::optional<std::pair<TerminalSymbol, std::unique_ptr<AdditiveExpression>>> additiveExpression;
     AdditiveExpression(lexer::Lexer& l);
 };
 

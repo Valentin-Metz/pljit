@@ -9,7 +9,7 @@ namespace parse_tree {
 
 class StatementList {
     public:
-    const std::vector<std::pair<const Statement, const TerminalSymbol>> statementList;
+    const std::vector<std::pair<std::unique_ptr<const Statement>, const TerminalSymbol>> statementList;
     StatementList(lexer::Lexer& l);
 };
 

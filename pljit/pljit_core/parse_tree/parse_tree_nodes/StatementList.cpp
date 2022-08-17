@@ -4,13 +4,13 @@
 
 namespace parse_tree {
 
-static const std::vector<std::pair<const Statement, const TerminalSymbol>> generateStatementList(lexer::Lexer& l) {
-    std::vector<std::pair<const Statement, const TerminalSymbol>> statement_list;
+static const std::vector<std::pair<std::unique_ptr<const Statement>, const TerminalSymbol>> generateStatementList(lexer::Lexer& l) {
+    std::vector<std::pair<std::unique_ptr<const Statement>, const TerminalSymbol>> statement_list;
     bool done = false;
     while (!done) {
         std::optional<TerminalSymbol> separator;
 
-        Statement statement{l};
+        std::unique_ptr<Statement> statement = std::make_unique<Statement>(l);
         lexer::LexerToken t{l.nextToken()};
         switch (t.token_type) {
             case lexer::LexerToken::Error:
@@ -22,7 +22,9 @@ static const std::vector<std::pair<const Statement, const TerminalSymbol>> gener
                 if (s.separator_type != lexer::LexerSeparatorToken::SEMICOLON) {
                     throw CompilationError(t.source_code_reference, CompilationError::ParseTree, "Wrong separator");
                 }
-                statement_list.push_back(std::make_pair(statement, s.source_code_reference));
+                std::vector<std::unique_ptr<Statement>> v;
+                v.push_back(std::move(statement));
+                statement_list.push_back(std::make_pair(std::move(statement), s.source_code_reference));
                 break;
             }
 
@@ -33,7 +35,7 @@ static const std::vector<std::pair<const Statement, const TerminalSymbol>> gener
                     throw CompilationError(t.source_code_reference, CompilationError::ParseTree, "Wrong keyword");
                 }
                 done = true;
-                statement_list.push_back(std::make_pair(statement, k.source_code_reference));
+                statement_list.push_back(std::make_pair(std::move(statement), k.source_code_reference));
                 break;
             }
 
