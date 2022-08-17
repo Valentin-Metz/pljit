@@ -6,7 +6,8 @@
 
 namespace parse_tree {
 
-AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : unaryExpression(l, separator) {
+AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : AdditiveExpression(UnaryExpression(l, separator), l, separator) {}
+AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : unaryExpression(unaryExpression) {
     while (!separator && !additiveExpression) {
         lexer::LexerToken t{l.nextToken()};
         switch (t.token_type) {
@@ -61,8 +62,6 @@ AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<lexer::Lex
                 throw CompilationError(t.source_code_reference, CompilationError::ParseTree, "Unexpected token in additive-expression");
         }
     }
-}
-AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : unaryExpression(unaryExpression) {
 }
 
 } // namespace parse_tree
