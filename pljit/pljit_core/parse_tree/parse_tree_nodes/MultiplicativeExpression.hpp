@@ -14,7 +14,7 @@ class MultiplicativeExpression {
         MULTIPLY,
         DIVIDE,
     };
-    //const std::pair<TerminalSymbol, MultiplicativeOperator> multiplicativeOperator;
+    const std::pair<TerminalSymbol, MultiplicativeOperator> multiplicativeOperator;
     const UnaryExpression unaryExpression;
     MultiplicativeExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
 };

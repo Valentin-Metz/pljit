@@ -17,8 +17,8 @@ class AdditiveExpression {
         MINUS,
     };
     UnaryExpression unaryExpression;
-    //std::vector<MultiplicativeExpression> multiplicativeExpression;
-    //std::optional<std::pair<std::pair<const TerminalSymbol, const AdditiveOperator>, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
+    std::vector<MultiplicativeExpression> multiplicativeExpression;
+    std::optional<std::pair<std::pair<const TerminalSymbol, const AdditiveOperator>, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
     AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
 };
 
