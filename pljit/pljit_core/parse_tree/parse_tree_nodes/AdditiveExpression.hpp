@@ -12,7 +12,7 @@ namespace parse_tree {
 
 class AdditiveExpression {
     public:
-    enum AdditiveOperator {
+    enum AdditiveOperator : int {
         PLUS,
         MINUS,
     };
@@ -20,6 +20,7 @@ class AdditiveExpression {
     std::vector<MultiplicativeExpression> multiplicativeExpression;
     std::optional<std::pair<std::optional<std::pair<const TerminalSymbol, const AdditiveOperator>>, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
     AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
+    AdditiveExpression(UnaryExpression unaryExpression, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
 };
 
 } // namespace parse_tree

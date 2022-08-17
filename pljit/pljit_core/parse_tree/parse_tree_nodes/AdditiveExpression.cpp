@@ -1,5 +1,6 @@
 #include "AdditiveExpression.hpp"
 #include "../../lexer/tokens/LexerArithmeticToken.hpp"
+#include "../../lexer/tokens/LexerBracketToken.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../pljit_core_utility/CompilationError.hpp"
 
@@ -41,13 +42,16 @@ AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<lexer::Lex
                 break;
             }
 
-            case lexer::LexerToken::Declarator: break;
-            case lexer::LexerToken::Assignment: break;
-            case lexer::LexerToken::Terminator: break;
-
             /// Expression is over; transmit separator
+            case lexer::LexerToken::Bracket: {
+                lexer::LexerBracketToken& b = static_cast<lexer::LexerBracketToken&>(t);
+                if (b.bracket_type == lexer::LexerBracketToken::OPEN) {
+                    // todo: open would be unary
+                    break;
+                }
+                [[fallthrough]];
+            }
             case lexer::LexerToken::Keyword:
-            case lexer::LexerToken::Bracket: // todo: open would be unary
             case lexer::LexerToken::Separator: {
                 separator.emplace(t);
                 break;
