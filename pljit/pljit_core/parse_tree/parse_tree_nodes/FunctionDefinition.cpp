@@ -8,6 +8,8 @@ FunctionDefinition::FunctionDefinition(Lexer& l) {
     while (!compound_statement) {
         LexerToken t{l.nextToken()};
         switch (t.token_type) {
+            case LexerToken::Error:
+                throw CompilationError(t.source_code_reference, CompilationError::Lexer, static_cast<LexerErrorToken&>(t).error_message);
             case LexerToken::Keyword: {
                 LexerKeywordToken& k = static_cast<LexerKeywordToken&>(t);
                 switch (k.keyword_type) {
@@ -29,20 +31,15 @@ FunctionDefinition::FunctionDefinition(Lexer& l) {
                         constant_declaration.emplace(ConstantDeclaration(k.source_code_reference, l));
                         break;
                     }
-                    case LexerKeywordToken::BEGIN: { // todo
-                        if (compound_statement)
-                            throw CompilationError(k.source_code_reference, CompilationError::ParseTree, "The compound statement must only be given once");
+                    case LexerKeywordToken::BEGIN: {
+                        compound_statement.emplace(CompoundStatement(k.source_code_reference, l));
                         break;
                     }
-
-                    case LexerKeywordToken::END:
-                    case LexerKeywordToken::RETURN: {
+                    default: {
                         throw CompilationError(k.source_code_reference, CompilationError::ParseTree, "Unexpected keyword");
                     }
                 }
             }
-            case LexerToken::Error:
-                throw CompilationError(t.source_code_reference, CompilationError::Lexer, static_cast<LexerErrorToken&>(t).error_message);
             default:
                 throw CompilationError(t.source_code_reference, CompilationError::ParseTree, "Expected keyword");
         }
