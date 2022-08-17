@@ -45,6 +45,7 @@ AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<lexer::Lex
             /// Expression is over; transmit separator
             case lexer::LexerToken::Bracket: {
                 lexer::LexerBracketToken& b = static_cast<lexer::LexerBracketToken&>(t);
+                /// additive-expression -> unary-expression -> primary-expression
                 if (b.bracket_type == lexer::LexerBracketToken::OPEN) {
                     // todo: open would be unary
                     break;
@@ -60,6 +61,8 @@ AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<lexer::Lex
                 throw CompilationError(t.source_code_reference, CompilationError::ParseTree, "Unexpected token in additive-expression");
         }
     }
+}
+AdditiveExpression::AdditiveExpression(UnaryExpression unaryExpression, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : unaryExpression(unaryExpression) {
 }
 
 } // namespace parse_tree
