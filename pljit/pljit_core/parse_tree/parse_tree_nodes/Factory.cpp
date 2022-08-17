@@ -1,5 +1,4 @@
 #include "Factory.hpp"
-#include "../../lexer/tokens/LexerDeclaratorToken.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerSeparatorToken.hpp"
 #include "../../pljit_core_utility/CompilationError.hpp"
