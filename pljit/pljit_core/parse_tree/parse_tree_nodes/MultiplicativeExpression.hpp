@@ -13,7 +13,7 @@ class MultiplicativeExpression {
     public:
     const std::pair<const TerminalSymbol, const ArithmeticSymbol> multiplicativeOperator;
     const UnaryExpression unaryExpression;
-    MultiplicativeExpression(std::pair<TerminalSymbol, ArithmeticSymbol> multiplicativeOperator, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
+    MultiplicativeExpression(std::pair<TerminalSymbol, ArithmeticSymbol> multiplicativeOperator, lexer::Lexer& l);
 };
 
 } // namespace parse_tree

@@ -12,8 +12,8 @@ class UnaryExpression {
     public:
     std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>> modifier;
     std::optional<std::unique_ptr<const PrimaryExpression>> primaryExpression;
-    UnaryExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
-    UnaryExpression(lexer::LexerToken t, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
+    UnaryExpression(lexer::Lexer& l);
+    UnaryExpression(lexer::LexerToken t, lexer::Lexer& l);
 };
 
 } // namespace parse_tree

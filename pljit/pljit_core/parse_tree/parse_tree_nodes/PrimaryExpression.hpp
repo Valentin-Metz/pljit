@@ -7,15 +7,16 @@
 #include <memory>
 #include <optional>
 namespace parse_tree {
+class AdditiveExpression;
 
 class PrimaryExpression {
     public:
     std::optional<TerminalSymbol> identifier;
-    std::optional<TerminalSymbol> literal;
+    std::optional<std::pair<TerminalSymbol, std::int64_t>> literal;
     std::optional<TerminalSymbol> openBracket;
-    std::optional<std::unique_ptr<PrimaryExpression>> primaryExpression;
+    //std::optional<std::unique_ptr<AdditiveExpression>> additiveExpression;
     std::optional<TerminalSymbol> closingBracket;
-    PrimaryExpression(lexer::LexerToken t, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
+    PrimaryExpression(lexer::LexerToken t, lexer::Lexer& l);
 };
 
 } // namespace parse_tree

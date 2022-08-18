@@ -4,8 +4,8 @@
 #include "../../pljit_core_utility/CompilationError.hpp"
 
 namespace parse_tree {
-UnaryExpression::UnaryExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : UnaryExpression(l.nextToken(), l, separator) {}
-UnaryExpression::UnaryExpression(lexer::LexerToken t, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) {
+UnaryExpression::UnaryExpression(lexer::Lexer& l) : UnaryExpression(l.nextToken(), l) {}
+UnaryExpression::UnaryExpression(lexer::LexerToken t, lexer::Lexer& l) {
     switch (t.token_type) {
         case lexer::LexerToken::Error:
             throw CompilationError(t.source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken&>(t).error_message);
@@ -15,12 +15,12 @@ UnaryExpression::UnaryExpression(lexer::LexerToken t, lexer::Lexer& l, std::opti
             switch (a.arithmetic_operator_type) {
                 case lexer::LexerArithmeticToken::PLUS: {
                     modifier.emplace(std::make_pair(t.source_code_reference, ArithmeticSymbol::PLUS));
-                    primaryExpression.emplace(std::make_unique<PrimaryExpression>(l.nextToken(), l, separator));
+                    primaryExpression.emplace(std::make_unique<PrimaryExpression>(l.nextToken(), l));
                     break;
                 }
                 case lexer::LexerArithmeticToken::MINUS: {
                     modifier.emplace(std::make_pair(t.source_code_reference, ArithmeticSymbol::MINUS));
-                    primaryExpression.emplace(std::make_unique<PrimaryExpression>(l.nextToken(), l, separator));
+                    primaryExpression.emplace(std::make_unique<PrimaryExpression>(l.nextToken(), l));
                     break;
                 }
                 default:
@@ -30,7 +30,7 @@ UnaryExpression::UnaryExpression(lexer::LexerToken t, lexer::Lexer& l, std::opti
         }
 
         default: {
-            primaryExpression.emplace(std::make_unique<PrimaryExpression>(l.nextToken(), l, separator));
+            primaryExpression.emplace(std::make_unique<PrimaryExpression>(l.nextToken(), l));
             break;
         }
     }
