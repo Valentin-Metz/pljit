@@ -1,10 +1,10 @@
-#ifndef PLJIT_STATEMENT_HPP
+#ifndef PLJIT_PARSETREESTATEMENT_HPP
 #define PLJIT_STATEMENT_HPP
 #include <memory>
 #include <vector>
 
 namespace parse_tree {
-class Statement;
+class ParseTreeStatement;
 }
 
 namespace ast {
@@ -23,9 +23,9 @@ class Statement {
     std::vector<std::unique_ptr<Expression>> expressions;
 
     protected:
-    Statement(StatementType statement_type, parse_tree::Statement statement);
+    Statement(StatementType statement_type, parse_tree::ParseTreeStatement statement);
 };
 
 } // namespace ast
 
-#endif //PLJIT_STATEMENT_HPP
+#endif //PLJIT_PARSETREESTATEMENT_HPP

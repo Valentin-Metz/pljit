@@ -1,4 +1,4 @@
-#include "Statement.hpp"
+#include "ParseTreeStatement.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerKeywordToken.hpp"
 #include "../../pljit_core_utility/CompilationError.hpp"
@@ -6,7 +6,7 @@
 namespace parse_tree {
 using namespace lexer;
 
-Statement::Statement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator) {
+ParseTreeStatement::ParseTreeStatement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator) {
     std::unique_ptr<LexerToken> t{l.nextToken()};
     switch (t->token_type) {
         case LexerToken::Error:

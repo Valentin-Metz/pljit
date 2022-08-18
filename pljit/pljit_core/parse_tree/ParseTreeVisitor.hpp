@@ -16,7 +16,7 @@ class Literal;
 class MultiplicativeExpression;
 class ParameterDeclaration;
 class PrimaryExpression;
-class Statement;
+class ParseTreeStatement;
 class StatementList;
 class TerminalSymbol;
 class UnaryExpression;
@@ -38,7 +38,7 @@ class ParseTreeVisitor {
     virtual void visit(const MultiplicativeExpression& node) const = 0;
     virtual void visit(const ParameterDeclaration& node) const = 0;
     virtual void visit(const PrimaryExpression& node) const = 0;
-    virtual void visit(const Statement& node) const = 0;
+    virtual void visit(const ParseTreeStatement& node) const = 0;
     virtual void visit(const StatementList& node) const = 0;
     virtual void visit(const TerminalSymbol& node) const = 0;
     virtual void visit(const UnaryExpression& node) const = 0;

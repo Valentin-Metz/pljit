@@ -1,16 +1,16 @@
 #include "StatementList.hpp"
 #include "../../lexer/tokens/LexerKeywordToken.hpp"
 #include "../../lexer/tokens/LexerSeparatorToken.hpp"
-#include "Statement.hpp"
+#include "ParseTreeStatement.hpp"
 
 namespace parse_tree {
 
-static const std::vector<std::pair<std::unique_ptr<const Statement>, const TerminalSymbol>> generateStatementList(lexer::Lexer& l) {
-    std::vector<std::pair<std::unique_ptr<const Statement>, const TerminalSymbol>> statement_list;
+static const std::vector<std::pair<std::unique_ptr<const ParseTreeStatement>, const TerminalSymbol>> generateStatementList(lexer::Lexer& l) {
+    std::vector<std::pair<std::unique_ptr<const ParseTreeStatement>, const TerminalSymbol>> statement_list;
     bool done = false;
     while (!done) {
         std::optional<std::unique_ptr<lexer::LexerToken>> separator;
-        std::unique_ptr<Statement> statement = std::make_unique<Statement>(l, separator);
+        std::unique_ptr<ParseTreeStatement> statement = std::make_unique<ParseTreeStatement>(l, separator);
 
         std::unique_ptr<lexer::LexerToken> t = std::move(separator.value());
         switch (t->token_type) {

@@ -1,6 +1,6 @@
 #include "FunctionDefinition.hpp"
 #include "../../lexer/tokens/LexerKeywordToken.hpp"
-#include "Statement.hpp"
+#include "ParseTreeStatement.hpp"
 
 namespace parse_tree {
 using namespace lexer;

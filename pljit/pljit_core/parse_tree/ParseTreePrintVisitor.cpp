@@ -12,8 +12,8 @@
 #include "parse_tree_nodes/Literal.hpp"
 #include "parse_tree_nodes/MultiplicativeExpression.hpp"
 #include "parse_tree_nodes/ParameterDeclaration.hpp"
+#include "parse_tree_nodes/ParseTreeStatement.hpp"
 #include "parse_tree_nodes/PrimaryExpression.hpp"
-#include "parse_tree_nodes/Statement.hpp"
 #include "parse_tree_nodes/StatementList.hpp"
 #include "parse_tree_nodes/TerminalSymbol.hpp"
 #include "parse_tree_nodes/UnaryExpression.hpp"
@@ -202,7 +202,7 @@ void ParseTreePrintVisitor::visit(const PrimaryExpression& node) const {
         node.additiveExpression.value()->accept(*this);
     }
 }
-void ParseTreePrintVisitor::visit(const Statement& node) const {
+void ParseTreePrintVisitor::visit(const ParseTreeStatement& node) const {
     std::cout << "Statement_";
     if (node.assignmentExpression) {
         std::cout << node.assignmentExpression.value().identifier.identifier.source_code_reference.byte_index << "\n";

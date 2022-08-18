@@ -5,11 +5,11 @@
 #include "TerminalSymbol.hpp"
 #include <vector>
 namespace parse_tree {
-class Statement;
+class ParseTreeStatement;
 
 class StatementList {
     public:
-    std::vector<std::pair<std::unique_ptr<const Statement>, const TerminalSymbol>> statementList;
+    std::vector<std::pair<std::unique_ptr<const ParseTreeStatement>, const TerminalSymbol>> statementList;
     StatementList(lexer::Lexer& l);
     void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 };
