@@ -9,7 +9,7 @@ namespace ast {
 
 class AST {
     SymbolTable symbolTable;
-    Function function;
+    std::unique_ptr<Function> function;
 
     public:
     AST(parse_tree::ParseTree& parse_tree, source_code::SourceCode& source_code);
