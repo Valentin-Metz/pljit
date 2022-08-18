@@ -7,6 +7,7 @@ namespace parse_tree {
 
 class ParseTree {
     public:
+    ~ParseTree();
     const FunctionDefinition root;
     ParseTree(lexer::Lexer& l);
     void print();

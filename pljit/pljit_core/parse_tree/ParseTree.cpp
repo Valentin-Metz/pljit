@@ -8,5 +8,6 @@ void ParseTree::print() {
     root.accept(print_visitor);
 }
 ParseTree::ParseTree(lexer::Lexer& l) : root(FunctionDefinition(l)) {}
+ParseTree::~ParseTree() = default;
 
 } // namespace parse_tree
