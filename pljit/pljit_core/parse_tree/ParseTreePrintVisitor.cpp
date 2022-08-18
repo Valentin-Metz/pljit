@@ -1,5 +1,6 @@
 #include "ParseTreePrintVisitor.hpp"
 #include "parse_tree_nodes/AdditiveExpression.hpp"
+#include "parse_tree_nodes/ArithmeticSymbol.hpp"
 #include "parse_tree_nodes/AssignmentExpression.hpp"
 #include "parse_tree_nodes/CompoundStatement.hpp"
 #include "parse_tree_nodes/ConstantDeclaration.hpp"
@@ -21,13 +22,55 @@
 
 namespace parse_tree {
 void ParseTreePrintVisitor::visit(const AdditiveExpression& node) const {
+    size_t identifier = 0;
+    if (node.unaryExpression.modifier) {
+        identifier = node.unaryExpression.modifier.value().first.source_code_reference.byte_index;
+    } else {
+        if (node.unaryExpression.primaryExpression.value()->identifier) {
+            identifier = node.unaryExpression.primaryExpression.value()->identifier->identifier.source_code_reference.byte_index;
+        }
+        if (node.unaryExpression.primaryExpression.value()->literal) {
+            identifier = node.unaryExpression.primaryExpression.value()->literal.value().literal.first.source_code_reference.byte_index;
+        }
+        if (node.unaryExpression.primaryExpression.value()->openBracket) {
+            identifier = node.unaryExpression.primaryExpression.value()->openBracket->source_code_reference.byte_index;
+        }
+    }
+    std::cout << "AdditiveExpression_" << identifier << "\n";
+    std::cout << "AdditiveExpression_" << identifier << " -> ";
+    node.unaryExpression.accept(*this);
+    for (std::size_t i = 0; i < node.multiplicativeExpression.size(); ++i) {
+        std::cout << "AdditiveExpression_" << identifier << " -> ";
+        node.multiplicativeExpression[i]->accept(*this);
+    }
+    if (node.additiveExpression) {
+        if (node.additiveExpression->first) {
+            std::cout << "AdditiveExpression_" << identifier << " -> ";
+            if (node.additiveExpression->first.value().second == ArithmeticSymbol::PLUS) {
+                std::cout << "ArithmeticSymbol_PLUS_";
+            } else {
+                std::cout << "ArithmeticSymbol_MINUS_";
+            }
+            node.additiveExpression->first.value().first.accept(*this);
+        }
+        std::cout << "AdditiveExpression_" << identifier << " -> ";
+        node.additiveExpression->second->accept(*this);
+    }
 }
 void ParseTreePrintVisitor::visit(const AssignmentExpression& node) const {
+    std::cout << "AssignmentExpression_" << node.identifier.identifier.source_code_reference.byte_index << "\n";
+    std::cout << "AssignmentExpression_" << node.identifier.identifier.source_code_reference.byte_index << " -> ";
+    node.identifier.accept(*this);
+    std::cout << "AssignmentExpression_" << node.identifier.identifier.source_code_reference.byte_index << " -> ";
+    std::cout << "AssignmentOperator_";
+    node.assignmentToken.accept(*this);
+    std::cout << "AssignmentExpression_" << node.identifier.identifier.source_code_reference.byte_index << " -> ";
+    node.additiveExpression.accept(*this);
 }
 void ParseTreePrintVisitor::visit(const CompoundStatement& node) const {
     std::cout << "CompoundStatement -> Keyword_BEGIN_";
     node.begin.accept(*this);
-    std::cout << "CompoundStatement -> StatementList";
+    std::cout << "CompoundStatement -> StatementList\n";
     node.statementList.accept(*this);
 }
 void ParseTreePrintVisitor::visit(const ConstantDeclaration& node) const {
@@ -81,7 +124,7 @@ void ParseTreePrintVisitor::visit(const InitDeclarator& node) const {
     std::cout << "InitDeclarator_" << node.identifier.identifier.source_code_reference.byte_index << "\n";
     std::cout << "InitDeclarator_" << node.identifier.identifier.source_code_reference.byte_index << " -> ";
     node.identifier.accept(*this);
-    std::cout << "InitDeclarator_" << node.identifier.identifier.source_code_reference.byte_index << " -> AssignmentOperator_";
+    std::cout << "InitDeclarator_" << node.identifier.identifier.source_code_reference.byte_index << " -> DeclarationOperator_";
     node.assignment_symbol.accept(*this);
     std::cout << "InitDeclarator_" << node.identifier.identifier.source_code_reference.byte_index << " -> ";
     node.literal.accept(*this);
@@ -110,8 +153,56 @@ void ParseTreePrintVisitor::visit(const ParameterDeclaration& node) const {
     node.declaratorList.accept(*this);
 }
 void ParseTreePrintVisitor::visit(const PrimaryExpression& node) const {
+    size_t identifier = 0;
+    if (node.identifier) {
+        identifier = node.identifier->identifier.source_code_reference.byte_index;
+    }
+    if (node.literal) {
+        identifier = node.literal.value().literal.first.source_code_reference.byte_index;
+    }
+    if (node.openBracket) {
+        identifier = node.openBracket->source_code_reference.byte_index;
+    }
+
+    std::cout << "PrimaryExpression_" << identifier << "\n";
+
+    if (node.openBracket) {
+        std::cout << "PrimaryExpression_" << identifier << " -> ";
+        std::cout << "Bracket_OPEN_";
+        node.openBracket->accept(*this);
+    }
+    if (node.closingBracket) {
+        std::cout << "PrimaryExpression_" << identifier << " -> ";
+        std::cout << "Bracket_CLOSE_";
+        node.closingBracket->accept(*this);
+    }
+
+    if (node.identifier) {
+        std::cout << "PrimaryExpression_" << identifier << " -> ";
+        node.identifier.value().accept(*this);
+    }
+    if (node.literal) {
+        std::cout << "PrimaryExpression_" << identifier << " -> ";
+        node.literal->accept(*this);
+    }
+    if (node.additiveExpression) {
+        std::cout << "PrimaryExpression_" << identifier << " -> ";
+        node.additiveExpression.value()->accept(*this);
+    }
 }
 void ParseTreePrintVisitor::visit(const Statement& node) const {
+    std::cout << "Statement_";
+    if (node.assignmentExpression) {
+        std::cout << node.assignmentExpression.value().identifier.identifier.source_code_reference.byte_index << "\n";
+        std::cout << "Statement_" << node.assignmentExpression.value().identifier.identifier.source_code_reference.byte_index << " -> ";
+        node.assignmentExpression.value().accept(*this);
+    } else {
+        std::cout << node.additiveExpression.value().first.source_code_reference.byte_index << "\n";
+        std::cout << "Statement_" << node.additiveExpression.value().first.source_code_reference.byte_index << " -> Keyword_RETURN_";
+        node.additiveExpression.value().first.accept(*this);
+        std::cout << "Statement_" << node.additiveExpression.value().first.source_code_reference.byte_index << " -> ";
+        node.additiveExpression.value().second->accept(*this);
+    }
 }
 void ParseTreePrintVisitor::visit(const StatementList& node) const {
     for (std::size_t i = 0; i < node.statementList.size(); ++i) {
@@ -129,6 +220,33 @@ void ParseTreePrintVisitor::visit(const TerminalSymbol& node) const {
     std::cout << node.source_code_reference.byte_index << "\n";
 }
 void ParseTreePrintVisitor::visit(const UnaryExpression& node) const {
+    size_t identifier = 0;
+    if (node.modifier) {
+        identifier = node.modifier.value().first.source_code_reference.byte_index;
+    } else {
+        if (node.primaryExpression.value()->identifier) {
+            identifier = node.primaryExpression.value()->identifier->identifier.source_code_reference.byte_index;
+        }
+        if (node.primaryExpression.value()->literal) {
+            identifier = node.primaryExpression.value()->literal.value().literal.first.source_code_reference.byte_index;
+        }
+        if (node.primaryExpression.value()->openBracket) {
+            identifier = node.primaryExpression.value()->openBracket->source_code_reference.byte_index;
+        }
+    }
+    std::cout << "UnaryExpression_" << identifier << "\n";
+
+    if (node.modifier) {
+        std::cout << "UnaryExpression_" << identifier << " -> ";
+        if (node.modifier.value().second == ArithmeticSymbol::PLUS) {
+            std::cout << "ArithmeticSymbol_PLUS_";
+        } else {
+            std::cout << "ArithmeticSymbol_MINUS_";
+        }
+        node.modifier.value().first.accept(*this);
+    }
+    std::cout << "UnaryExpression_" << identifier << " -> ";
+    node.primaryExpression.value()->accept(*this);
 }
 void ParseTreePrintVisitor::visit(const VariableDeclaration& node) const {
     std::cout << "VariableDeclaration-> Keyword_VAR_";

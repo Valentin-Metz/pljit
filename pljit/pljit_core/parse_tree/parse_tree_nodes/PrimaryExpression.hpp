@@ -3,6 +3,8 @@
 
 #include "../../lexer/Lexer.hpp"
 #include "../../lexer/tokens/LexerToken.hpp"
+#include "Identifier.hpp"
+#include "Literal.hpp"
 #include "TerminalSymbol.hpp"
 #include <memory>
 #include <optional>
@@ -12,12 +14,13 @@ class AdditiveExpression;
 class PrimaryExpression {
     public:
     ~PrimaryExpression();
-    std::optional<TerminalSymbol> identifier;
-    std::optional<std::pair<TerminalSymbol, std::int64_t>> literal;
+    std::optional<Identifier> identifier;
+    std::optional<Literal> literal;
     std::optional<TerminalSymbol> openBracket;
     std::optional<std::unique_ptr<AdditiveExpression>> additiveExpression;
     std::optional<TerminalSymbol> closingBracket;
     PrimaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l);
+    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 };
 
 } // namespace parse_tree

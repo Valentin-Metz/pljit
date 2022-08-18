@@ -16,7 +16,7 @@ PrimaryExpression::PrimaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer
             break;
         }
         case lexer::LexerToken::Literal: {
-            literal.emplace(t->source_code_reference, static_cast<lexer::LexerLiteralToken*>(t.get())->value);
+            literal.emplace(std::make_pair(t->source_code_reference, static_cast<lexer::LexerLiteralToken*>(t.get())->value));
             break;
         }
         case lexer::LexerToken::Bracket: {
