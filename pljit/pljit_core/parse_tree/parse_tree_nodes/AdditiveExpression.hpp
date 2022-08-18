@@ -17,8 +17,8 @@ class AdditiveExpression {
     UnaryExpression unaryExpression;
     std::vector<std::unique_ptr<MultiplicativeExpression>> multiplicativeExpression;
     std::optional<std::pair<std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>>, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
-    AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
-    AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
+    AdditiveExpression(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator);
+    AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator);
     void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 };
 

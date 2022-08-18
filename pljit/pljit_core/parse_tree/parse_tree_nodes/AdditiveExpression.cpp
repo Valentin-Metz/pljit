@@ -7,13 +7,13 @@
 
 namespace parse_tree {
 
-AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : AdditiveExpression(l.nextToken(), l, separator) {}
-AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : unaryExpression(t, l) {
+AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator) : AdditiveExpression(l.nextToken(), l, separator) {}
+AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator) : unaryExpression(t, l) {
     while (!separator && !additiveExpression) {
         std::unique_ptr<lexer::LexerToken> token{l.nextToken()};
         switch (token->token_type) {
             case lexer::LexerToken::Error:
-                throw CompilationError(token->source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken&>(token).error_message);
+                throw CompilationError(token->source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken*>(token.get())->error_message);
 
             /// additive-expression -> unary-expression -> primary-expression
             case lexer::LexerToken::Identifier:
@@ -26,22 +26,22 @@ AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lex
             /// (+ | -) additive-expression -> unary-expression -> primary-expression
             /// (* | /) multiplicative-expression
             case lexer::LexerToken::Arithmetic: {
-                lexer::LexerArithmeticToken& a = static_cast<lexer::LexerArithmeticToken&>(token);
-                switch (a.arithmetic_operator_type) {
+                lexer::LexerArithmeticToken* a = static_cast<lexer::LexerArithmeticToken*>(token.get());
+                switch (a->arithmetic_operator_type) {
                     case lexer::LexerArithmeticToken::PLUS: {
-                        additiveExpression.emplace(std::make_pair(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::PLUS), std::make_unique<const AdditiveExpression>(l, separator)));
+                        additiveExpression.emplace(std::make_pair(std::make_pair(TerminalSymbol(a->source_code_reference), ArithmeticSymbol::PLUS), std::make_unique<const AdditiveExpression>(l, separator)));
                         break;
                     }
                     case lexer::LexerArithmeticToken::MINUS: {
-                        additiveExpression.emplace(std::make_pair(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::MINUS), std::make_unique<const AdditiveExpression>(l, separator)));
+                        additiveExpression.emplace(std::make_pair(std::make_pair(TerminalSymbol(a->source_code_reference), ArithmeticSymbol::MINUS), std::make_unique<const AdditiveExpression>(l, separator)));
                         break;
                     }
                     case lexer::LexerArithmeticToken::MULTIPLY: {
-                        multiplicativeExpression.push_back(std::make_unique<MultiplicativeExpression>(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::MULTIPLY), l));
+                        multiplicativeExpression.push_back(std::make_unique<MultiplicativeExpression>(std::make_pair(TerminalSymbol(a->source_code_reference), ArithmeticSymbol::MULTIPLY), l));
                         break;
                     }
                     case lexer::LexerArithmeticToken::DIVIDE: {
-                        multiplicativeExpression.push_back(std::make_unique<MultiplicativeExpression>(std::make_pair(TerminalSymbol(a.source_code_reference), ArithmeticSymbol::DIVIDE), l));
+                        multiplicativeExpression.push_back(std::make_unique<MultiplicativeExpression>(std::make_pair(TerminalSymbol(a->source_code_reference), ArithmeticSymbol::DIVIDE), l));
                         break;
                     }
                 }
@@ -50,9 +50,9 @@ AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lex
 
             /// Expression is over; transmit separator
             case lexer::LexerToken::Bracket: {
-                lexer::LexerBracketToken& b = static_cast<lexer::LexerBracketToken&>(token);
+                lexer::LexerBracketToken* b = static_cast<lexer::LexerBracketToken*>(token.get());
                 /// additive-expression -> unary-expression -> primary-expression
-                if (b.bracket_type == lexer::LexerBracketToken::OPEN) {
+                if (b->bracket_type == lexer::LexerBracketToken::OPEN) {
                     std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>> o;
                     additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(token, l, separator)));
                     break;
@@ -65,7 +65,7 @@ AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lex
                 break;
             }
             default:
-                throw CompilationError(token.source_code_reference, CompilationError::ParseTree, "Unexpected token in additive-expression");
+                throw CompilationError(token->source_code_reference, CompilationError::ParseTree, "Unexpected token in additive-expression");
         }
     }
 }
