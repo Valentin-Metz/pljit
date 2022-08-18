@@ -24,6 +24,7 @@ int main(int argc, char* argv[]) {
         std::cout << "success" << std::endl;
     } catch (CompilationError e) {
         e.print(c);
+        std::cout << "error" << std::endl;
     }
 
     return 0;
