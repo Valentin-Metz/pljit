@@ -13,9 +13,10 @@ namespace parse_tree {
 class Identifier {
     public:
     const TerminalSymbol identifier;
+    ~Identifier();
     Identifier(lexer::Lexer& l);
     Identifier(TerminalSymbol identifier);
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree

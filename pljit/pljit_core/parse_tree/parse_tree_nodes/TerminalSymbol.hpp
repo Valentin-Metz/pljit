@@ -8,8 +8,9 @@ namespace parse_tree {
 class TerminalSymbol {
     public:
     const source_code::SourceCodeReference source_code_reference;
-    TerminalSymbol(source_code::SourceCodeReference source_code_reference) : source_code_reference(source_code_reference) {}
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    ~TerminalSymbol();
+    TerminalSymbol(source_code::SourceCodeReference source_code_reference);
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree

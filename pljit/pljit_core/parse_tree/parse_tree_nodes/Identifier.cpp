@@ -1,4 +1,5 @@
 #include "Identifier.hpp"
+#include "TerminalSymbol.hpp"
 
 namespace parse_tree {
 
@@ -17,5 +18,7 @@ static const TerminalSymbol generateIdentifier(lexer::Lexer& l) {
 
 Identifier::Identifier(lexer::Lexer& l) : identifier(generateIdentifier(l)) {}
 Identifier::Identifier(TerminalSymbol identifier) : identifier(identifier) {}
+void Identifier::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+Identifier::~Identifier() = default;
 
 } // namespace parse_tree
