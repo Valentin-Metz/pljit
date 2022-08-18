@@ -3,15 +3,15 @@
 namespace parse_tree {
 
 static const TerminalSymbol generateIdentifier(lexer::Lexer& l) {
-    lexer::LexerToken i{l.nextToken()};
-    switch (i.token_type) {
+    std::unique_ptr<lexer::LexerToken> i{l.nextToken()};
+    switch (i->token_type) {
         case lexer::LexerToken::Error:
-            throw CompilationError(i.source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken&>(i).error_message);
+            throw CompilationError(i->source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken*>(i.get())->error_message);
         case lexer::LexerToken::Identifier: {
-            return TerminalSymbol(static_cast<lexer::LexerIdentifierToken&>(i).source_code_reference);
+            return TerminalSymbol(static_cast<lexer::LexerIdentifierToken*>(i.get())->source_code_reference);
         }
         default:
-            throw CompilationError(i.source_code_reference, CompilationError::ParseTree, "Expected identifier");
+            throw CompilationError(i->source_code_reference, CompilationError::ParseTree, "Expected identifier");
     }
 }
 

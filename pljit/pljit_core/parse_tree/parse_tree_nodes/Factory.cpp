@@ -37,7 +37,7 @@ const TerminalSymbol Factory::produceAssignment(lexer::Lexer& l) {
     std::unique_ptr<lexer::LexerToken> a{l.nextToken()};
     switch (a->token_type) {
         case lexer::LexerToken::Error:
-            throw CompilationError(a->source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken*>(a.get()).error_message);
+            throw CompilationError(a->source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken*>(a.get())->error_message);
         case lexer::LexerToken::Assignment: {
             return a->source_code_reference;
         }

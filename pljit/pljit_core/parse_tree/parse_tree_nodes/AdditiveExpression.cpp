@@ -8,7 +8,7 @@
 namespace parse_tree {
 
 AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator) : AdditiveExpression(l.nextToken(), l, separator) {}
-AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator) : unaryExpression(t, l) {
+AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator) : unaryExpression(std::move(t), l) {
     while (!separator && !additiveExpression) {
         std::unique_ptr<lexer::LexerToken> token{l.nextToken()};
         switch (token->token_type) {

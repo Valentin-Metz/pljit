@@ -13,7 +13,7 @@ class UnaryExpression {
     std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>> modifier;
     std::optional<std::unique_ptr<const PrimaryExpression>> primaryExpression;
     UnaryExpression(lexer::Lexer& l);
-    UnaryExpression(lexer::LexerToken t, lexer::Lexer& l);
+    UnaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l);
 };
 
 } // namespace parse_tree

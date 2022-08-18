@@ -17,7 +17,7 @@ class PrimaryExpression {
     std::optional<TerminalSymbol> openBracket;
     std::optional<std::unique_ptr<AdditiveExpression>> additiveExpression;
     std::optional<TerminalSymbol> closingBracket;
-    PrimaryExpression(lexer::LexerToken t, lexer::Lexer& l);
+    PrimaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l);
 };
 
 } // namespace parse_tree
