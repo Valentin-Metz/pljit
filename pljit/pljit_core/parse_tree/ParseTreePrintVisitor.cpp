@@ -145,6 +145,18 @@ void ParseTreePrintVisitor::visit(const Literal& node) const {
     std::cout << "Literal_" << node.literal.second << "_" << node.literal.first.source_code_reference.byte_index << "\n";
 }
 void ParseTreePrintVisitor::visit(const MultiplicativeExpression& node) const {
+    std::cout << "MultiplicativeExpression_" << node.multiplicativeOperator.first.source_code_reference.byte_index << "\n";
+
+    std::cout << "MultiplicativeExpression_" << node.multiplicativeOperator.first.source_code_reference.byte_index << " -> ";
+    if (node.multiplicativeOperator.second== ArithmeticSymbol::MULTIPLY){
+        std::cout <<"ArithmeticSymbol_MULTIPLY_";
+    } else{
+        std::cout <<"ArithmeticSymbol_DIVIDE_";
+    }
+    node.multiplicativeOperator.first.accept(*this);
+
+    std::cout << "MultiplicativeExpression_" << node.multiplicativeOperator.first.source_code_reference.byte_index << " -> ";
+    node.unaryExpression.accept(*this);
 }
 void ParseTreePrintVisitor::visit(const ParameterDeclaration& node) const {
     std::cout << "ParameterDeclaration -> Keyword_PARAM_";
