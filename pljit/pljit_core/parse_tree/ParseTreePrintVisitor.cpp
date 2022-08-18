@@ -25,6 +25,10 @@ void ParseTreePrintVisitor::visit(const AdditiveExpression& node) const {
 void ParseTreePrintVisitor::visit(const AssignmentExpression& node) const {
 }
 void ParseTreePrintVisitor::visit(const CompoundStatement& node) const {
+    std::cout << "CompoundStatement -> Keyword_BEGIN_";
+    node.begin.accept(*this);
+    std::cout << "CompoundStatement -> StatementList";
+    node.statementList.accept(*this);
 }
 void ParseTreePrintVisitor::visit(const ConstantDeclaration& node) const {
     std::cout << "ConstantDeclaration -> Keyword_CONST_";
@@ -110,6 +114,16 @@ void ParseTreePrintVisitor::visit(const PrimaryExpression& node) const {
 void ParseTreePrintVisitor::visit(const Statement& node) const {
 }
 void ParseTreePrintVisitor::visit(const StatementList& node) const {
+    for (std::size_t i = 0; i < node.statementList.size(); ++i) {
+        std::cout << "StatementList -> ";
+        node.statementList[i].first.get()->accept(*this);
+        if (i != node.statementList.size() - 1) {
+            std::cout << "StatementList -> SEMICOLON_";
+        } else {
+            std::cout << "StatementList -> Keyword_END_";
+        }
+        node.statementList[i].second.accept(*this);
+    }
 }
 void ParseTreePrintVisitor::visit(const TerminalSymbol& node) const {
     std::cout << node.source_code_reference.byte_index << "\n";

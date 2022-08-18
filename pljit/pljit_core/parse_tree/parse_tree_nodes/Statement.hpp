@@ -3,6 +3,7 @@
 
 #include "../../lexer/Lexer.hpp"
 #include "../../lexer/tokens/LexerToken.hpp"
+#include "../ParseTreeVisitor.hpp"
 #include "AdditiveExpression.hpp"
 #include "AssignmentExpression.hpp"
 #include "TerminalSymbol.hpp"
@@ -14,6 +15,7 @@ class Statement {
     std::optional<const AssignmentExpression> assignmentExpression;
     std::optional<std::pair<const TerminalSymbol, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
     Statement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator);
+    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 };
 
 } // namespace parse_tree
