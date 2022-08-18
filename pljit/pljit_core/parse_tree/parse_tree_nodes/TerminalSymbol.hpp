@@ -2,6 +2,7 @@
 #define PLJIT_TERMINALSYMBOL_HPP
 
 #include "../../source_code_management/SourceCodeReference.hpp"
+#include "../ParseTreeVisitor.hpp"
 namespace parse_tree {
 
 class TerminalSymbol {
