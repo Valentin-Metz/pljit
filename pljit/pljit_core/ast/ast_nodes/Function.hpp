@@ -4,6 +4,7 @@
 #include "../../source_code_management/SourceCode.hpp"
 #include <memory>
 #include <vector>
+#include "Statement.hpp"
 
 namespace parse_tree {
 class ParseTree;

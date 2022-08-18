@@ -12,7 +12,7 @@ class Expression;
 
 class Statement {
     public:
-    ~Statement();
+    virtual ~Statement();
     enum StatementType {
         Assignment,
         Return,

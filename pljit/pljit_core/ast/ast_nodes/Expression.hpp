@@ -7,7 +7,8 @@ namespace ast {
 
 class Expression {
     public:
-    ~Expression();
+    virtual ~Expression();
+    Expression();
 };
 
 } // namespace ast
