@@ -19,7 +19,8 @@ class FunctionDefinition {
     std::optional<TerminalSymbol> terminator;
 
     FunctionDefinition(lexer::Lexer& l);
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    ~FunctionDefinition();
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree

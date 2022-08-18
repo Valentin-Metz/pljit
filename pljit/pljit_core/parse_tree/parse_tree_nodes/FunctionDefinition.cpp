@@ -52,5 +52,8 @@ FunctionDefinition::FunctionDefinition(Lexer& l) {
         throw CompilationError(t->source_code_reference, CompilationError::ParseTree, "Expected terminal symbol '.'");
     }
 }
+void FunctionDefinition::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+
+FunctionDefinition::~FunctionDefinition() = default;
 
 } // namespace parse_tree
