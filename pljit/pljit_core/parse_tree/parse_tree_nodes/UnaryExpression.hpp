@@ -2,6 +2,7 @@
 #define PLJIT_UNARYEXPRESSION_HPP
 
 #include "../../lexer/Lexer.hpp"
+#include "../ParseTreeVisitor.hpp"
 #include "ArithmeticSymbol.hpp"
 #include "PrimaryExpression.hpp"
 #include "TerminalSymbol.hpp"
@@ -14,6 +15,7 @@ class UnaryExpression {
     std::optional<std::unique_ptr<const PrimaryExpression>> primaryExpression;
     UnaryExpression(lexer::Lexer& l);
     UnaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l);
+    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 };
 
 } // namespace parse_tree

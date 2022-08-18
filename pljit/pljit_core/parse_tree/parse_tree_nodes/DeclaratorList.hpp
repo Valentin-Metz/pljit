@@ -2,6 +2,7 @@
 #define PLJIT_DECLARATORLIST_HPP
 
 #include "../../lexer/Lexer.hpp"
+#include "../ParseTreeVisitor.hpp"
 #include "Identifier.hpp"
 #include "TerminalSymbol.hpp"
 #include <vector>
@@ -11,6 +12,7 @@ class DeclaratorList {
     public:
     const std::vector<std::pair<const Identifier, const TerminalSymbol>> declaratorList;
     DeclaratorList(lexer::Lexer& l);
+    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 };
 
 } // namespace parse_tree

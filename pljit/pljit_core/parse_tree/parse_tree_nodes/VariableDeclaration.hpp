@@ -10,6 +10,7 @@ class VariableDeclaration {
     const TerminalSymbol keyword;
     const DeclaratorList declaratorList;
     VariableDeclaration(TerminalSymbol keyword, lexer::Lexer& l) : keyword(keyword), declaratorList(DeclaratorList(l)) {}
+    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 };
 
 } // namespace parse_tree

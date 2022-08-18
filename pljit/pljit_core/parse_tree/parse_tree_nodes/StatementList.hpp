@@ -11,6 +11,7 @@ class StatementList {
     public:
     const std::vector<std::pair<std::unique_ptr<const Statement>, const TerminalSymbol>> statementList;
     StatementList(lexer::Lexer& l);
+    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 };
 
 } // namespace parse_tree
