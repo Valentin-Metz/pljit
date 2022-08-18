@@ -15,13 +15,17 @@ int main(int argc, char* argv[]) {
 
     source_code::SourceCode c{valid_source};
 
-    CompilationError error = CompilationError(source_code::SourceCodeReference{0,5}, CompilationError::ParseTree, "Bad thing");
-    error.print(c);
-    //lexer::Lexer l{c};
+    //CompilationError error = CompilationError(source_code::SourceCodeReference{0,5}, CompilationError::ParseTree, "Bad thing");
+    //error.print(c);
+    lexer::Lexer l{c};
 
-    //parse_tree::ParseTree parse_tree{l};
+    try {
+        parse_tree::ParseTree parse_tree{l};
+        std::cout << "success" << std::endl;
+    } catch (CompilationError e) {
+        e.print(c);
+    }
 
-    std::cout << "success" << std::endl;
     return 0;
 }
 //---------------------------------------------------------------------------

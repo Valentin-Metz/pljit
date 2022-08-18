@@ -30,7 +30,7 @@ UnaryExpression::UnaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Le
         }
 
         default: {
-            primaryExpression.emplace(std::make_unique<PrimaryExpression>(l.nextToken(), l));
+            primaryExpression.emplace(std::make_unique<PrimaryExpression>(std::move(t), l));
             break;
         }
     }

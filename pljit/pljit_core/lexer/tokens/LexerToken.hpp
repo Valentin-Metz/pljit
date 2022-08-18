@@ -23,6 +23,8 @@ class LexerToken {
 
     protected:
     LexerToken(source_code::SourceCodeReference source_code_reference, TokenType token_type) : source_code_reference(source_code_reference), token_type(token_type) {}
+    public:
+    virtual ~LexerToken() = default;
 };
 
 } // namespace lexer

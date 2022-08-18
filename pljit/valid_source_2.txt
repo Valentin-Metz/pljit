@@ -1,0 +1,4 @@
+CONST density = 2400;
+BEGIN
+RETURN density
+END.
