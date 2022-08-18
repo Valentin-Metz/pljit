@@ -1,1 +1,1 @@
-add_library(pljit_core_utility NonCopyable.cpp CompilationError.hpp)
+add_library(pljit_core_utility NonCopyable.cpp CompilationError.hpp CompilationError.cpp)

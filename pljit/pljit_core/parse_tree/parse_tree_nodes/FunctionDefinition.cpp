@@ -6,7 +6,8 @@ using namespace lexer;
 
 FunctionDefinition::FunctionDefinition(Lexer& l) {
     while (!compound_statement) {
-        LexerToken t{l.nextToken()};
+        LexerToken t = l.nextToken();
+        LexerKeywordToken& k = static_cast<LexerKeywordToken&>(t);
         switch (t.token_type) {
             case LexerToken::Error:
                 throw CompilationError(t.source_code_reference, CompilationError::Lexer, static_cast<LexerErrorToken&>(t).error_message);

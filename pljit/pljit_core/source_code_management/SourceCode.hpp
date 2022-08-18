@@ -7,9 +7,8 @@
 namespace source_code {
 
 class SourceCode : public NonCopyable {
-    const std::string_view source_code;
-
     public:
+    const std::string_view source_code;
     explicit SourceCode(std::string_view source_code) : source_code(std::move(source_code)) {}
 
     operator const std::string_view&() const { return source_code; };

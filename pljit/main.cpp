@@ -14,7 +14,10 @@ int main(int argc, char* argv[]) {
     std::string valid_source((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
 
     source_code::SourceCode c{valid_source};
-    lexer::Lexer l{c};
+
+    CompilationError error = CompilationError(source_code::SourceCodeReference{0,5}, CompilationError::ParseTree, "Bad thing");
+    error.print(c);
+    //lexer::Lexer l{c};
 
     //parse_tree::ParseTree parse_tree{l};
 

@@ -3,16 +3,17 @@
 #include "../../lexer/tokens/LexerBracketToken.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../pljit_core_utility/CompilationError.hpp"
+#include <memory>
 
 namespace parse_tree {
 
 AdditiveExpression::AdditiveExpression(lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : AdditiveExpression(l.nextToken(), l, separator) {}
-AdditiveExpression::AdditiveExpression(lexer::LexerToken t, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : unaryExpression(t, l) {
+AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator) : unaryExpression(t, l) {
     while (!separator && !additiveExpression) {
-        lexer::LexerToken token{l.nextToken()};
-        switch (token.token_type) {
+        std::unique_ptr<lexer::LexerToken> token{l.nextToken()};
+        switch (token->token_type) {
             case lexer::LexerToken::Error:
-                throw CompilationError(token.source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken&>(token).error_message);
+                throw CompilationError(token->source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken&>(token).error_message);
 
             /// additive-expression -> unary-expression -> primary-expression
             case lexer::LexerToken::Identifier:
