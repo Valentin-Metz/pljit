@@ -2,6 +2,7 @@
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerKeywordToken.hpp"
 #include "../../pljit_core_utility/CompilationError.hpp"
+#include "AssignmentExpression.hpp"
 #include "TerminalSymbol.hpp"
 
 namespace parse_tree {
@@ -22,7 +23,7 @@ ParseTreeStatement::ParseTreeStatement(lexer::Lexer& l, std::optional<std::uniqu
         }
         /// AssignmentExpression
         case LexerToken::Identifier: {
-            assignmentExpression.emplace(Identifier(t->source_code_reference), l, separator);
+            assignmentExpression.emplace(std::make_unique<AssignmentExpression>(Identifier(t->source_code_reference), l, separator));
             break;
         }
 

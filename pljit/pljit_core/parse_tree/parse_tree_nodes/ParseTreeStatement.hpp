@@ -4,15 +4,16 @@
 #include "../../lexer/Lexer.hpp"
 #include "../../lexer/tokens/LexerToken.hpp"
 #include "../ParseTreeVisitor.hpp"
-#include "AssignmentExpression.hpp"
+#include "TerminalSymbol.hpp"
 #include <optional>
 namespace parse_tree {
 
 class TerminalSymbol;
+class AssignmentExpression;
 
 class ParseTreeStatement {
     public:
-    std::optional<const AssignmentExpression> assignmentExpression;
+    std::optional<std::unique_ptr<const AssignmentExpression>> assignmentExpression;
     std::optional<std::pair<const TerminalSymbol, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
     ~ParseTreeStatement();
     ParseTreeStatement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator);

@@ -205,9 +205,9 @@ void ParseTreePrintVisitor::visit(const PrimaryExpression& node) const {
 void ParseTreePrintVisitor::visit(const ParseTreeStatement& node) const {
     std::cout << "Statement_";
     if (node.assignmentExpression) {
-        std::cout << node.assignmentExpression.value().identifier.identifier.source_code_reference.byte_index << "\n";
-        std::cout << "Statement_" << node.assignmentExpression.value().identifier.identifier.source_code_reference.byte_index << " -> ";
-        node.assignmentExpression.value().accept(*this);
+        std::cout << node.assignmentExpression.value()->identifier.identifier.source_code_reference.byte_index << "\n";
+        std::cout << "Statement_" << node.assignmentExpression.value()->identifier.identifier.source_code_reference.byte_index << " -> ";
+        node.assignmentExpression.value()->accept(*this);
     } else {
         std::cout << node.additiveExpression.value().first.source_code_reference.byte_index << "\n";
         std::cout << "Statement_" << node.additiveExpression.value().first.source_code_reference.byte_index << " -> Keyword_RETURN_";
