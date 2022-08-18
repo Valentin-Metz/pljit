@@ -37,8 +37,8 @@ void ParseTreePrintVisitor::visit(const ConstantDeclaration& node) const {
     node.initDeclaratorList.accept(*this);
 }
 void ParseTreePrintVisitor::visit(const DeclaratorList& node) const {
+    std::cout << "DeclaratorList_" << node.declaratorList[0].first.identifier.source_code_reference.byte_index << "\n";
     for (std::size_t i = 0; i < node.declaratorList.size(); ++i) {
-        std::cout << "DeclaratorList_" << node.declaratorList[0].first.identifier.source_code_reference.byte_index << "\n";
         std::cout << "DeclaratorList_" << node.declaratorList[0].first.identifier.source_code_reference.byte_index << " -> ";
         node.declaratorList[i].first.accept(*this);
         if (i != node.declaratorList.size() - 1) {
