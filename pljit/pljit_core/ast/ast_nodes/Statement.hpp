@@ -23,7 +23,7 @@ class Statement {
     std::vector<std::unique_ptr<Expression>> expressions;
 
     protected:
-    Statement(StatementType statement_type, parse_tree::ParseTreeStatement statement);
+    Statement(StatementType statement_type);
 };
 
 } // namespace ast

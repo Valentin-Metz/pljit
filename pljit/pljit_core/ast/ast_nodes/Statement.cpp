@@ -5,7 +5,6 @@
 namespace ast {
 Statement::~Statement() {
 }
-//todo
-Statement::Statement(Statement::StatementType statement_type, parse_tree::ParseTreeStatement statement) : statementType(Assignment) {
+Statement::Statement(Statement::StatementType statement_type) : statementType(statement_type) {
 }
 } // namespace ast
