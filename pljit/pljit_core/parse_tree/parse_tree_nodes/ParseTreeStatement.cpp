@@ -18,7 +18,7 @@ ParseTreeStatement::ParseTreeStatement(lexer::Lexer& l, std::optional<std::uniqu
         case LexerToken::Keyword: {
             if (static_cast<LexerKeywordToken*>(t.get())->keyword_type != LexerKeywordToken::RETURN)
                 throw CompilationError(t->source_code_reference, CompilationError::ParseTree, "Wrong keyword");
-            additiveExpression.emplace(std::make_pair(t->source_code_reference, std::make_unique<AdditiveExpression>(l, separator)));
+            additiveExpression.emplace(std::make_pair(std::make_unique<TerminalSymbol>(t->source_code_reference), std::make_unique<AdditiveExpression>(l, separator)));
             break;
         }
         /// AssignmentExpression
