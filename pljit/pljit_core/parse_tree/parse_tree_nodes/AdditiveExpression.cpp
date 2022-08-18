@@ -19,7 +19,7 @@ AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lex
             case lexer::LexerToken::Identifier:
             case lexer::LexerToken::Literal: {
                 std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>> o;
-                additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(AdditiveExpression(token, l, separator))));
+                additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(AdditiveExpression(std::move(token), l, separator))));
                 break;
             }
 
@@ -54,14 +54,14 @@ AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lex
                 /// additive-expression -> unary-expression -> primary-expression
                 if (b->bracket_type == lexer::LexerBracketToken::OPEN) {
                     std::optional<std::pair<const TerminalSymbol, const ArithmeticSymbol>> o;
-                    additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(token, l, separator)));
+                    additiveExpression.emplace(std::make_pair(o, std::make_unique<AdditiveExpression>(std::move(token), l, separator)));
                     break;
                 }
                 [[fallthrough]];
             }
             case lexer::LexerToken::Keyword:
             case lexer::LexerToken::Separator: {
-                separator.emplace(token);
+                separator.emplace(std::move(token));
                 break;
             }
             default:

@@ -11,7 +11,7 @@ class AssignmentExpression {
     const Identifier identifier;
     const TerminalSymbol assignmentToken;
     const AdditiveExpression additiveExpression;
-    AssignmentExpression(Identifier identifier, lexer::Lexer& l, std::optional<lexer::LexerToken>& separator);
+    AssignmentExpression(Identifier identifier, lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator);
 };
 
 } // namespace parse_tree
