@@ -5,7 +5,7 @@
 namespace ast {
 Function::Function(const parse_tree::StatementList& statement_list, source_code::SourceCode& source_code) {
     for (auto& statement : statement_list.statementList) {
-        //if (statement.first.get())
+        //if (statement.first.get().)
     }
 }
 Function::~Function() = default;

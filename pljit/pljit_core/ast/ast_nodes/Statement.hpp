@@ -1,4 +1,4 @@
-#ifndef PLJIT_PARSETREESTATEMENT_HPP
+#ifndef PLJIT_STATEMENT_HPP
 #define PLJIT_STATEMENT_HPP
 #include <memory>
 #include <vector>
@@ -28,4 +28,4 @@ class Statement {
 
 } // namespace ast
 
-#endif //PLJIT_PARSETREESTATEMENT_HPP
+#endif //PLJIT_STATEMENT_HPP
