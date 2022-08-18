@@ -16,7 +16,7 @@ void CompilationError::print(source_code::SourceCode& source_code) {
 
     std::cout << line_number << ":" << character_position << ": ";
 
-    switch (error_source) {
+    switch (error_source) { // todo
         case Lexer: {
             std::cout << "Lexer error: " << error_message;
             break;

@@ -12,6 +12,8 @@ class CompilationError {
     enum ErrorSource {
         Lexer,
         ParseTree,
+        SymbolTable,
+        AST,
     };
     const ErrorSource error_source;
     const std::string error_message;
