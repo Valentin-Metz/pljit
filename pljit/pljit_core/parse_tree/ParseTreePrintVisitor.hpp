@@ -25,6 +25,7 @@ class ParseTreePrintVisitor : public ParseTreeVisitor {
     void visit(const TerminalSymbol& node) const override;
     void visit(const UnaryExpression& node) const override;
     void visit(const VariableDeclaration& node) const override;
+    public:
 };
 
 } // namespace parse_tree
