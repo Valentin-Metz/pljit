@@ -11,10 +11,11 @@ class AdditiveExpression;
 
 class PrimaryExpression {
     public:
+    ~PrimaryExpression();
     std::optional<TerminalSymbol> identifier;
     std::optional<std::pair<TerminalSymbol, std::int64_t>> literal;
     std::optional<TerminalSymbol> openBracket;
-    //std::optional<std::unique_ptr<AdditiveExpression>> additiveExpression;
+    std::optional<std::unique_ptr<AdditiveExpression>> additiveExpression;
     std::optional<TerminalSymbol> closingBracket;
     PrimaryExpression(lexer::LexerToken t, lexer::Lexer& l);
 };
