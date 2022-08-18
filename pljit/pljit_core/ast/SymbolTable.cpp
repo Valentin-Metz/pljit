@@ -27,6 +27,7 @@ void SymbolTable::check_assign(std::string_view identifier, source_code::SourceC
         throw CompilationError(r, CompilationError::SymbolTable, "Attempted to access undeclared variable");
     }
 }
+
 void SymbolTable::declare(std::string_view identifier, std::tuple<bool, bool, int64_t, source_code::SourceCodeReference> w_i_v_r) {
     std::unordered_map<std::string_view, std::tuple<bool, bool, int64_t, source_code::SourceCodeReference>>::iterator result = table.find(identifier);
     if (result != table.end())
