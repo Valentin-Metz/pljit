@@ -1,6 +1,5 @@
 #ifndef PLJIT_STATEMENT_HPP
 #define PLJIT_STATEMENT_HPP
-#include "Expression.hpp"
 #include <memory>
 #include <vector>
 
@@ -9,11 +8,11 @@ class Statement;
 }
 
 namespace ast {
-
-using parseTreeStatement = parse_tree::Statement;
+class Expression;
 
 class Statement {
     public:
+    ~Statement();
     enum StatementType {
         Assignment,
         Return,

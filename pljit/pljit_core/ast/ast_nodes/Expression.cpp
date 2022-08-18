@@ -2,4 +2,6 @@
 
 namespace ast {
 
+Expression::~Expression() = default;
+
 } // namespace ast
