@@ -2,12 +2,13 @@
 #define PLJIT_FUNCTION_HPP
 
 #include "../../source_code_management/SourceCode.hpp"
-#include <vector>
 #include <memory>
+#include <vector>
 
 namespace parse_tree {
 class ParseTree;
-}
+class StatementList;
+} // namespace parse_tree
 
 namespace ast {
 
@@ -18,7 +19,7 @@ class Function {
 
     public:
     ~Function();
-    Function(parse_tree::ParseTree& parse_tree, source_code::SourceCode& source_code);
+    Function(const parse_tree::StatementList& statement_list, source_code::SourceCode& source_code);
 };
 
 } // namespace ast
