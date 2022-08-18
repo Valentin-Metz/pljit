@@ -21,7 +21,6 @@ int main(int argc, char* argv[]) {
 
     try {
         parse_tree::ParseTree parse_tree{l};
-        std::cout << "success" << std::endl;
         parse_tree.print();
     } catch (CompilationError e) {
         e.print(c);
