@@ -7,7 +7,7 @@ namespace ast {
 
 class ReturnStatement : public Statement {
     public:
-    ReturnStatement(const parse_tree::AdditiveExpression* statement);
+    ReturnStatement(const parse_tree::AdditiveExpression* return_statement);
 };
 
 } // namespace ast
