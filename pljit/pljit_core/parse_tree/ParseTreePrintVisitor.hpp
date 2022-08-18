@@ -7,24 +7,24 @@ namespace parse_tree {
 class ParseTreePrintVisitor : public ParseTreeVisitor {
     public:
     ~ParseTreePrintVisitor() override = default;
-    void visit(const AdditiveExpression) const override;
-    void visit(const AssignmentExpression) const override;
-    void visit(const CompoundStatement) const override;
-    void visit(const ConstantDeclaration) const override;
-    void visit(const DeclaratorList) const override;
-    void visit(const FunctionDefinition) const override;
-    void visit(const Identifier) const override;
-    void visit(const InitDeclarator) const override;
-    void visit(const InitDeclaratorList) const override;
-    void visit(const Literal) const override;
-    void visit(const MultiplicativeExpression) const override;
-    void visit(const ParameterDeclaration) const override;
-    void visit(const PrimaryExpression) const override;
-    void visit(const Statement) const override;
-    void visit(const StatementList) const override;
-    void visit(const TerminalSymbol) const override;
-    void visit(const UnaryExpression) const override;
-    void visit(const VariableDeclaration) const override;
+    void visit(const AdditiveExpression& node) const override;
+    void visit(const AssignmentExpression& node) const override;
+    void visit(const CompoundStatement& node) const override;
+    void visit(const ConstantDeclaration& node) const override;
+    void visit(const DeclaratorList& node) const override;
+    void visit(const FunctionDefinition& node) const override;
+    void visit(const Identifier& node) const override;
+    void visit(const InitDeclarator& node) const override;
+    void visit(const InitDeclaratorList& node) const override;
+    void visit(const Literal& node) const override;
+    void visit(const MultiplicativeExpression& node) const override;
+    void visit(const ParameterDeclaration& node) const override;
+    void visit(const PrimaryExpression& node) const override;
+    void visit(const Statement& node) const override;
+    void visit(const StatementList& node) const override;
+    void visit(const TerminalSymbol& node) const override;
+    void visit(const UnaryExpression& node) const override;
+    void visit(const VariableDeclaration& node) const override;
 };
 
 } // namespace parse_tree
