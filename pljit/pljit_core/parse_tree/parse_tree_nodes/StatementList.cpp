@@ -22,8 +22,6 @@ static const std::vector<std::pair<std::unique_ptr<const Statement>, const Termi
                 if (s->separator_type != lexer::LexerSeparatorToken::SEMICOLON) {
                     throw CompilationError(t->source_code_reference, CompilationError::ParseTree, "Wrong separator");
                 }
-                std::vector<std::unique_ptr<Statement>> v;
-                v.push_back(std::move(statement));
                 statement_list.push_back(std::make_pair(std::move(statement), s->source_code_reference));
                 break;
             }
