@@ -79,9 +79,10 @@ LexerToken Lexer::nextToken() {
                     ++current_parser_position;
                 } else {
                     /// Keyword
-                    if (source_string_reference.compare(token_start, current_parser_position - token_start, "PARAM") == 0)
-                        return LexerKeywordToken(LexerKeywordToken::PARAM, SourceCodeReference{token_start, current_parser_position - token_start});
-                    else if (source_string_reference.compare(token_start, current_parser_position - token_start, "VAR") == 0)
+                    if (source_string_reference.compare(token_start, current_parser_position - token_start, "PARAM") == 0) {
+                        LexerKeywordToken k = LexerKeywordToken(LexerKeywordToken::PARAM, SourceCodeReference{token_start, current_parser_position - token_start});
+                        return k;
+                    } else if (source_string_reference.compare(token_start, current_parser_position - token_start, "VAR") == 0)
                         return LexerKeywordToken(LexerKeywordToken::VAR, SourceCodeReference{token_start, current_parser_position - token_start});
                     else if (source_string_reference.compare(token_start, current_parser_position - token_start, "CONST") == 0)
                         return LexerKeywordToken(LexerKeywordToken::CONST, SourceCodeReference{token_start, current_parser_position - token_start});

@@ -8,7 +8,7 @@ namespace parse_tree {
 class ParseTree {
     public:
     const FunctionDefinition root;
-    ParseTree(lexer::Lexer l) : root(FunctionDefinition(l)) {}
+    ParseTree(lexer::Lexer& l) : root(FunctionDefinition(l)) {}
 };
 
 } // namespace parse_tree
