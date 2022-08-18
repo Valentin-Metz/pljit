@@ -11,7 +11,7 @@ struct SourceCodeReference {
     std::size_t reference_length;
 
     public:
-    std::string_view resolve(SourceCode& c);
+    const std::string_view resolve(const SourceCode& c) const;
 };
 
 } // namespace source_code

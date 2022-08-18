@@ -34,4 +34,22 @@ void SymbolTable::declare(std::string_view identifier, std::tuple<bool, bool, in
     table.insert(std::make_pair(identifier, w_i_v_r));
 }
 
+SymbolTable::SymbolTable(parse_tree::ParseTree& parse_tree, source_code::SourceCode& source_code) {
+    if (parse_tree.root.parameter_declaration) {
+        for (std::pair<const parse_tree::Identifier, const parse_tree::TerminalSymbol> identifier : parse_tree.root.parameter_declaration.value().declaratorList.declaratorList) {
+            declare(identifier.first.identifier.source_code_reference.resolve(source_code), std::make_tuple(true, true, 0, identifier.first.identifier.source_code_reference));
+        }
+    }
+    if (parse_tree.root.variable_declaration) {
+        for (std::pair<const parse_tree::Identifier, const parse_tree::TerminalSymbol> identifier : parse_tree.root.parameter_declaration.value().declaratorList.declaratorList) {
+            declare(identifier.first.identifier.source_code_reference.resolve(source_code), std::make_tuple(true, false, 0, identifier.first.identifier.source_code_reference));
+        }
+    }
+    if (parse_tree.root.constant_declaration) {
+        for (std::pair<const parse_tree::InitDeclarator, const parse_tree::TerminalSymbol> identifier : parse_tree.root.constant_declaration.value().initDeclaratorList.initDeclaratorList) {
+            declare(identifier.first.identifier.identifier.source_code_reference.resolve(source_code), std::make_tuple(false, true, identifier.first.literal.literal.second, identifier.first.identifier.identifier.source_code_reference));
+        }
+    }
+}
+
 } // namespace ast
