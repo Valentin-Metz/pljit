@@ -2,6 +2,7 @@
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerKeywordToken.hpp"
 #include "../../pljit_core_utility/CompilationError.hpp"
+#include "TerminalSymbol.hpp"
 
 namespace parse_tree {
 using namespace lexer;
@@ -29,5 +30,7 @@ ParseTreeStatement::ParseTreeStatement(lexer::Lexer& l, std::optional<std::uniqu
             throw CompilationError(t->source_code_reference, CompilationError::ParseTree, "Expected identifier or 'RETURN'");
     }
 }
+void ParseTreeStatement::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+ParseTreeStatement::~ParseTreeStatement() = default;
 
 } // namespace parse_tree

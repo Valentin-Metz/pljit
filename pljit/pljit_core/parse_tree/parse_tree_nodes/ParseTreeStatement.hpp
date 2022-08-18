@@ -6,16 +6,18 @@
 #include "../ParseTreeVisitor.hpp"
 #include "AdditiveExpression.hpp"
 #include "AssignmentExpression.hpp"
-#include "TerminalSymbol.hpp"
 #include <optional>
 namespace parse_tree {
+
+class TerminalSymbol;
 
 class ParseTreeStatement {
     public:
     std::optional<const AssignmentExpression> assignmentExpression;
     std::optional<std::pair<const TerminalSymbol, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
+    ~ParseTreeStatement();
     ParseTreeStatement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator);
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree
