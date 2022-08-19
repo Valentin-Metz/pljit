@@ -3,13 +3,17 @@
 
 #include "AstVisitor.hpp"
 #include <cstdlib>
+#include <memory>
+#include <vector>
 namespace ast {
+class Expression;
 
 class AstPrintVisitor : public AstVisitor {
     private:
     std::size_t statement_counter = 0;
     std::size_t expression_counter = 0;
     std::size_t unique_counter = 65536;
+    void printExpressions(std::vector<std::unique_ptr<Expression>>& expressions);
 
     public:
     ~AstPrintVisitor() override = default;

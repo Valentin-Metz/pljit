@@ -64,24 +64,17 @@ void AstPrintVisitor::visit(AssignmentStatement& node) {
     if (!node.expressions.empty()) {
         std::cout << "Statement_" << statement_counter << " -> ";
     }
-    for (auto& expression : node.expressions) {
-        std::cout << "PLUS_" << unique_counter << " [color=orange]\n";
-        std::cout << "PLUS_" << unique_counter << " [label = \"+\"]\n";
-
-        std::cout << "PLUS_" << unique_counter-- << " -> Expression_" << expression_counter << " [color=orange]\n";
-        std::cout << "Expression_" << expression_counter << " -> ";
-        std::size_t current_expression = expression_counter;
-        expression_counter++;
-        expression->accept(*this);
-        if (expression != node.expressions.back()) {
-            std::cout << "Expression_" << current_expression << " -> ";
-        }
-    }
+    printExpressions(node.expressions);
 }
 
 void AstPrintVisitor::visit(ReturnStatement& node) {
     std::cout << "Statement_" << statement_counter << " -> RETURN_" << statement_counter << " [color=pink]\n";
     std::cout << "RETURN_" << statement_counter << " [label = \"RETURN\"]\n";
+
+    if (!node.expressions.empty()) {
+        std::cout << "Statement_" << statement_counter << " -> ";
+    }
+    printExpressions(node.expressions);
 }
 
 void AstPrintVisitor::visit(MultiplicativeExpression& node) {
@@ -97,19 +90,7 @@ void AstPrintVisitor::visit(MultiplicativeExpression& node) {
     if (!node.expressions.empty()) {
         std::cout << "MultiplicativeExpression_" << expression_counter << " -> ";
     }
-    for (auto& expression : node.expressions) {
-        std::cout << "PLUS_" << unique_counter << " [color=orange]\n";
-        std::cout << "PLUS_" << unique_counter << " [label = \"+\"]\n";
-
-        std::cout << "PLUS_" << unique_counter-- << " -> Expression_" << expression_counter << " [color=orange]\n";
-        std::cout << "Expression_" << expression_counter << " -> ";
-        std::size_t current_expression = expression_counter;
-        expression_counter++;
-        expression->accept(*this);
-        if (expression != node.expressions.back()) {
-            std::cout << "Expression_" << current_expression << " -> ";
-        }
-    }
+    printExpressions(node.expressions);
 }
 
 void AstPrintVisitor::visit(TerminalExpression& node) {
@@ -127,6 +108,21 @@ void AstPrintVisitor::visit(TerminalExpression& node) {
             std::cout << "PLUS_" << unique_counter << " -> " << value.second << "_" << unique_counter << " [color=red]\n";
             std::cout << value.second << "_" << unique_counter << " [label = \"" << value.second << "\"]\n";
             std::cout << "PLUS_" << unique_counter-- << " [label = \"+\"]\n";
+        }
+    }
+}
+void AstPrintVisitor::printExpressions(std::vector<std::unique_ptr<Expression>>& expressions) {
+    for (auto& expression : expressions) {
+        std::cout << "PLUS_" << unique_counter << " [color=orange]\n";
+        std::cout << "PLUS_" << unique_counter << " [label = \"+\"]\n";
+
+        std::cout << "PLUS_" << unique_counter-- << " -> Expression_" << expression_counter << " [color=orange]\n";
+        std::cout << "Expression_" << expression_counter << " -> ";
+        std::size_t current_expression = expression_counter;
+        expression_counter++;
+        expression->accept(*this);
+        if (expression != expressions.back()) {
+            std::cout << "Expression_" << current_expression << " -> ";
         }
     }
 }
