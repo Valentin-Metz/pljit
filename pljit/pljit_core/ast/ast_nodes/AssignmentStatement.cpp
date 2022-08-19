@@ -1,5 +1,7 @@
 #include "AssignmentStatement.hpp"
 #include "../AstVisitor.hpp"
+#include "Expression.hpp"
+#include "MultiplicativeExpression.hpp"
 
 namespace ast {
 
@@ -12,6 +14,20 @@ void AssignmentStatement::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
 void AssignmentStatement::execute(ExecutionTable& table) {
+    int64_t result = 0;
+    for (auto& expression : expressions) {
+        if (expression->expressionType == Expression::Multiplicative) {
+            result += expression->execute(table);
+        } else {
+            MultiplicativeExpression& m = static_cast<MultiplicativeExpression&>(*expression.get());
+            if (m.multiplicativeOperator == MultiplicativeExpression::Multiply) {
+                result *= expression->execute(table);
+            } else {
+                result /= expression->execute(table);
+            }
+        }
+    }
+    table.update(target, result);
 }
 
 } // namespace ast

@@ -10,7 +10,6 @@ class Expression {
     public:
     virtual ~Expression();
     enum ExpressionType {
-        Additive,
         Multiplicative,
         Terminal,
     };

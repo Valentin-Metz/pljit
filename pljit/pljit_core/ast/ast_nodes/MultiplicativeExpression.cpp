@@ -13,7 +13,16 @@ void MultiplicativeExpression::accept(AstVisitor& visitor) {
 int64_t MultiplicativeExpression::execute(ExecutionTable& table) {
     int64_t result = 0;
     for (auto& expression : expressions) {
-        result += expression->execute(table);
+        if (expression->expressionType == Expression::Multiplicative) {
+            result += expression->execute(table);
+        } else {
+            MultiplicativeExpression& m = static_cast<MultiplicativeExpression&>(*expression.get());
+            if (m.multiplicativeOperator == Multiply) {
+                result *= expression->execute(table);
+            } else {
+                result /= expression->execute(table);
+            }
+        }
     }
     return result;
 }

@@ -1,6 +1,8 @@
 #include "ReturnStatement.hpp"
 #include "../../parse_tree/parse_tree_nodes/Statement.hpp"
 #include "../AstVisitor.hpp"
+#include "Expression.hpp"
+#include "MultiplicativeExpression.hpp"
 
 namespace ast {
 ReturnStatement::ReturnStatement(const parse_tree::AdditiveExpression* return_statement, SymbolTable& symbol_table, source_code::SourceCode& source_code) : Statement(Return) {
@@ -11,6 +13,20 @@ void ReturnStatement::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
 void ReturnStatement::execute(ExecutionTable& table) {
+    int64_t result = 0;
+    for (auto& expression : expressions) {
+        if (expression->expressionType == Expression::Multiplicative) {
+            result += expression->execute(table);
+        } else {
+            MultiplicativeExpression& m = static_cast<MultiplicativeExpression&>(*expression.get());
+            if (m.multiplicativeOperator == MultiplicativeExpression::Multiply) {
+                result *= expression->execute(table);
+            } else {
+                result /= expression->execute(table);
+            }
+        }
+    }
+    table.result.emplace(result);
 }
 
 } // namespace ast
