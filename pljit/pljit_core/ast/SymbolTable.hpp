@@ -18,6 +18,8 @@ class SymbolTable {
     };
     /// Identifier -> (DeclarationVariant, Initialized, Value, SourceCodeReference)
     std::unordered_map<std::string_view, std::tuple<DeclarationVariant, bool, int64_t, source_code::SourceCodeReference>> table;
+    /// Names for function parameters in order
+    std::vector<std::string_view> parameters;
 
     public:
     SymbolTable(parse_tree::ParseTree& parse_tree, source_code::SourceCode& source_code);

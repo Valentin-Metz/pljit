@@ -43,6 +43,7 @@ void SymbolTable::declare(std::string_view identifier, DeclarationVariant declar
 SymbolTable::SymbolTable(parse_tree::ParseTree& parse_tree, source_code::SourceCode& source_code) {
     if (parse_tree.root.parameter_declaration) {
         for (auto& identifier : parse_tree.root.parameter_declaration.value().declaratorList.declaratorList) {
+            parameters.push_back(identifier.first.identifier.source_code_reference.resolve(source_code));
             declare(identifier.first.identifier.source_code_reference.resolve(source_code), Parameter, 0, identifier.first.identifier.source_code_reference);
         }
     }
