@@ -1,12 +1,11 @@
 #ifndef FINAL_SOURCE_CODE_H
 #define FINAL_SOURCE_CODE_H
 
-#include "../pljit_core_utility/NonCopyable.hpp"
 #include <string>
 #include <utility>
 namespace source_code {
 
-class SourceCode : public NonCopyable {
+class SourceCode {
     public:
     const std::string_view source_code;
     explicit SourceCode(std::string_view source_code) : source_code(std::move(source_code)) {}
