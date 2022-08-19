@@ -2,9 +2,14 @@
 #define PLJIT_ASTPRINTVISITOR_HPP
 
 #include "AstVisitor.hpp"
+#include <cstdlib>
 namespace ast {
 
 class AstPrintVisitor : public AstVisitor {
+    private:
+    std::size_t statement_counter = 0;
+    std::size_t expression_counter = 0;
+
     public:
     ~AstPrintVisitor() override = default;
     virtual void visit(AST& node) override;

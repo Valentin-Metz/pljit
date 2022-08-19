@@ -49,6 +49,11 @@ void AstPrintVisitor::visit(SymbolTable& node) {
 }
 
 void AstPrintVisitor::visit(Function& node) {
+    for (auto& statement : node.statements) {
+        std::cout << "Function -> Expression_" << statement_counter << "\n";
+        statement.get()->accept(*this);
+        statement_counter++;
+    }
 }
 
 void AstPrintVisitor::visit(AssignmentStatement& node) {
