@@ -7,4 +7,7 @@ Statement::~Statement() {
 }
 Statement::Statement(Statement::StatementType statement_type) : statementType(statement_type) {
 }
+void Statement::parseAdditiveExpression() {
+
+}
 } // namespace ast

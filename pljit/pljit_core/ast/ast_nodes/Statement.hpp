@@ -17,6 +17,7 @@ class Statement {
         Assignment,
         Return,
     };
+    static void parseAdditiveExpression();
 
     private:
     const StatementType statementType;
