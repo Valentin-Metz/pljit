@@ -1,4 +1,4 @@
-#include "ParseTreeStatement.hpp"
+#include "Statement.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerKeywordToken.hpp"
 #include "../../pljit_core_utility/CompilationError.hpp"
@@ -8,7 +8,7 @@
 namespace parse_tree {
 using namespace lexer;
 
-ParseTreeStatement::ParseTreeStatement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator) {
+Statement::Statement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator) {
     std::unique_ptr<LexerToken> t{l.nextToken()};
     switch (t->token_type) {
         case LexerToken::Error:
@@ -31,7 +31,7 @@ ParseTreeStatement::ParseTreeStatement(lexer::Lexer& l, std::optional<std::uniqu
             throw CompilationError(t->source_code_reference, CompilationError::ParseTree, "Expected identifier or 'RETURN'");
     }
 }
-void ParseTreeStatement::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
-ParseTreeStatement::~ParseTreeStatement() = default;
+void Statement::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+Statement::~Statement() = default;
 
 } // namespace parse_tree

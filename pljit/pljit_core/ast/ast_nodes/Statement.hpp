@@ -6,7 +6,7 @@
 #include <vector>
 
 namespace parse_tree {
-class ParseTreeStatement;
+class Statement;
 }
 
 namespace ast {

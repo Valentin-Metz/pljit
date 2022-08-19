@@ -1,5 +1,5 @@
 #include "Statement.hpp"
-#include "../../parse_tree/parse_tree_nodes/ParseTreeStatement.hpp"
+#include "../../parse_tree/parse_tree_nodes/Statement.hpp"
 #include "Expression.hpp"
 #include "MultiplicativeExpression.hpp"
 #include "TerminalExpression.hpp"

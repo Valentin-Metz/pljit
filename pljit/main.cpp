@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
         std::cout << "success" << std::endl;
     } catch (CompilationError e) {
         e.print(source_code);
-        std::cout << "error" << std::endl;
+        std::cout << "Terminated with error" << std::endl;
     }
 
     return 0;

@@ -1,6 +1,6 @@
 #include "Function.hpp"
 #include "../../parse_tree/ParseTree.hpp"
-#include "../../parse_tree/parse_tree_nodes/ParseTreeStatement.hpp"
+#include "../../parse_tree/parse_tree_nodes/Statement.hpp"
 #include "AssignmentStatement.hpp"
 #include "ReturnStatement.hpp"
 

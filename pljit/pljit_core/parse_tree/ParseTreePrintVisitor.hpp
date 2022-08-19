@@ -20,7 +20,7 @@ class ParseTreePrintVisitor : public ParseTreeVisitor {
     void visit(const MultiplicativeExpression& node) const override;
     void visit(const ParameterDeclaration& node) const override;
     void visit(const PrimaryExpression& node) const override;
-    void visit(const ParseTreeStatement& node) const override;
+    void visit(const Statement& node) const override;
     void visit(const StatementList& node) const override;
     void visit(const TerminalSymbol& node) const override;
     void visit(const UnaryExpression& node) const override;

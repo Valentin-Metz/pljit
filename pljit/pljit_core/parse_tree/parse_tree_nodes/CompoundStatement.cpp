@@ -1,5 +1,5 @@
 #include "CompoundStatement.hpp"
-#include "ParseTreeStatement.hpp"
+#include "Statement.hpp"
 
 namespace parse_tree {
 
