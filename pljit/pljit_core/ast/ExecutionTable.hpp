@@ -1,6 +1,7 @@
 #ifndef PLJIT_EXECUTIONTABLE_HPP
 #define PLJIT_EXECUTIONTABLE_HPP
 #include <unordered_map>
+#include <string_view>
 
 namespace ast {
 
