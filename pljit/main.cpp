@@ -10,7 +10,7 @@
 
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
-int main(int argc, char* argv[]) {
+int main([[maybe_unused]] int argc, char* argv[]) {
     std::ifstream ifs(argv[1]);
     std::string valid_source((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
 
