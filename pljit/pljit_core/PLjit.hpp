@@ -16,6 +16,7 @@ class FunctionHandle;
 
 /// PL/0 just-in-time compiler
 class PLjit {
+    friend FunctionHandle;
 
     /// Indicates state of registered function
     enum FunctionState {
