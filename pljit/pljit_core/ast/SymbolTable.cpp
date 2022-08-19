@@ -29,7 +29,7 @@ void SymbolTable::check_assign(std::string_view identifier, source_code::SourceC
 void SymbolTable::declare(std::string_view identifier, DeclarationVariant declaration_variant, int64_t value, source_code::SourceCodeReference source_code_reference) {
     auto result = table.find(identifier);
     if (result != table.end())
-        throw CompilationError(source_code_reference, CompilationError::SymbolTable, "Attempted to declare variable twice");
+        throw CompilationError(source_code_reference, CompilationError::SymbolTable, "Attempted to declare identifier twice");
 
     if (declaration_variant == Variable) {
         table.insert(std::make_pair(identifier, std::make_tuple(Variable, false, value, source_code_reference)));
