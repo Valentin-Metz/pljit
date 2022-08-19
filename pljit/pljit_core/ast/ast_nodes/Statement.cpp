@@ -14,7 +14,7 @@ void Statement::parseUnaryExpression(const parse_tree::UnaryExpression& unary_ex
     if (unary_expression.modifier && unary_expression.modifier.value().second == ArithmeticSymbol::MINUS) sign *= -1;
 
     if (unary_expression.primaryExpression.value()->identifier) {
-        symbol_table.check_assign(unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference.resolve(source_code),
+        symbol_table.check_read(unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference.resolve(source_code),
                                   unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference);
         expressions.push_back(std::make_unique<TerminalExpression>(std::make_pair(sign, unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference.resolve(source_code))));
     }
