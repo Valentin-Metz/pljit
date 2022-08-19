@@ -16,13 +16,21 @@ void CompilationError::print(source_code::SourceCode& source_code) {
 
     std::cout << line_number << ":" << character_position << ": ";
 
-    switch (error_source) { // todo
+    switch (error_source) {
         case Lexer: {
             std::cout << "Lexer error: " << error_message;
             break;
         }
         case ParseTree: {
             std::cout << "ParseTree error: " << error_message;
+            break;
+        }
+        case SymbolTable: {
+            std::cout << "SymbolTable error: " << error_message;
+            break;
+        }
+        case AST: {
+            std::cout << "AST error: " << error_message;
             break;
         }
     }

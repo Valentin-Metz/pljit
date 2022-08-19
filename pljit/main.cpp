@@ -24,6 +24,8 @@ int main(int argc, char* argv[]) {
         parse_tree::ParseTree parse_tree{l};
         parse_tree.print();
         ast::AST ast{parse_tree, source_code};
+
+        std::cout << "success" << std::endl;
     } catch (CompilationError e) {
         e.print(source_code);
         std::cout << "error" << std::endl;
