@@ -9,6 +9,7 @@ class AstPrintVisitor : public AstVisitor {
     private:
     std::size_t statement_counter = 0;
     std::size_t expression_counter = 0;
+    std::size_t multiplicative_expression_counter = 0;
     std::size_t unique_counter = 65536;
 
     public:

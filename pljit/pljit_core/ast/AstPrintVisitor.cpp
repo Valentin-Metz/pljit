@@ -56,19 +56,19 @@ void AstPrintVisitor::visit(Function& node) {
 }
 
 void AstPrintVisitor::visit(AssignmentStatement& node) {
-    std::cout << "Statement_" << statement_counter << " -> ASSIGN_" << statement_counter << "\n";
+    std::cout << "Statement_" << statement_counter << " -> ASSIGN_" << statement_counter << " [color=purple]\n";
     std::cout << "ASSIGN_" << statement_counter << " [label = \"ASSIGN\"]\n";
-    std::cout << "ASSIGN_" << statement_counter << " -> " << node.target << "_" << unique_counter << "\n";
+    std::cout << "ASSIGN_" << statement_counter << " -> " << node.target << "_" << unique_counter << " [color=purple]\n";
     std::cout << node.target << "_" << unique_counter-- << " [label = \"" << node.target << "\"]\n";
 
     if (!node.expressions.empty()) {
         std::cout << "Statement_" << statement_counter << " -> ";
     }
     for (auto& expression : node.expressions) {
-        std::cout << "PLUS_" << unique_counter << "\n";
+        std::cout << "PLUS_" << unique_counter << " [color=orange]\n";
         std::cout << "PLUS_" << unique_counter << " [label = \"+\"]\n";
 
-        std::cout << "PLUS_" << unique_counter-- << " -> Expression_" << expression_counter << "\n";
+        std::cout << "PLUS_" << unique_counter-- << " -> Expression_" << expression_counter << " [color=orange]\n";
         std::cout << "Expression_" << expression_counter << " -> ";
         expression->accept(*this);
         if (expression != node.expressions.back()) {
@@ -79,12 +79,21 @@ void AstPrintVisitor::visit(AssignmentStatement& node) {
 }
 
 void AstPrintVisitor::visit(ReturnStatement& node) {
-    std::cout << "Statement_" << statement_counter << " -> RETURN_" << statement_counter << "\n";
+    std::cout << "Statement_" << statement_counter << " -> RETURN_" << statement_counter << " [color=pink]\n";
     std::cout << "RETURN_" << statement_counter << " [label = \"RETURN\"]\n";
 }
 
 void AstPrintVisitor::visit(MultiplicativeExpression& node) {
-    std::cout << "MultiplicativeExpression_" << expression_counter << "\n";
+    if (node.multiplicativeOperator==MultiplicativeExpression::Multiply){
+        std::cout << "MULTIPLY_" << unique_counter << " [color=green]\n";
+        std::cout << "MULTIPLY_" << unique_counter << " [label = \"*\"]\n";
+        std::cout << "MULTIPLY_" << unique_counter-- << " -> MultiplicativeExpression_" << multiplicative_expression_counter << " [color=green]\n";
+    } else{
+        std::cout << "DIVIDE_" << unique_counter << " [color=lightblue]\n";
+        std::cout << "DIVIDE_" << unique_counter << " [label = \"*\"]\n";
+        std::cout << "DIVIDE_" << unique_counter-- << " -> MultiplicativeExpression_" << multiplicative_expression_counter << " [color=lightblue]\n";
+    }
+    multiplicative_expression_counter++;
 }
 
 void AstPrintVisitor::visit(TerminalExpression& node) {
@@ -94,12 +103,12 @@ void AstPrintVisitor::visit(TerminalExpression& node) {
         auto value = std::get<std::pair<int64_t, std::string_view>>(node.value);
         if (value.first == -1) {
             std::cout << "MINUS_" << unique_counter << " [color=blue]\n";
-            std::cout << "MINUS_" << unique_counter << " -> " << value.second << "_" << unique_counter << "\n";
+            std::cout << "MINUS_" << unique_counter << " -> " << value.second << "_" << unique_counter << " [color=blue]\n";
             std::cout << value.second << "_" << unique_counter << " [label = \"" << value.second << "\"]\n";
             std::cout << "MINUS_" << unique_counter-- << " [label = \"-\"]\n";
         } else {
             std::cout << "PLUS_" << unique_counter << " [color=red]\n";
-            std::cout << "PLUS_" << unique_counter << " -> " << value.second << "_" << unique_counter << "\n";
+            std::cout << "PLUS_" << unique_counter << " -> " << value.second << "_" << unique_counter << " [color=red]\n";
             std::cout << value.second << "_" << unique_counter << " [label = \"" << value.second << "\"]\n";
             std::cout << "PLUS_" << unique_counter-- << " [label = \"+\"]\n";
         }
