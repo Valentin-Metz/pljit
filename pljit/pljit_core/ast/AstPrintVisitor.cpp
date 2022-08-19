@@ -1,7 +1,6 @@
 #include "AstPrintVisitor.hpp"
 #include "Ast.hpp"
 #include "SymbolTable.hpp"
-#include "ast_nodes/AdditiveExpression.hpp"
 #include "ast_nodes/AssignmentStatement.hpp"
 #include "ast_nodes/Function.hpp"
 #include "ast_nodes/MultiplicativeExpression.hpp"
@@ -65,9 +64,6 @@ void AstPrintVisitor::visit(AssignmentStatement& node) {
 void AstPrintVisitor::visit(ReturnStatement& node) {
     std::cout << "Statement_" << statement_counter << " -> RETURN_" << statement_counter << "\n";
     std::cout << "RETURN_" << statement_counter << " [label = \"RETURN\"]\n";
-}
-
-void AstPrintVisitor::visit(AdditiveExpression& node) {
 }
 
 void AstPrintVisitor::visit(MultiplicativeExpression& node) {

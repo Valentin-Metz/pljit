@@ -8,7 +8,6 @@ class SymbolTable;
 class Function;
 class AssignmentStatement;
 class ReturnStatement;
-class AdditiveExpression;
 class MultiplicativeExpression;
 class TerminalExpression;
 
@@ -20,7 +19,6 @@ class AstVisitor {
     virtual void visit(Function& node) = 0;
     virtual void visit(AssignmentStatement& node) = 0;
     virtual void visit(ReturnStatement& node) = 0;
-    virtual void visit(AdditiveExpression& node) = 0;
     virtual void visit(MultiplicativeExpression& node) = 0;
     virtual void visit(TerminalExpression& node) = 0;
 };

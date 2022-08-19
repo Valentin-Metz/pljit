@@ -17,7 +17,6 @@ class AstPrintVisitor : public AstVisitor {
     virtual void visit(Function& node) override;
     virtual void visit(AssignmentStatement& node) override;
     virtual void visit(ReturnStatement& node) override;
-    virtual void visit(AdditiveExpression& node) override;
     virtual void visit(MultiplicativeExpression& node) override;
     virtual void visit(TerminalExpression& node) override;
 };
