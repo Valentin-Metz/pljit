@@ -22,6 +22,7 @@ void SymbolTable::check_assign(std::string_view identifier, source_code::SourceC
         if (std::get<0>(result->second) == Constant) {
             throw CompilationError(r, CompilationError::SymbolTable, "Attempted to write to constant");
         }
+        std::get<1>(result->second) = true;
     } else {
         throw CompilationError(r, CompilationError::SymbolTable, "Attempted to access undeclared variable");
     }
