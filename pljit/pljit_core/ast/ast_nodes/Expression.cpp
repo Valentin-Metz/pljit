@@ -4,6 +4,5 @@ namespace ast {
 
 Expression::~Expression() = default;
 
-Expression::Expression() {
-}
+Expression::Expression(const ExpressionType expression_type) : expressionType(expression_type) {}
 } // namespace ast

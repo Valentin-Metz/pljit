@@ -1,5 +1,5 @@
-#ifndef PLJIT_ADDITIVEEXPRESSION_HPP
-#define PLJIT_ADDITIVEEXPRESSION_HPP
+#ifndef PLJIT_PARSETREE_ADDITIVEEXPRESSION_HPP
+#define PLJIT_PARSETREE_ADDITIVEEXPRESSION_HPP
 
 #include "../../lexer/Lexer.hpp"
 #include "../ParseTreeVisitor.hpp"
@@ -24,4 +24,4 @@ class AdditiveExpression {
 
 } // namespace parse_tree
 
-#endif //PLJIT_ADDITIVEEXPRESSION_HPP
+#endif //PLJIT_PARSETREE_ADDITIVEEXPRESSION_HPP

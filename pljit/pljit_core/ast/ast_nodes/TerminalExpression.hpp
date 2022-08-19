@@ -1,9 +1,12 @@
 #ifndef PLJIT_TERMINALEXPRESSION_HPP
 #define PLJIT_TERMINALEXPRESSION_HPP
 
+#include "Expression.hpp"
 namespace ast {
 
-class TerminalExpression {
+class TerminalExpression : public Expression {
+    public:
+    TerminalExpression();
 };
 
 } // namespace ast

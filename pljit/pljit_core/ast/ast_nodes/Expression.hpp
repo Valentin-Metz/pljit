@@ -1,15 +1,20 @@
 #ifndef PLJIT_EXPRESSION_HPP
 #define PLJIT_EXPRESSION_HPP
 
-
 namespace ast {
-
 
 class Expression {
     public:
     virtual ~Expression();
-    Expression();
+    enum ExpressionType {
+        Additive,
+        Multiplicative,
+        Terminal,
+    };
+    const ExpressionType expressionType;
 
+    protected:
+    Expression(const ExpressionType expression_type);
 };
 
 } // namespace ast
