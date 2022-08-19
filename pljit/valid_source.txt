@@ -3,6 +3,5 @@ VAR volume;
 CONST density = 2400;
 BEGIN
 volume := width * height * depth;
-density := width * height * depth;
 RETURN density * volume
 END.
