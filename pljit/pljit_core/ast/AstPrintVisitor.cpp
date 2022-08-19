@@ -58,7 +58,24 @@ void AstPrintVisitor::visit(Function& node) {
 void AstPrintVisitor::visit(AssignmentStatement& node) {
     std::cout << "Statement_" << statement_counter << " -> ASSIGN_" << statement_counter << "\n";
     std::cout << "ASSIGN_" << statement_counter << " [label = \"ASSIGN\"]\n";
-    std::cout << "ASSIGN_" << statement_counter << " -> " << node.target << "\n";
+    std::cout << "ASSIGN_" << statement_counter << " -> " << node.target << "_" << unique_counter << "\n";
+    std::cout << node.target << "_" << unique_counter-- << " [label = \"" << node.target << "\"]\n";
+
+    if (!node.expressions.empty()) {
+        std::cout << "Statement_" << statement_counter << " -> ";
+    }
+    for (auto& expression : node.expressions) {
+        std::cout << "PLUS_" << unique_counter << "\n";
+        std::cout << "PLUS_" << unique_counter << " [label = \"+\"]\n";
+
+        std::cout << "PLUS_" << unique_counter-- << " -> Expression_" << expression_counter << "\n";
+        std::cout << "Expression_" << expression_counter << " -> ";
+        expression->accept(*this);
+        if (expression != node.expressions.back()) {
+            std::cout << "Expression_" << expression_counter << " -> ";
+        }
+        expression_counter++;
+    }
 }
 
 void AstPrintVisitor::visit(ReturnStatement& node) {
@@ -67,9 +84,26 @@ void AstPrintVisitor::visit(ReturnStatement& node) {
 }
 
 void AstPrintVisitor::visit(MultiplicativeExpression& node) {
+    std::cout << "MultiplicativeExpression_" << expression_counter << "\n";
 }
 
 void AstPrintVisitor::visit(TerminalExpression& node) {
+    if (node.value.index() == 0) {
+        std::cout << std::get<int64_t>(node.value) << "\n";
+    } else {
+        auto value = std::get<std::pair<int64_t, std::string_view>>(node.value);
+        if (value.first == -1) {
+            std::cout << "MINUS_" << unique_counter << " [color=blue]\n";
+            std::cout << "MINUS_" << unique_counter << " -> " << value.second << "_" << unique_counter << "\n";
+            std::cout << value.second << "_" << unique_counter << " [label = \"" << value.second << "\"]\n";
+            std::cout << "MINUS_" << unique_counter-- << " [label = \"-\"]\n";
+        } else {
+            std::cout << "PLUS_" << unique_counter << " [color=red]\n";
+            std::cout << "PLUS_" << unique_counter << " -> " << value.second << "_" << unique_counter << "\n";
+            std::cout << value.second << "_" << unique_counter << " [label = \"" << value.second << "\"]\n";
+            std::cout << "PLUS_" << unique_counter-- << " [label = \"+\"]\n";
+        }
+    }
 }
 
 } // namespace ast

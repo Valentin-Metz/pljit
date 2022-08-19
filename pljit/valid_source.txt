@@ -1,7 +1,8 @@
-PARAM width, height, depth;
+PARAM width, height, depth, stuff;
 VAR volume;
 CONST density = 2400;
 BEGIN
 volume := width * height * depth;
+stuff := height + height - height;
 RETURN density * volume
 END.
