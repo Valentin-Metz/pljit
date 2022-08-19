@@ -14,5 +14,16 @@ void AST::print() {
     AstPrintVisitor print_visitor;
     this->accept(print_visitor);
 }
+ExecutionTable AST::getExecutionTable() {
+    if (executionTable) return executionTable.value();
+
+    ExecutionTable t;
+    for (auto& entry : symbolTable.table) {
+        t.insert(entry.first, std::get<2>(entry.second));
+    }
+
+    executionTable.emplace(t);
+    return executionTable.value();
+}
 
 } // namespace ast

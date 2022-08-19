@@ -2,6 +2,7 @@
 #define PLJIT_AST_HPP
 
 #include "../parse_tree/ParseTree.hpp"
+#include "ExecutionTable.hpp"
 #include "SymbolTable.hpp"
 #include "ast_nodes/Function.hpp"
 
@@ -15,6 +16,13 @@ class AST {
     AST(parse_tree::ParseTree& parse_tree, source_code::SourceCode& source_code);
     void accept(AstVisitor& visitor);
     void print();
+
+    private:
+    // The execution table must be copied for every execution
+    std::optional<const ExecutionTable> executionTable;
+
+    public:
+    ExecutionTable getExecutionTable();
 };
 
 } // namespace ast

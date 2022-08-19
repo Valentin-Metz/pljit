@@ -1,0 +1,7 @@
+#ifndef PLJIT_RUNTIMEERROR_HPP
+#define PLJIT_RUNTIMEERROR_HPP
+
+class RuntimeError {
+};
+
+#endif //PLJIT_RUNTIMEERROR_HPP

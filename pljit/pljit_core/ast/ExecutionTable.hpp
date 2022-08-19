@@ -1,10 +1,15 @@
 #ifndef PLJIT_EXECUTIONTABLE_HPP
 #define PLJIT_EXECUTIONTABLE_HPP
+#include <unordered_map>
 
 namespace ast {
 
 class ExecutionTable {
-
+    private:
+    std::unordered_map<std::string_view, int64_t> table;
+    public:
+    ExecutionTable();
+    void insert(std::string_view identifier, int64_t value);
 };
 
 } // namespace ast
