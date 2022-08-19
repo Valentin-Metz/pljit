@@ -18,6 +18,9 @@ void AstPrintVisitor::visit(AST& node) {
     std::cout << "AST -> SymbolTable\n";
     node.symbolTable.accept(*this);
 
+    std::cout << "AST -> Function\n";
+    node.function->accept(*this);
+
     std::cout << "}" << std::endl;
 }
 
