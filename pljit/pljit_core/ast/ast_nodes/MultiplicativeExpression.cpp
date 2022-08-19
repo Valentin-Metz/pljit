@@ -1,5 +1,9 @@
 #include "MultiplicativeExpression.hpp"
+#include "Statement.hpp"
 
 namespace ast {
-MultiplicativeExpression::MultiplicativeExpression() : Expression(Multiplicative) {}
+MultiplicativeExpression::MultiplicativeExpression(MultiplicativeOperator multiplicative_operator, const parse_tree::UnaryExpression& unary_expression, SymbolTable& symbol_table, source_code::SourceCode& source_code) : Expression(Multiplicative), multiplicativeOperator(multiplicative_operator) {
+    Statement::parseUnaryExpression(unary_expression, symbol_table, source_code, expressions, 1);
+}
+
 } // namespace ast

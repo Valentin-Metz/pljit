@@ -1,6 +1,7 @@
 #include "Statement.hpp"
 #include "../../parse_tree/parse_tree_nodes/ParseTreeStatement.hpp"
 #include "Expression.hpp"
+#include "MultiplicativeExpression.hpp"
 #include "TerminalExpression.hpp"
 
 namespace ast {
@@ -9,7 +10,7 @@ Statement::~Statement() {
 Statement::Statement(Statement::StatementType statement_type) : statementType(statement_type) {
 }
 
-static void parseUnaryExpression(const parse_tree::UnaryExpression& unary_expression, SymbolTable& symbol_table, source_code::SourceCode& source_code, std::vector<std::unique_ptr<Expression>>& expressions, int64_t sign) {
+void Statement::parseUnaryExpression(const parse_tree::UnaryExpression& unary_expression, SymbolTable& symbol_table, source_code::SourceCode& source_code, std::vector<std::unique_ptr<Expression>>& expressions, int64_t sign) {
     if (unary_expression.modifier && unary_expression.modifier.value().second == ArithmeticSymbol::MINUS) sign *= -1;
 
     if (unary_expression.primaryExpression.value()->identifier) {
@@ -26,7 +27,11 @@ static void parseUnaryExpression(const parse_tree::UnaryExpression& unary_expres
 }
 
 static void parseMultiplicativeExpression(const parse_tree::MultiplicativeExpression& multiplicative_expression, SymbolTable& symbol_table, source_code::SourceCode& source_code, std::vector<std::unique_ptr<Expression>>& expressions) {
-
+    if (multiplicative_expression.multiplicativeOperator.second == ArithmeticSymbol::MULTIPLY) {
+        expressions.push_back(std::make_unique<MultiplicativeExpression>(MultiplicativeExpression::Multiply, multiplicative_expression.unaryExpression, symbol_table, source_code));
+    } else {
+        expressions.push_back(std::make_unique<MultiplicativeExpression>(MultiplicativeExpression::Divide, multiplicative_expression.unaryExpression, symbol_table, source_code));
+    }
 }
 
 void Statement::parseAdditiveExpression(const parse_tree::AdditiveExpression& additive_expression, SymbolTable& symbol_table, source_code::SourceCode& source_code, std::vector<std::unique_ptr<Expression>>& expressions, int64_t sign) {
