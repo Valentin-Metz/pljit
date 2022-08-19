@@ -15,27 +15,30 @@ namespace ast {
 void AstPrintVisitor::visit(AST& node) {
     std::cout << "digraph AST {\n";
 
+    std::cout << "AST -> SymbolTable\n";
     node.symbolTable.accept(*this);
 
     std::cout << "}" << std::endl;
 }
 
 void AstPrintVisitor::visit(SymbolTable& node) {
-    for (auto& symbol : node.table) {
-        std::cout << "SymbolTable -> ";
+    std::cout << "SymbolTable -> Parameters\n";
+    std::cout << "SymbolTable -> Variables\n";
+    std::cout << "SymbolTable -> Constants\n";
 
+    for (auto& symbol : node.table) {
         switch (std::get<0>(symbol.second)) {
             case SymbolTable::Parameter: {
-                std::cout << "Parameter_" << symbol.first << "\n";
+                std::cout << "Parameters -> " << symbol.first << "\n";
                 break;
             }
             case SymbolTable::Variable: {
-                std::cout << "Variable_" << symbol.first << "\n";
+                std::cout << "Variables -> " << symbol.first << "\n";
                 break;
             }
             case SymbolTable::Constant: {
-                std::cout << "Constant_" << symbol.first << "\n";
-                std::cout << "Constant_" << symbol.first << " -> " << std::get<2>(symbol.second) << "\n";
+                std::cout << "Constants -> " << symbol.first << "\n";
+                std::cout << symbol.first << " -> " << std::get<2>(symbol.second) << "\n";
                 break;
             }
         }
