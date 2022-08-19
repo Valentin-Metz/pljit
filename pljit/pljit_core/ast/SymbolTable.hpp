@@ -9,14 +9,22 @@
 namespace ast {
 
 class SymbolTable {
-    /// Identifier -> (Writeable, Initialized, Value, SourceCodeReference)
-    std::unordered_map<std::string_view, std::tuple<bool, bool, int64_t, source_code::SourceCodeReference>> table;
+    public:
+    enum DeclarationVariant {
+        Parameter,
+        Variable,
+        Constant,
+    };
+
+    private:
+    /// Identifier -> (DeclarationVariant, Initialized, Value, SourceCodeReference)
+    std::unordered_map<std::string_view, std::tuple<DeclarationVariant, bool, int64_t, source_code::SourceCodeReference>> table;
 
     public:
     SymbolTable(parse_tree::ParseTree& parse_tree, source_code::SourceCode& source_code);
     void check_read(std::string_view identifier, source_code::SourceCodeReference r);
     void check_assign(std::string_view identifier, source_code::SourceCodeReference r);
-    void declare(std::string_view identifier, std::tuple<bool, bool, int64_t, source_code::SourceCodeReference> w_i_v_r);
+    void declare(std::string_view identifier, DeclarationVariant declaration_variant, int64_t value, source_code::SourceCodeReference source_code_reference);
 };
 
 } // namespace ast
