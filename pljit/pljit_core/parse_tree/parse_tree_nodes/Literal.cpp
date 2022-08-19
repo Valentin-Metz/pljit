@@ -20,5 +20,6 @@ static const std::pair<TerminalSymbol, std::int64_t> generateLiteral(lexer::Lexe
 
 Literal::Literal(lexer::Lexer& l) : literal(generateLiteral(l)) {}
 Literal::Literal(std::pair<TerminalSymbol, std::int64_t> literal) : literal(literal) {}
+void Literal::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 
 } // namespace parse_tree

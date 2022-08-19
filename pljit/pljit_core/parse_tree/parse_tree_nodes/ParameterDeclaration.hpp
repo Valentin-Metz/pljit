@@ -9,8 +9,8 @@ class ParameterDeclaration {
     public:
     const TerminalSymbol keyword;
     const DeclaratorList declaratorList;
-    ParameterDeclaration(TerminalSymbol keyword, lexer::Lexer& l) : keyword(keyword), declaratorList(DeclaratorList(l)) {}
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    ParameterDeclaration(TerminalSymbol keyword, lexer::Lexer& l);
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree

@@ -15,7 +15,7 @@ class UnaryExpression {
     std::optional<std::unique_ptr<const PrimaryExpression>> primaryExpression;
     UnaryExpression(lexer::Lexer& l);
     UnaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l);
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree

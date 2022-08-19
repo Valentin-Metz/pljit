@@ -10,8 +10,8 @@ class ConstantDeclaration {
     public:
     const TerminalSymbol keyword;
     const InitDeclaratorList initDeclaratorList;
-    ConstantDeclaration(TerminalSymbol keyword, lexer::Lexer& l) : keyword(keyword), initDeclaratorList(l) {}
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    ConstantDeclaration(TerminalSymbol keyword, lexer::Lexer& l);
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree

@@ -14,5 +14,6 @@ static const std::vector<std::pair<const InitDeclarator, const TerminalSymbol>> 
 }
 
 InitDeclaratorList::InitDeclaratorList(lexer::Lexer& l) : initDeclaratorList(generateInitDeclaratorList(l)) {}
+void InitDeclaratorList::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 
 } // namespace parse_tree

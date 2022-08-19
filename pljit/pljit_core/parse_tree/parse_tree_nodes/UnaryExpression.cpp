@@ -35,4 +35,5 @@ UnaryExpression::UnaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Le
         }
     }
 }
+void UnaryExpression::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 } // namespace parse_tree

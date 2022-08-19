@@ -20,7 +20,7 @@ class PrimaryExpression {
     std::optional<std::unique_ptr<AdditiveExpression>> additiveExpression;
     std::optional<TerminalSymbol> closingBracket;
     PrimaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l);
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree

@@ -12,7 +12,7 @@ class DeclaratorList {
     public:
     const std::vector<std::pair<const Identifier, const TerminalSymbol>> declaratorList;
     DeclaratorList(lexer::Lexer& l);
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree

@@ -12,7 +12,7 @@ class AssignmentExpression {
     const TerminalSymbol assignmentToken;
     const AdditiveExpression additiveExpression;
     AssignmentExpression(Identifier identifier, lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator);
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree

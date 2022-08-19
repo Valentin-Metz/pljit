@@ -13,7 +13,7 @@ class InitDeclarator {
     const Literal literal;
 
     InitDeclarator(lexer::Lexer& l);
-    void accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+    void accept(const ParseTreeVisitor& visitor) const;
 };
 
 } // namespace parse_tree

@@ -48,5 +48,6 @@ static const std::vector<std::pair<std::unique_ptr<const Statement>, const Termi
 }
 
 StatementList::StatementList(lexer::Lexer& l) : statementList(generateStatementList(l)) {}
+void StatementList::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 
 } // namespace parse_tree

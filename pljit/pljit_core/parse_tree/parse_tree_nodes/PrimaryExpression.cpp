@@ -34,6 +34,7 @@ PrimaryExpression::PrimaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer
             throw CompilationError(t->source_code_reference, CompilationError::ParseTree, "Expected identifier, literal or additive-expression in brackets");
     }
 }
+void PrimaryExpression::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 PrimaryExpression::~PrimaryExpression() = default;
 
 } // namespace parse_tree
