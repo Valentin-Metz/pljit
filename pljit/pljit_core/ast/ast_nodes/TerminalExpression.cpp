@@ -8,5 +8,8 @@ TerminalExpression::TerminalExpression(std::variant<int64_t, std::pair<int64_t, 
 void TerminalExpression::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
+int64_t TerminalExpression::execute(ExecutionTable& table) {
+    return 0;
+}
 
 } // namespace ast

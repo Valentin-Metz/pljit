@@ -1,6 +1,8 @@
 #ifndef PLJIT_EXPRESSION_HPP
 #define PLJIT_EXPRESSION_HPP
 
+#include "../ExecutionTable.hpp"
+#include <cstdint>
 namespace ast {
 class AstVisitor;
 
@@ -14,6 +16,7 @@ class Expression {
     };
     const ExpressionType expressionType;
     virtual void accept(AstVisitor& visitor) = 0;
+    virtual int64_t execute(ExecutionTable& table) = 0;
 
     protected:
     Expression(const ExpressionType expression_type);

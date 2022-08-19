@@ -25,7 +25,8 @@ void Function::accept(AstVisitor& visitor) {
 }
 void Function::execute(ExecutionTable& table) {
     for (auto& statement : statements) {
-        
+        statement->execute(table);
+        if (table.result) return;
     }
 }
 

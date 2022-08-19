@@ -10,5 +10,8 @@ MultiplicativeExpression::MultiplicativeExpression(MultiplicativeOperator multip
 void MultiplicativeExpression::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
+int64_t MultiplicativeExpression::execute(ExecutionTable& table) {
+    return 0;
+}
 
 } // namespace ast
