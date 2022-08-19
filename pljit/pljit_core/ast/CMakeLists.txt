@@ -1,2 +1,2 @@
 add_library(ast Ast.cpp Ast.hpp SymbolTable.cpp SymbolTable.hpp ast_nodes/Statement.cpp ast_nodes/Statement.hpp ast_nodes/Expression.cpp ast_nodes/Expression.hpp ast_nodes/ReturnStatement.cpp ast_nodes/ReturnStatement.hpp ast_nodes/AssignmentStatement.cpp ast_nodes/AssignmentStatement.hpp ast_nodes/Function.cpp ast_nodes/Function.hpp ast_nodes/TerminalExpression.cpp ast_nodes/TerminalExpression.hpp ast_nodes/AdditiveExpression.cpp ast_nodes/AdditiveExpression.hpp ast_nodes/MultiplicativeExpression.cpp ast_nodes/MultiplicativeExpression.hpp)
-target_link_libraries(ast parse_tree)
+target_link_libraries(ast parse_tree pljit_core_utility source_code_management)
