@@ -16,8 +16,6 @@ int main(int argc, char* argv[]) {
 
     source_code::SourceCode source_code{valid_source};
 
-    //CompilationError error = CompilationError(source_code::SourceCodeReference{0,5}, CompilationError::ParseTree, "Bad thing");
-    //error.print(source_code);
     lexer::Lexer l{source_code};
 
     try {
