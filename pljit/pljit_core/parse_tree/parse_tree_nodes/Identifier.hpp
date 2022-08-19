@@ -4,7 +4,7 @@
 #include "../../lexer/Lexer.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerIdentifierToken.hpp"
-#include "../../pljit_core_utility/CompilationError.hpp"
+#include "../../error_management/CompilationError.hpp"
 #include "../ParseTreeVisitor.hpp"
 #include "TerminalSymbol.hpp"
 #include <optional>

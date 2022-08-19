@@ -1,7 +1,7 @@
 #include "Statement.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerKeywordToken.hpp"
-#include "../../pljit_core_utility/CompilationError.hpp"
+#include "../../error_management/CompilationError.hpp"
 #include "AssignmentExpression.hpp"
 #include "TerminalSymbol.hpp"
 

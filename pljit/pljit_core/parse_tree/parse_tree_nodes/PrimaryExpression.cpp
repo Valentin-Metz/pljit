@@ -2,7 +2,7 @@
 #include "../../lexer/tokens/LexerBracketToken.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerLiteralToken.hpp"
-#include "../../pljit_core_utility/CompilationError.hpp"
+#include "../../error_management/CompilationError.hpp"
 #include "AdditiveExpression.hpp"
 
 namespace parse_tree {

@@ -1,5 +1,5 @@
 #include "SymbolTable.hpp"
-#include "../pljit_core_utility/CompilationError.hpp"
+#include "../error_management/CompilationError.hpp"
 
 namespace ast {
 void SymbolTable::check_read(std::string_view identifier, source_code::SourceCodeReference r) {
