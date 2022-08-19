@@ -14,7 +14,9 @@ namespace pljit {
 
 class FunctionHandle;
 
+/// PL/0 just-in-time compiler
 class PLjit {
+
     /// Indicates state of registered function
     enum FunctionState {
         Registered,
@@ -22,14 +24,17 @@ class PLjit {
         Complete,
         Failed,
     };
+
     /// Stores atomic state of registered functions
     std::vector<std::pair<std::atomic<FunctionState>, std::variant<std::string, ast::AST>>> functions;
 
+    // Constructors
     public:
     PLjit();
     ~PLjit();
 
-    FunctionHandle registerFunction(std::string);
+    /// Registers a function by source code and returns a callable handle
+    FunctionHandle registerFunction(std::string source_code);
 };
 
 } // namespace pljit
