@@ -7,8 +7,7 @@
 namespace ast {
 Statement::~Statement() {
 }
-Statement::Statement(Statement::StatementType statement_type) : statementType(statement_type) {
-}
+Statement::Statement(Statement::StatementType statement_type) : statementType(statement_type) {}
 
 void Statement::parseUnaryExpression(const parse_tree::UnaryExpression& unary_expression, SymbolTable& symbol_table, source_code::SourceCode& source_code, std::vector<std::unique_ptr<Expression>>& expressions, int64_t sign) {
     if (unary_expression.modifier && unary_expression.modifier.value().second == ArithmeticSymbol::MINUS) sign *= -1;
