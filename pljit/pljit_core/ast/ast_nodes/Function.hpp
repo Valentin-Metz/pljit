@@ -11,7 +11,6 @@
 namespace parse_tree {
 class ParseTree;
 class StatementList;
-class ExecutionTable;
 } // namespace parse_tree
 
 namespace ast {
