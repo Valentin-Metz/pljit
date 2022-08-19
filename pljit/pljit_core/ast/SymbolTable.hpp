@@ -16,8 +16,6 @@ class SymbolTable {
         Variable,
         Constant,
     };
-
-    private:
     /// Identifier -> (DeclarationVariant, Initialized, Value, SourceCodeReference)
     std::unordered_map<std::string_view, std::tuple<DeclarationVariant, bool, int64_t, source_code::SourceCodeReference>> table;
 

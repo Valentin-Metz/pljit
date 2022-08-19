@@ -3,6 +3,7 @@
 
 namespace ast {
 
+class AST;
 class SymbolTable;
 class Function;
 class AssignmentStatement;
@@ -14,6 +15,7 @@ class TerminalExpression;
 class AstVisitor {
     public:
     virtual ~AstVisitor() = default;
+    virtual void visit(AST& node) = 0;
     virtual void visit(SymbolTable& node) = 0;
     virtual void visit(Function& node) = 0;
     virtual void visit(AssignmentStatement& node) = 0;

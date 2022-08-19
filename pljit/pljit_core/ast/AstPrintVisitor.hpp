@@ -7,6 +7,7 @@ namespace ast {
 class AstPrintVisitor : public AstVisitor {
     public:
     ~AstPrintVisitor() override = default;
+    virtual void visit(AST& node) override;
     virtual void visit(SymbolTable& node) override;
     virtual void visit(Function& node) override;
     virtual void visit(AssignmentStatement& node) override;

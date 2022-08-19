@@ -8,11 +8,13 @@
 namespace ast {
 
 class AST {
+    public:
     SymbolTable symbolTable;
     std::unique_ptr<Function> function;
-
-    public:
+    const source_code::SourceCode& sourceCode;
     AST(parse_tree::ParseTree& parse_tree, source_code::SourceCode& source_code);
+    void accept(AstVisitor& visitor);
+    void print();
 };
 
 } // namespace ast
