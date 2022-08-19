@@ -15,7 +15,7 @@ class ExecutionTable {
 
     void insert(std::string_view identifier, int64_t value);
     void update(std::string_view identifier, int64_t value);
-    int64_t get(std::string_view identifier, int64_t value);
+    int64_t get(std::string_view identifier);
 };
 
 } // namespace ast
