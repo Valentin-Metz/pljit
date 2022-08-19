@@ -10,5 +10,7 @@ ReturnStatement::ReturnStatement(const parse_tree::AdditiveExpression* return_st
 void ReturnStatement::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
+void ReturnStatement::execute(ExecutionTable& table) {
+}
 
 } // namespace ast

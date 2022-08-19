@@ -24,6 +24,9 @@ void Function::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
 void Function::execute(ExecutionTable& table) {
+    for (auto& statement : statements) {
+        
+    }
 }
 
 Function::~Function() = default;

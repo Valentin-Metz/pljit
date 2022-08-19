@@ -11,5 +11,7 @@ AssignmentStatement::AssignmentStatement(const parse_tree::AssignmentExpression*
 void AssignmentStatement::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
+void AssignmentStatement::execute(ExecutionTable& table) {
+}
 
 } // namespace ast
