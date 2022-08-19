@@ -7,6 +7,7 @@
 #include <unordered_map>
 
 namespace ast {
+class AstVisitor;
 
 class SymbolTable {
     public:
@@ -25,6 +26,7 @@ class SymbolTable {
     void check_read(std::string_view identifier, source_code::SourceCodeReference r);
     void check_assign(std::string_view identifier, source_code::SourceCodeReference r);
     void declare(std::string_view identifier, DeclarationVariant declaration_variant, int64_t value, source_code::SourceCodeReference source_code_reference);
+    void accept(AstVisitor& visitor);
 };
 
 } // namespace ast

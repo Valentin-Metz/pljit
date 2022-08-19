@@ -19,5 +19,7 @@ Function::Function(const parse_tree::StatementList& statement_list, SymbolTable&
         throw CompilationError(statement_list.statementList.back().second.source_code_reference, CompilationError::ErrorSource::AST, "Missing RETURN statement");
     }
 }
+void Function::accept(AstVisitor& visitor) {
+}
 Function::~Function() = default;
 } // namespace ast

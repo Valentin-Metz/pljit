@@ -2,6 +2,7 @@
 #define PLJIT_EXPRESSION_HPP
 
 namespace ast {
+class AstVisitor;
 
 class Expression {
     public:
@@ -12,6 +13,7 @@ class Expression {
         Terminal,
     };
     const ExpressionType expressionType;
+    virtual void accept(AstVisitor& visitor) = 0;
 
     protected:
     Expression(const ExpressionType expression_type);

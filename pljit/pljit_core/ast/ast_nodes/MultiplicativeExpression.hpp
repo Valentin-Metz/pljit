@@ -16,6 +16,7 @@ class MultiplicativeExpression : public Expression {
     const MultiplicativeOperator multiplicativeOperator;
     std::vector<std::unique_ptr<Expression>> expressions;
     MultiplicativeExpression(MultiplicativeOperator multiplicative_operator, const parse_tree::UnaryExpression& additive_expression, SymbolTable& symbol_table, source_code::SourceCode& source_code);
+    virtual void accept(AstVisitor& visitor) override;
 };
 
 } // namespace ast

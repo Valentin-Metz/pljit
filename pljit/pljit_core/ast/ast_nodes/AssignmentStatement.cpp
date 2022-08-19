@@ -5,5 +5,7 @@ AssignmentStatement::AssignmentStatement(const parse_tree::AssignmentExpression*
     symbol_table.check_assign(assignment_expression->identifier.identifier.source_code_reference.resolve(source_code), assignment_expression->identifier.identifier.source_code_reference);
     Statement::parseAdditiveExpression(assignment_expression->additiveExpression, symbol_table, source_code, expressions, 1);
 }
+void AssignmentStatement::accept(AstVisitor& visitor) {
+}
 
 } // namespace ast

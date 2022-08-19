@@ -9,6 +9,7 @@ namespace ast {
 class ReturnStatement : public Statement {
     public:
     ReturnStatement(const parse_tree::AdditiveExpression* return_statement, SymbolTable& symbol_table, source_code::SourceCode& source_code);
+    virtual void accept(AstVisitor& visitor) override;
 };
 
 } // namespace ast

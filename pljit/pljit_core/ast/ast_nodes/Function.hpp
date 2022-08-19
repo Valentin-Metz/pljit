@@ -21,6 +21,7 @@ class Function {
     std::vector<std::unique_ptr<Statement>> statements;
     ~Function();
     Function(const parse_tree::StatementList& statement_list, SymbolTable& symbol_table, source_code::SourceCode& source_code);
+    void accept(AstVisitor& visitor);
 };
 
 } // namespace ast

@@ -13,6 +13,7 @@ class TerminalExpression : public Expression {
 
     public:
     TerminalExpression(std::variant<int64_t, std::pair<int64_t, std::string_view>> value);
+    virtual void accept(AstVisitor& visitor) override;
 };
 
 } // namespace ast
