@@ -42,7 +42,7 @@ SymbolTable::SymbolTable(parse_tree::ParseTree& parse_tree, source_code::SourceC
         }
     }
     if (parse_tree.root.variable_declaration) {
-        for (auto& identifier : parse_tree.root.parameter_declaration.value().declaratorList.declaratorList) {
+        for (auto& identifier : parse_tree.root.variable_declaration.value().declaratorList.declaratorList) {
             declare(identifier.first.identifier.source_code_reference.resolve(source_code), std::make_tuple(true, false, 0, identifier.first.identifier.source_code_reference));
         }
     }
