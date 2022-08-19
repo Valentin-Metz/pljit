@@ -2,8 +2,8 @@
 #define PLJIT_PLJIT_HPP
 
 #include <atomic>
-#include <optional>
 #include <string>
+#include <variant>
 #include <vector>
 
 namespace ast {
@@ -23,7 +23,7 @@ class PLjit {
         Failed,
     };
     /// Stores atomic state of registered functions
-    std::vector<std::pair<std::atomic<FunctionState>, std::optional<ast::AST>>> functions;
+    std::vector<std::pair<std::atomic<FunctionState>, std::variant<std::string, ast::AST>>> functions;
 
     public:
     PLjit();
