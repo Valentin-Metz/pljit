@@ -1,5 +1,4 @@
 #include "Function.hpp"
-#include "../../parse_tree/ParseTree.hpp"
 #include "../../parse_tree/parse_tree_nodes/Statement.hpp"
 #include "../AstVisitor.hpp"
 #include "AssignmentStatement.hpp"
@@ -23,6 +22,8 @@ Function::Function(const parse_tree::StatementList& statement_list, SymbolTable&
 
 void Function::accept(AstVisitor& visitor) {
     visitor.visit(*this);
+}
+void Function::execute(ExecutionTable& table) {
 }
 
 Function::~Function() = default;

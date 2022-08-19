@@ -3,6 +3,7 @@
 
 #include "../../source_code_management/SourceCode.hpp"
 #include "../SymbolTable.hpp"
+#include "../ExecutionTable.hpp"
 #include "Statement.hpp"
 #include <memory>
 #include <vector>
@@ -10,6 +11,7 @@
 namespace parse_tree {
 class ParseTree;
 class StatementList;
+class ExecutionTable;
 } // namespace parse_tree
 
 namespace ast {
@@ -22,6 +24,7 @@ class Function {
     ~Function();
     Function(const parse_tree::StatementList& statement_list, SymbolTable& symbol_table, source_code::SourceCode& source_code);
     void accept(AstVisitor& visitor);
+    void execute(ExecutionTable& table);
 };
 
 } // namespace ast
