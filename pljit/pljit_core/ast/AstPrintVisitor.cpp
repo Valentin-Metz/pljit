@@ -93,6 +93,8 @@ void AstPrintVisitor::visit(MultiplicativeExpression& node) {
         std::cout << "DIVIDE_" << unique_counter << " [label = \"*\"]\n";
         std::cout << "DIVIDE_" << unique_counter-- << " -> MultiplicativeExpression_" << multiplicative_expression_counter << " [color=lightblue]\n";
     }
+
+
     multiplicative_expression_counter++;
 }
 
