@@ -8,6 +8,7 @@ namespace ast {
 
 class AssignmentStatement : public Statement {
     public:
+    const std::string_view target;
     AssignmentStatement(const parse_tree::AssignmentExpression* assignment_expression, SymbolTable& symbol_table, source_code::SourceCode& source_code);
     virtual void accept(AstVisitor& visitor) override;
 };

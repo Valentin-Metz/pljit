@@ -50,16 +50,21 @@ void AstPrintVisitor::visit(SymbolTable& node) {
 
 void AstPrintVisitor::visit(Function& node) {
     for (auto& statement : node.statements) {
-        std::cout << "Function -> Expression_" << statement_counter << "\n";
+        std::cout << "Function -> Statement_" << statement_counter << "\n";
         statement.get()->accept(*this);
         statement_counter++;
     }
 }
 
 void AstPrintVisitor::visit(AssignmentStatement& node) {
+    std::cout << "Statement_" << statement_counter << " -> ASSIGN_" << statement_counter << "\n";
+    std::cout << "ASSIGN_" << statement_counter << " [label = \"ASSIGN\"]\n";
+    std::cout << "ASSIGN_" << statement_counter << " -> " << node.target << "\n";
 }
 
 void AstPrintVisitor::visit(ReturnStatement& node) {
+    std::cout << "Statement_" << statement_counter << " -> RETURN_" << statement_counter << "\n";
+    std::cout << "RETURN_" << statement_counter << " [label = \"RETURN\"]\n";
 }
 
 void AstPrintVisitor::visit(AdditiveExpression& node) {
