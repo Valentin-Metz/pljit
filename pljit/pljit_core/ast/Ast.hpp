@@ -13,6 +13,7 @@ class AST {
     SymbolTable symbolTable;
     std::unique_ptr<Function> function;
     const source_code::SourceCode& sourceCode;
+    ~AST();
     AST(parse_tree::ParseTree& parse_tree, source_code::SourceCode& source_code);
     void accept(AstVisitor& visitor);
     void print();

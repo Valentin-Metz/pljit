@@ -1,5 +1,6 @@
 #include "PLjit.hpp"
 #include "FunctionHandle.hpp"
+#include "ast/Ast.hpp"
 
 namespace pljit {
 

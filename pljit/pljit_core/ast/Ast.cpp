@@ -26,5 +26,6 @@ ExecutionTable AST::getExecutionTable() {
     executionTable.emplace(t);
     return executionTable.value();
 }
+AST::~AST() = default;
 
 } // namespace ast
