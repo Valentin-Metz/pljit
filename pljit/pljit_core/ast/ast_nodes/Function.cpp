@@ -1,6 +1,7 @@
 #include "Function.hpp"
 #include "../../parse_tree/ParseTree.hpp"
 #include "../../parse_tree/parse_tree_nodes/Statement.hpp"
+#include "../AstVisitor.hpp"
 #include "AssignmentStatement.hpp"
 #include "ReturnStatement.hpp"
 
@@ -19,7 +20,10 @@ Function::Function(const parse_tree::StatementList& statement_list, SymbolTable&
         throw CompilationError(statement_list.statementList.back().second.source_code_reference, CompilationError::ErrorSource::AST, "Missing RETURN statement");
     }
 }
+
 void Function::accept(AstVisitor& visitor) {
+    visitor.visit(*this);
 }
+
 Function::~Function() = default;
 } // namespace ast

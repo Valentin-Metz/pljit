@@ -1,5 +1,6 @@
 #include "SymbolTable.hpp"
 #include "../error_management/CompilationError.hpp"
+#include "AstVisitor.hpp"
 
 namespace ast {
 void SymbolTable::check_read(std::string_view identifier, source_code::SourceCodeReference r) {
@@ -54,6 +55,10 @@ SymbolTable::SymbolTable(parse_tree::ParseTree& parse_tree, source_code::SourceC
             declare(identifier.first.identifier.identifier.source_code_reference.resolve(source_code), Constant, identifier.first.literal.literal.second, identifier.first.identifier.identifier.source_code_reference);
         }
     }
+}
+
+void SymbolTable::accept(AstVisitor& visitor) {
+    visitor.visit(*this);
 }
 
 } // namespace ast
