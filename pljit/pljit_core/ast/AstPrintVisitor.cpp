@@ -70,11 +70,12 @@ void AstPrintVisitor::visit(AssignmentStatement& node) {
 
         std::cout << "PLUS_" << unique_counter-- << " -> Expression_" << expression_counter << " [color=orange]\n";
         std::cout << "Expression_" << expression_counter << " -> ";
+        std::size_t current_expression = expression_counter;
+        expression_counter++;
         expression->accept(*this);
         if (expression != node.expressions.back()) {
-            std::cout << "Expression_" << expression_counter << " -> ";
+            std::cout << "Expression_" << current_expression << " -> ";
         }
-        expression_counter++;
     }
 }
 
@@ -84,18 +85,31 @@ void AstPrintVisitor::visit(ReturnStatement& node) {
 }
 
 void AstPrintVisitor::visit(MultiplicativeExpression& node) {
-    if (node.multiplicativeOperator==MultiplicativeExpression::Multiply){
+    if (node.multiplicativeOperator == MultiplicativeExpression::Multiply) {
         std::cout << "MULTIPLY_" << unique_counter << " [color=green]\n";
         std::cout << "MULTIPLY_" << unique_counter << " [label = \"*\"]\n";
-        std::cout << "MULTIPLY_" << unique_counter-- << " -> MultiplicativeExpression_" << multiplicative_expression_counter << " [color=green]\n";
-    } else{
+        std::cout << "MULTIPLY_" << unique_counter-- << " -> MultiplicativeExpression_" << expression_counter << " [color=green]\n";
+    } else {
         std::cout << "DIVIDE_" << unique_counter << " [color=lightblue]\n";
         std::cout << "DIVIDE_" << unique_counter << " [label = \"*\"]\n";
-        std::cout << "DIVIDE_" << unique_counter-- << " -> MultiplicativeExpression_" << multiplicative_expression_counter << " [color=lightblue]\n";
+        std::cout << "DIVIDE_" << unique_counter-- << " -> MultiplicativeExpression_" << expression_counter << " [color=lightblue]\n";
     }
+    if (!node.expressions.empty()) {
+        std::cout << "MultiplicativeExpression_" << expression_counter << " -> ";
+    }
+    for (auto& expression : node.expressions) {
+        std::cout << "PLUS_" << unique_counter << " [color=orange]\n";
+        std::cout << "PLUS_" << unique_counter << " [label = \"+\"]\n";
 
-
-    multiplicative_expression_counter++;
+        std::cout << "PLUS_" << unique_counter-- << " -> Expression_" << expression_counter << " [color=orange]\n";
+        std::cout << "Expression_" << expression_counter << " -> ";
+        std::size_t current_expression = expression_counter;
+        expression_counter++;
+        expression->accept(*this);
+        if (expression != node.expressions.back()) {
+            std::cout << "Expression_" << current_expression << " -> ";
+        }
+    }
 }
 
 void AstPrintVisitor::visit(TerminalExpression& node) {
