@@ -11,7 +11,11 @@ void MultiplicativeExpression::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
 int64_t MultiplicativeExpression::execute(ExecutionTable& table) {
-    return 0;
+    int64_t result = 0;
+    for (auto& expression : expressions) {
+        result += expression->execute(table);
+    }
+    return result;
 }
 
 } // namespace ast
