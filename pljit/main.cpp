@@ -5,6 +5,7 @@
 #include "pljit_core/source_code_management/SourceCode.hpp"
 #include <fstream>
 #include <iostream>
+#include "pljit_core/PLjit.hpp"
 #include <memory>
 #include <optional>
 
@@ -29,6 +30,7 @@ int main([[maybe_unused]] int argc, char* argv[]) {
         e.print(source_code);
         std::cout << "Terminated with error" << std::endl;
     }
+
 
     return 0;
 }

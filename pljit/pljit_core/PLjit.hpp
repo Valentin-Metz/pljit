@@ -1,7 +1,8 @@
 #ifndef PLJIT_PLJIT_HPP
 #define PLJIT_PLJIT_HPP
 
-#include <atomic>
+#include <memory>
+#include <mutex>
 #include <string>
 #include <variant>
 #include <vector>
@@ -18,16 +19,9 @@ class FunctionHandle;
 class PLjit {
     friend FunctionHandle;
 
-    /// Indicates state of registered function
-    enum FunctionState {
-        Registered,
-        Compiling,
-        Complete,
-        Failed,
-    };
-
-    /// Stores atomic state of registered functions
-    std::vector<std::pair<std::atomic<FunctionState>, std::variant<std::string, ast::AST>>> functions;
+    /// Stores functions either as source or once compiled as an AST
+    /// The once_flag ensures that we only compile once
+    std::vector<std::pair<std::unique_ptr<std::once_flag>, std::variant<std::string, std::unique_ptr<ast::AST>>>> functions;
 
     // Constructors
     public:
