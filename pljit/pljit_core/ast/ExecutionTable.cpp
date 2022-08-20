@@ -16,6 +16,7 @@ void ExecutionTable::update(std::string_view identifier, int64_t value) {
 int64_t ExecutionTable::get(std::string_view identifier) {
     return table.find(identifier)->second;
 }
+
 template <typename... Args>
 int64_t ExecutionTable::initialize(Args... args) {
     insert(args...);
