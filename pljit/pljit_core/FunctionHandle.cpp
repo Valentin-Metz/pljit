@@ -37,7 +37,17 @@ void FunctionHandle::compile() {
 template <typename... Args>
 std::variant<int64_t, Error> FunctionHandle::execute(Args... args) {
     compile();
-    return std::variant<int64_t, Error>();
+
+    ast::AST& ast = *std::get<1>(storage->functions[index].second);
+
+    /// Copy execution table and initialize it with parameters
+    ast::ExecutionTable execution_table = ast.getExecutionTable();
+    execution_table.template initialize(args...);
+
+    /// Execute the program
+    ast.function->execute(execution_table);
+
+    return execution_table.result.value(); // todo: runtime-error
 }
 
 } // namespace pljit
