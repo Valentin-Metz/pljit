@@ -1,14 +1,11 @@
 #include "pljit_core/ast/Ast.hpp"
 #include "pljit_core/lexer/Lexer.hpp"
 #include "pljit_core/parse_tree/ParseTree.hpp"
-#include "pljit_core/parse_tree/parse_tree_nodes/StatementList.hpp"
 #include "pljit_core/source_code_management/SourceCode.hpp"
 #include <fstream>
 #include <iostream>
 #include "pljit_core/PLjit.hpp"
-#include "pljit_core/FunctionHandle.hpp"
-#include <memory>
-#include <optional>
+#include "pljit_core/error_management/Error.hpp"
 
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
@@ -34,10 +31,8 @@ int main([[maybe_unused]] int argc, char* argv[]) {
 
     pljit::PLjit pljit;
 
-    auto x = pljit.registerFunction(valid_source);
-
-    //x.execute(2,2,2);
-
+    auto handle = pljit.registerFunction(valid_source);
+    auto result = handle.execute(2,2,2,2);
 
     return 0;
 }

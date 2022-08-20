@@ -6,4 +6,4 @@ add_subdirectory(ast)
 
 add_library(pljit_core PLjit.cpp FunctionHandle.cpp FunctionHandle.hpp FunctionStorage.cpp FunctionStorage.hpp)
 
-target_link_libraries(pljit_core lexer pljit_core_utility parse_tree ast)
+target_link_libraries(pljit_core source_code_management error_management lexer parse_tree ast)
