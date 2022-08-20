@@ -5,7 +5,10 @@
 
 namespace pljit {
 
-PLjit::PLjit() = default;
+PLjit::PLjit() {
+    functionStorage = std::make_unique<FunctionStorage>();
+}
+
 PLjit::~PLjit() = default;
 
 FunctionHandle PLjit::registerFunction(std::string_view source_code) {
