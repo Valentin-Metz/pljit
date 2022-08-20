@@ -57,7 +57,7 @@ static void optimize_expressions(std::vector<std::unique_ptr<Expression>>& expre
                 if (static_cast<MultiplicativeExpression&>(*expressions[i]).multiplicativeOperator == MultiplicativeExpression::Multiply) {
                     previousExpression.value = std::get<0>(previousExpression.value) * std::get<0>(currentExpression.value);
                 } else {
-                    if (std::get<0>(currentExpression.value) == 0) throw pljit::Error({0, 0}, pljit::Error::Runtime, "Division by zero");
+                    if (std::get<0>(currentExpression.value) == 0) throw pljit::PLjit_Error({0, 0}, pljit::PLjit_Error::Runtime, "Division by zero");
                     previousExpression.value = std::get<0>(previousExpression.value) / std::get<0>(currentExpression.value);
                 }
                 expressions.erase(expressions.begin() + i);

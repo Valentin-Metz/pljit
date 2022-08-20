@@ -298,7 +298,7 @@ too (`-lkstat`).
 
 [Using RegisterBenchmark](#using-register-benchmark)
 
-[Exiting with an Error](#exiting-with-an-error)
+[Exiting with an PLjit_Error](#exiting-with-an-error)
 
 [A Faster KeepRunning Loop](#a-faster-keep-running-loop)
 
@@ -1192,7 +1192,7 @@ int main(int argc, char** argv) {
 
 <a name="exiting-with-an-error" />
 
-### Exiting with an Error
+### Exiting with an PLjit_Error
 
 When errors caused by external influences, such as file I/O and network
 communication, occur within a benchmark the

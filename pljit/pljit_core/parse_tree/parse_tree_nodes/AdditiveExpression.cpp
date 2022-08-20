@@ -1,5 +1,5 @@
 #include "AdditiveExpression.hpp"
-#include "../../error_management/Error.hpp"
+#include "../../error_management/PLjit_Error.hpp"
 #include "../../lexer/tokens/LexerArithmeticToken.hpp"
 #include "../../lexer/tokens/LexerBracketToken.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
@@ -13,7 +13,7 @@ AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lex
         std::unique_ptr<lexer::LexerToken> token{l.nextToken()};
         switch (token->token_type) {
             case lexer::LexerToken::Error:
-                throw pljit::Error(token->source_code_reference, pljit::Error::Lexer, static_cast<lexer::LexerErrorToken*>(token.get())->error_message);
+                throw pljit::PLjit_Error(token->source_code_reference, pljit::PLjit_Error::Lexer, static_cast<lexer::LexerErrorToken*>(token.get())->error_message);
 
             /// additive-expression -> unary-expression -> primary-expression
             case lexer::LexerToken::Identifier:
@@ -65,7 +65,7 @@ AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lex
                 break;
             }
             default:
-                throw pljit::Error(token->source_code_reference, pljit::Error::ParseTree, "Unexpected token in additive-expression");
+                throw pljit::PLjit_Error(token->source_code_reference, pljit::PLjit_Error::ParseTree, "Unexpected token in additive-expression");
         }
     }
 }

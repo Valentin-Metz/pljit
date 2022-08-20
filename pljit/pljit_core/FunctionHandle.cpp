@@ -34,7 +34,7 @@ void FunctionHandle::compile() {
     storage->functions[index].second.emplace<std::unique_ptr<ast::AST>>(std::move(ast));
 }
 
-std::variant<std::int64_t, Error> FunctionHandle::execute(std::vector<std::int64_t> parameters) {
+std::variant<std::int64_t, PLjit_Error> FunctionHandle::execute(std::vector<std::int64_t> parameters) {
     try {
         /// Call compile() exactly once
         std::call_once(*storage->functions[index].first, &FunctionHandle::compile, this);
@@ -51,7 +51,7 @@ std::variant<std::int64_t, Error> FunctionHandle::execute(std::vector<std::int64
         /// Execute the program
         ast.function->execute(execution_table);
         return execution_table.result.value();
-    } catch (Error error) {
+    } catch (PLjit_Error error) {
         return error;
     }
 }

@@ -1,5 +1,5 @@
 #include "SymbolTable.hpp"
-#include "../../error_management/Error.hpp"
+#include "../../error_management/PLjit_Error.hpp"
 #include "AstVisitor.hpp"
 
 namespace ast {
@@ -9,9 +9,9 @@ void SymbolTable::check_read(std::string_view identifier, source_code::SourceCod
     if (result != table.end()) {
         /// Initialized?
         if (!std::get<1>(result->second))
-            throw pljit::Error(r, pljit::Error::SymbolTable, "Attempted to read from uninitialized variable");
+            throw pljit::PLjit_Error(r, pljit::PLjit_Error::SymbolTable, "Attempted to read from uninitialized variable");
     } else {
-        throw pljit::Error(r, pljit::Error::SymbolTable, "Attempted to access undeclared variable");
+        throw pljit::PLjit_Error(r, pljit::PLjit_Error::SymbolTable, "Attempted to access undeclared variable");
     }
 }
 
@@ -20,18 +20,18 @@ void SymbolTable::check_assign(std::string_view identifier, source_code::SourceC
     /// Contained in table and writeable
     if (result != table.end()) {
         if (std::get<0>(result->second) == Constant) {
-            throw pljit::Error(r, pljit::Error::SymbolTable, "Attempted to write to constant");
+            throw pljit::PLjit_Error(r, pljit::PLjit_Error::SymbolTable, "Attempted to write to constant");
         }
         std::get<1>(result->second) = true;
     } else {
-        throw pljit::Error(r, pljit::Error::SymbolTable, "Attempted to access undeclared variable");
+        throw pljit::PLjit_Error(r, pljit::PLjit_Error::SymbolTable, "Attempted to access undeclared variable");
     }
 }
 
 void SymbolTable::declare(std::string_view identifier, DeclarationVariant declaration_variant, int64_t value, source_code::SourceCodeReference source_code_reference) {
     auto result = table.find(identifier);
     if (result != table.end())
-        throw pljit::Error(source_code_reference, pljit::Error::SymbolTable, "Attempted to declare identifier twice");
+        throw pljit::PLjit_Error(source_code_reference, pljit::PLjit_Error::SymbolTable, "Attempted to declare identifier twice");
 
     if (declaration_variant == Variable) {
         table.insert(std::make_pair(identifier, std::make_tuple(Variable, false, value, source_code_reference)));

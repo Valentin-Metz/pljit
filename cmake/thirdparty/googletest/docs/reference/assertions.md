@@ -554,7 +554,7 @@ Note that the piece of code under test can be a compound statement, for example:
 EXPECT_DEATH({
   int n = 5;
   DoSomething(&n);
-}, "Error on line .* of DoSomething()");
+}, "PLjit_Error on line .* of DoSomething()");
 ```
 
 ### EXPECT_DEATH {#EXPECT_DEATH}

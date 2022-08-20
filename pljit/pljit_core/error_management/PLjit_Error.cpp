@@ -1,14 +1,14 @@
-#include "Error.hpp"
+#include "PLjit_Error.hpp"
 #include <iostream>
 
 namespace pljit {
 
-Error::Error(source_code::SourceCodeReference source_code_reference, Error::ErrorSource error_source, std::string error_message)
+PLjit_Error::PLjit_Error(source_code::SourceCodeReference source_code_reference, PLjit_Error::ErrorSource error_source, std::string error_message)
     : source_code_reference(source_code_reference), error_source(error_source), error_message(std::move(error_message)) {}
 
-void Error::set_source_code(source_code::SourceCode* source_code_pointer) { source_code = source_code_pointer; }
+void PLjit_Error::set_source_code(source_code::SourceCode* source_code_pointer) { source_code = source_code_pointer; }
 
-void Error::print() {
+void PLjit_Error::print() {
     if (error_source == Runtime) {
         std::cout << "Runtime error: " << error_message << std::endl;
         return;

@@ -23,7 +23,7 @@ the Assertions Reference.
 See [Exception Assertions](reference/assertions.md#exceptions) in the Assertions
 Reference.
 
-### Predicate Assertions for Better Error Messages
+### Predicate Assertions for Better PLjit_Error Messages
 
 Even though googletest has a rich set of assertions, they can never be complete,
 as it's impossible (nor a good idea) to anticipate all scenarios a user might
@@ -417,7 +417,7 @@ TEST(MyDeathTest, Foo) {
   ASSERT_DEATH({
     int n = 5;
     Foo(&n);
-  }, "Error on line .* of Foo()");
+  }, "PLjit_Error on line .* of Foo()");
 }
 
 TEST(MyDeathTest, NormalExit) {

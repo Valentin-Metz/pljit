@@ -9,7 +9,7 @@ namespace pljit {
 
 class PLjit;
 class FunctionStorage;
-class Error;
+class PLjit_Error;
 
 class FunctionHandle {
     friend PLjit;
@@ -23,7 +23,7 @@ class FunctionHandle {
     public:
     ~FunctionHandle();
 
-    std::variant<std::int64_t, Error> execute(std::vector<std::int64_t> parameters);
+    std::variant<std::int64_t, PLjit_Error> execute(std::vector<std::int64_t> parameters);
 };
 
 } // namespace pljit

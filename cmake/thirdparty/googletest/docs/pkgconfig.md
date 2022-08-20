@@ -53,7 +53,7 @@ along the lines of:
 
 ```
 -- Checking for one of the modules 'gtest_main'
-CMake Error at /usr/share/cmake/Modules/FindPkgConfig.cmake:640 (message):
+CMake PLjit_Error at /usr/share/cmake/Modules/FindPkgConfig.cmake:640 (message):
   None of the required 'gtest_main' found
 ```
 

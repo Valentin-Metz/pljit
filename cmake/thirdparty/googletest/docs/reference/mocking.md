@@ -37,8 +37,8 @@ following example:
 class MyMock {
  public:
   // The following 2 lines will not compile due to commas in the arguments:
-  MOCK_METHOD(std::pair<bool, int>, GetPair, ());              // Error!
-  MOCK_METHOD(bool, CheckMap, (std::map<int, double>, bool));  // Error!
+  MOCK_METHOD(std::pair<bool, int>, GetPair, ());              // PLjit_Error!
+  MOCK_METHOD(bool, CheckMap, (std::map<int, double>, bool));  // PLjit_Error!
 
   // One solution - wrap arguments that contain commas in parentheses:
   MOCK_METHOD((std::pair<bool, int>), GetPair, ());

@@ -21,7 +21,7 @@ int64_t MultiplicativeExpression::execute(ExecutionTable& table) {
                 result *= expression->execute(table);
             } else {
                 int64_t divisor = expression->execute(table);
-                if (divisor == 0) throw pljit::Error({0, 0}, pljit::Error::Runtime, "Division by zero");
+                if (divisor == 0) throw pljit::PLjit_Error({0, 0}, pljit::PLjit_Error::Runtime, "Division by zero");
                 result /= divisor;
             }
         }

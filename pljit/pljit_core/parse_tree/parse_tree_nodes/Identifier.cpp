@@ -7,12 +7,12 @@ static const TerminalSymbol generateIdentifier(lexer::Lexer& l) {
     std::unique_ptr<lexer::LexerToken> i{l.nextToken()};
     switch (i->token_type) {
         case lexer::LexerToken::Error:
-            throw pljit::Error(i->source_code_reference, pljit::Error::Lexer, static_cast<lexer::LexerErrorToken*>(i.get())->error_message);
+            throw pljit::PLjit_Error(i->source_code_reference, pljit::PLjit_Error::Lexer, static_cast<lexer::LexerErrorToken*>(i.get())->error_message);
         case lexer::LexerToken::Identifier: {
             return TerminalSymbol(static_cast<lexer::LexerIdentifierToken*>(i.get())->source_code_reference);
         }
         default:
-            throw pljit::Error(i->source_code_reference, pljit::Error::ParseTree, "Expected identifier");
+            throw pljit::PLjit_Error(i->source_code_reference, pljit::PLjit_Error::ParseTree, "Expected identifier");
     }
 }
 
