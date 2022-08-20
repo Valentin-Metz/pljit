@@ -1,25 +1,27 @@
 #ifndef PLJIT_EXECUTIONTABLE_HPP
 #define PLJIT_EXECUTIONTABLE_HPP
+#include <optional>
 #include <string_view>
 #include <unordered_map>
-#include <optional>
+#include <vector>
 
 namespace ast {
 
 class ExecutionTable {
+    std::size_t parameter_counter = 0;
+    const std::vector<std::string_view>& parameter_list;
+
     public:
     std::optional<std::int64_t> result;
     std::unordered_map<std::string_view, std::int64_t> table;
 
-    ExecutionTable();
+    ExecutionTable(const std::vector<std::string_view>& parameter_list);
 
     void insert(std::string_view identifier, std::int64_t value);
     void update(std::string_view identifier, std::int64_t value);
     std::int64_t get(std::string_view identifier);
 
-    /// Executes function with a variable amount of arguments
-    template <typename... Args>
-    void initialize(Args... args);
+    void initialize(std::int64_t value);
 };
 
 } // namespace ast

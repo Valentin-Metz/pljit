@@ -43,7 +43,7 @@ std::variant<std::int64_t, Error> FunctionHandle::execute(Args... args) {
 
     /// Copy execution table and initialize it with parameters
     ast::ExecutionTable execution_table = ast.getExecutionTable();
-    execution_table.template initialize(args...);
+    execution_table.initialize(args...);
 
     /// Execute the program
     ast.function->execute(execution_table);

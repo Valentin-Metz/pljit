@@ -36,6 +36,8 @@ int main([[maybe_unused]] int argc, char* argv[]) {
 
     auto x = pljit.registerFunction(valid_source);
 
+    //x.execute(2,2,2);
+
 
     return 0;
 }

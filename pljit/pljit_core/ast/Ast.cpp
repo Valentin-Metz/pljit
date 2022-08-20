@@ -18,7 +18,7 @@ void AST::print() {
 }
 
 void AST::generateExecutionTable() {
-    ExecutionTable t;
+    ExecutionTable t(symbolTable.parameters);
     for (auto& entry : symbolTable.table) {
         t.insert(entry.first, std::get<2>(entry.second));
     }

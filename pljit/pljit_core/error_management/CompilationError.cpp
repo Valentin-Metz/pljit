@@ -1,5 +1,9 @@
 #include "CompilationError.hpp"
 #include <iostream>
+
+CompilationError::CompilationError(source_code::SourceCodeReference source_code_reference, CompilationError::ErrorSource error_source, std::string error_message)
+    : source_code_reference(source_code_reference), error_source(error_source), error_message(std::move(error_message)) {}
+
 void CompilationError::print(source_code::SourceCode& source_code) {
     std::size_t line_number = 0;
     std::size_t last_linebreak = 0;
