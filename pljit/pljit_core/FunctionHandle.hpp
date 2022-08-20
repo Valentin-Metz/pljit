@@ -2,7 +2,10 @@
 #define PLJIT_FUNCTIONHANDLE_HPP
 
 #include "PLjit.hpp"
+#include <variant>
 namespace pljit {
+
+class Error;
 
 class FunctionHandle {
     friend PLjit;
@@ -11,6 +14,10 @@ class FunctionHandle {
     const std::size_t index;
     FunctionHandle(FunctionStorage* storage, std::size_t index);
     ~FunctionHandle();
+
+    public:
+    template <typename... Args>
+    std::variant<int64_t, Error> execute();
 };
 
 } // namespace pljit
