@@ -11,24 +11,34 @@ namespace pljit {
 FunctionHandle::FunctionHandle(FunctionStorage* storage, std::size_t index) : storage(storage), index(index) {}
 FunctionHandle::~FunctionHandle() = default;
 
-template <typename... Args>
-void FunctionHandle::compile(Args... args) {
+void FunctionHandle::compile() {
     /// Generate source code
-    source_code::SourceCode source_code{std::get<std::string_view>(storage->functions[index].second)};
+    source_code::SourceCode source_code{std::move(std::get<std::string_view>(storage->functions[index].second))};
 
     /// Parse source code
     lexer::Lexer lexer{source_code};
 
     /// Construct parse tree
-    parse_tree::ParseTree{lexer};
+    parse_tree::ParseTree parse_tree{lexer};
 
     /// Construct abstract syntax tree
-    //ast::AST ast{s};
+    ast::AST ast{parse_tree, std::move(source_code)};
+
+    /*
+    /// Optimize abstract syntax tree
+    ast.optimize();
+
+    /// Generate execution table
+    ast.generateExecutionTable();
+
+    /// Store the abstract syntax tree
+     */
+    //storage->functions[index].second.emplace<ast::AST>(parse_tree, std::move(source_code));
 }
 
 template <typename... Args>
 std::variant<int64_t, Error> FunctionHandle::execute(Args... args) {
-    compile<>(args...);
+    compile();
     return std::variant<int64_t, Error>();
 }
 

@@ -15,8 +15,7 @@ class FunctionHandle {
     FunctionHandle(FunctionStorage* storage, std::size_t index);
     ~FunctionHandle();
 
-    template <typename... Args>
-    void compile(Args... args);
+    void compile();
 
     public:
     template <typename... Args>

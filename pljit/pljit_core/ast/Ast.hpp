@@ -5,10 +5,15 @@
 #include "ExecutionTable.hpp"
 #include "SymbolTable.hpp"
 #include "ast_nodes/Function.hpp"
+namespace pljit {
+class FunctionHandle;
+}
 
 namespace ast {
 
 class AST {
+    friend class pljit::FunctionHandle;
+
     public:
     SymbolTable symbolTable;
     std::unique_ptr<Function> function;
