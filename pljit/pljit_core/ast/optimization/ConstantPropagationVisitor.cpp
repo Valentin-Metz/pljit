@@ -32,9 +32,33 @@ void ConstantPropagationVisitor::visit(Function& node) {
     }
 }
 
+static bool is_expression_const(std::unique_ptr<Expression>& e) {
+    return e->expressionType == Expression::Terminal && static_cast<TerminalExpression&>(*e.get()).value.index() == 0;
+}
+
 static void optimize_expressions(std::vector<std::unique_ptr<Expression>>& expressions, ConstantPropagationVisitor& visitor) {
     for (std::size_t i = 0; i < expressions.size(); ++i) {
         expressions[i]->accept(visitor);
+        if (expressions[i].get()->expressionType == Expression::Terminal) {
+            if (i > 0 && is_expression_const(expressions[i - 1]) && is_expression_const(expressions[i])) {
+                auto& previousExpression = static_cast<TerminalExpression&>(*expressions[i - 1].get());
+                auto& currentExpression = static_cast<TerminalExpression&>(*expressions[i].get());
+
+                previousExpression.value = std::get<0>(previousExpression.value) + std::get<0>(currentExpression.value);
+                expressions.erase(expressions.begin() + i);
+                --i;
+            }
+        } else {
+            auto& containedExpressions = static_cast<MultiplicativeExpression&>(*expressions[i]).expressions;
+            if (i > 0 && containedExpressions.size() == 1 && is_expression_const(expressions[i - 1]) && is_expression_const(containedExpressions[0])) {
+                auto& previousExpression = static_cast<TerminalExpression&>(*expressions[i - 1].get());
+                auto& currentExpression = static_cast<TerminalExpression&>(*containedExpressions[0].get());
+
+                previousExpression.value = std::get<0>(previousExpression.value) + std::get<0>(currentExpression.value);
+                expressions.erase(expressions.begin() + i);
+                --i;
+            }
+        }
     }
 }
 
