@@ -4,6 +4,9 @@
 #include <memory>
 #include <string_view>
 
+// Included so that the enduser does not need to include two files to register a function
+#include "FunctionHandle.hpp"
+
 namespace pljit {
 
 class FunctionHandle;

@@ -3,6 +3,7 @@
 
 #include <variant>
 #include <cstdint>
+
 namespace pljit {
 
 class PLjit;
