@@ -15,9 +15,12 @@ class FunctionHandle {
     FunctionHandle(FunctionStorage* storage, std::size_t index);
     ~FunctionHandle();
 
+    template <typename... Args>
+    void compile(Args... args);
+
     public:
     template <typename... Args>
-    std::variant<int64_t, Error> execute();
+    std::variant<int64_t, Error> execute(Args... args);
 };
 
 } // namespace pljit

@@ -17,6 +17,7 @@ class FunctionHandle;
 
 class FunctionStorage {
     friend class PLjit;
+    friend class FunctionHandle;
     /// Stores functions either as source or once compiled as an AST
     /// The once_flag ensures that we only compile once
     std::vector<std::pair<std::unique_ptr<std::once_flag>, std::variant<std::string_view, std::unique_ptr<ast::AST>>>> functions;
