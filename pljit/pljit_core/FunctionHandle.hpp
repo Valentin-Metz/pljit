@@ -5,11 +5,11 @@
 namespace pljit {
 
 class FunctionHandle {
-    private:
     friend PLjit;
-    const PLjit& root;
+    friend FunctionStorage;
+    const FunctionStorage* storage;
     const std::size_t index;
-    FunctionHandle(PLjit& root, std::size_t index);
+    FunctionHandle(FunctionStorage* storage, std::size_t index);
     ~FunctionHandle();
 };
 

@@ -2,26 +2,17 @@
 #define PLJIT_PLJIT_HPP
 
 #include <memory>
-#include <mutex>
 #include <string>
-#include <variant>
-#include <vector>
-
-namespace ast {
-class AST;
-}
 
 namespace pljit {
 
 class FunctionHandle;
+class FunctionStorage;
 
 /// PL/0 just-in-time compiler
 class PLjit {
-    friend FunctionHandle;
-
-    /// Stores functions either as source or once compiled as an AST
-    /// The once_flag ensures that we only compile once
-    std::vector<std::pair<std::unique_ptr<std::once_flag>, std::variant<std::string, std::unique_ptr<ast::AST>>>> functions;
+    // Stores executable functions
+    std::unique_ptr<FunctionStorage> functionStorage;
 
     // Constructors
     public:
