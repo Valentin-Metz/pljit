@@ -19,10 +19,12 @@ class AST {
     void print();
 
     private:
+    // Optimizes the AST
+    void optimize();
+
     // The execution table must be copied for every execution
     std::optional<const ExecutionTable> executionTable;
-
-    public:
+    void generateExecutionTable();
     ExecutionTable getExecutionTable();
 };
 
