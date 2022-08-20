@@ -8,18 +8,18 @@ namespace ast {
 
 class ExecutionTable {
     public:
-    std::optional<int64_t> result;
-    std::unordered_map<std::string_view, int64_t> table;
+    std::optional<std::int64_t> result;
+    std::unordered_map<std::string_view, std::int64_t> table;
 
     ExecutionTable();
 
-    void insert(std::string_view identifier, int64_t value);
-    void update(std::string_view identifier, int64_t value);
-    int64_t get(std::string_view identifier);
+    void insert(std::string_view identifier, std::int64_t value);
+    void update(std::string_view identifier, std::int64_t value);
+    std::int64_t get(std::string_view identifier);
 
     /// Executes function with a variable amount of arguments
-    //template<std::pair<std::string_view, int64_t>... Arguments>
-    //int64_t execute(Arguments..., ...);
+    template <typename... Args>
+    int64_t initialize(Args... args);
 };
 
 } // namespace ast

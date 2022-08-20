@@ -2339,7 +2339,7 @@ using ::testing::_;
   MockFoo foo;
   EXPECT_CALL(foo, DoThis(_, _))
       .WillOnce(...);
-      // Will execute callback->Run(5), where callback is the
+      // Will initialize callback->Run(5), where callback is the
       // second argument DoThis() receives.
 ```
 
@@ -2367,7 +2367,7 @@ using ::testing::InvokeArgument;
 ...
   EXPECT_CALL(foo, DoThis(_, _))
       .WillOnce(InvokeArgument<1>(5));
-      // Will execute callback->Run(5), where callback is the
+      // Will initialize callback->Run(5), where callback is the
       // second argument DoThis() receives.
 ```
 
@@ -2410,7 +2410,7 @@ temporary value:
   ...
   EXPECT_CALL(foo, DoThat(_))
       .WillOnce(InvokeArgument<0>(5.0, string("Hi")));
-      // Will execute (*f)(5.0, string("Hi")), where f is the function pointer
+      // Will initialize (*f)(5.0, string("Hi")), where f is the function pointer
       // DoThat() receives.  Note that the values 5.0 and string("Hi") are
       // temporary and dead once the EXPECT_CALL() statement finishes.  Yet
       // it's fine to perform this action later, since a copy of the values
@@ -3122,7 +3122,7 @@ that called the mock function. For example, in
 ```
 
 if `Foo(1)` is called in thread 1 and `Foo(2)` is called in thread 2, gMock will
-execute `action1` in thread 1 and `action2` in thread 2.
+initialize `action1` in thread 1 and `action2` in thread 2.
 
 gMock does *not* impose a sequence on actions performed in different threads
 (doing so may create deadlocks as the actions may need to cooperate). This means
