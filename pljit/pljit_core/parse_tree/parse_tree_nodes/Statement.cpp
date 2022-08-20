@@ -12,12 +12,12 @@ Statement::Statement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::Lexer
     std::unique_ptr<LexerToken> t{l.nextToken()};
     switch (t->token_type) {
         case LexerToken::Error:
-            throw CompilationError(t->source_code_reference, CompilationError::Lexer, static_cast<LexerErrorToken*>(t.get())->error_message);
+            throw pljit::Error(t->source_code_reference, pljit::Error::Lexer, static_cast<LexerErrorToken*>(t.get())->error_message);
 
         /// AdditiveExpression
         case LexerToken::Keyword: {
             if (static_cast<LexerKeywordToken*>(t.get())->keyword_type != LexerKeywordToken::RETURN)
-                throw CompilationError(t->source_code_reference, CompilationError::ParseTree, "Wrong keyword");
+                throw pljit::Error(t->source_code_reference, pljit::Error::ParseTree, "Wrong keyword");
             additiveExpression.emplace(std::make_pair(std::make_unique<TerminalSymbol>(t->source_code_reference), std::make_unique<AdditiveExpression>(l, separator)));
             break;
         }
@@ -28,7 +28,7 @@ Statement::Statement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::Lexer
         }
 
         default:
-            throw CompilationError(t->source_code_reference, CompilationError::ParseTree, "Expected identifier or 'RETURN'");
+            throw pljit::Error(t->source_code_reference, pljit::Error::ParseTree, "Expected identifier or 'RETURN'");
     }
 }
 void Statement::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }

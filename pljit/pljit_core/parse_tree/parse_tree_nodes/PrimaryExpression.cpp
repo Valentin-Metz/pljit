@@ -10,7 +10,7 @@ namespace parse_tree {
 PrimaryExpression::PrimaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l) {
     switch (t->token_type) {
         case lexer::LexerToken::Error:
-            throw CompilationError(t->source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken*>(t.get())->error_message);
+            throw pljit::Error(t->source_code_reference, pljit::Error::Lexer, static_cast<lexer::LexerErrorToken*>(t.get())->error_message);
         case lexer::LexerToken::Identifier: {
             identifier.emplace(t->source_code_reference);
             break;
@@ -31,7 +31,7 @@ PrimaryExpression::PrimaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer
             [[fallthrough]];
         }
         default:
-            throw CompilationError(t->source_code_reference, CompilationError::ParseTree, "Expected identifier, literal or additive-expression in brackets");
+            throw pljit::Error(t->source_code_reference, pljit::Error::ParseTree, "Expected identifier, literal or additive-expression in brackets");
     }
 }
 void PrimaryExpression::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }

@@ -8,7 +8,7 @@ UnaryExpression::UnaryExpression(lexer::Lexer& l) : UnaryExpression(l.nextToken(
 UnaryExpression::UnaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Lexer& l) {
     switch (t->token_type) {
         case lexer::LexerToken::Error:
-            throw CompilationError(t->source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken*>(t.get())->error_message);
+            throw pljit::Error(t->source_code_reference, pljit::Error::Lexer, static_cast<lexer::LexerErrorToken*>(t.get())->error_message);
 
         case lexer::LexerToken::Arithmetic: {
             lexer::LexerArithmeticToken* a = static_cast<lexer::LexerArithmeticToken*>(t.get());
@@ -24,7 +24,7 @@ UnaryExpression::UnaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer::Le
                     break;
                 }
                 default:
-                    throw CompilationError(t->source_code_reference, CompilationError::ParseTree, "Unexpected operator in unary-expression");
+                    throw pljit::Error(t->source_code_reference, pljit::Error::ParseTree, "Unexpected operator in unary-expression");
             }
             break;
         }

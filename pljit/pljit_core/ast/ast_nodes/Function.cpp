@@ -16,7 +16,7 @@ Function::Function(const parse_tree::StatementList& statement_list, SymbolTable&
         }
     }
     if (!contains_return_statement) {
-        throw CompilationError(statement_list.statementList.back().second.source_code_reference, CompilationError::ErrorSource::AST, "Missing RETURN statement");
+        throw pljit::Error(statement_list.statementList.back().second.source_code_reference, pljit::Error::ErrorSource::AST, "Missing RETURN statement");
     }
 }
 

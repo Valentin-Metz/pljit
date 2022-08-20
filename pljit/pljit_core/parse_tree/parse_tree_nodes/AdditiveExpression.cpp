@@ -13,7 +13,7 @@ AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lex
         std::unique_ptr<lexer::LexerToken> token{l.nextToken()};
         switch (token->token_type) {
             case lexer::LexerToken::Error:
-                throw CompilationError(token->source_code_reference, CompilationError::Lexer, static_cast<lexer::LexerErrorToken*>(token.get())->error_message);
+                throw pljit::Error(token->source_code_reference, pljit::Error::Lexer, static_cast<lexer::LexerErrorToken*>(token.get())->error_message);
 
             /// additive-expression -> unary-expression -> primary-expression
             case lexer::LexerToken::Identifier:
@@ -65,7 +65,7 @@ AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lex
                 break;
             }
             default:
-                throw CompilationError(token->source_code_reference, CompilationError::ParseTree, "Unexpected token in additive-expression");
+                throw pljit::Error(token->source_code_reference, pljit::Error::ParseTree, "Unexpected token in additive-expression");
         }
     }
 }
