@@ -25,7 +25,7 @@ int main([[maybe_unused]] int argc, char* argv[]) {
 
         //std::cout << "success" << std::endl;
     } catch (pljit::Error e) {
-        e.print(source_code);
+        e.print();
         std::cout << "Terminated with error" << std::endl;
     }
 

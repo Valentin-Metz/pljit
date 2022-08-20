@@ -6,7 +6,9 @@ namespace pljit {
 Error::Error(source_code::SourceCodeReference source_code_reference, Error::ErrorSource error_source, std::string error_message)
     : source_code_reference(source_code_reference), error_source(error_source), error_message(std::move(error_message)) {}
 
-void Error::print(source_code::SourceCode& source_code) {
+void Error::set_source_code(source_code::SourceCode* source_code_pointer) { source_code = source_code_pointer; }
+
+void Error::print() {
     if (error_source == Runtime) {
         std::cout << "Runtime error: " << error_message << std::endl;
         return;
@@ -16,7 +18,7 @@ void Error::print(source_code::SourceCode& source_code) {
     std::size_t last_linebreak = 0;
 
     for (std::size_t i = 0; i < source_code_reference.byte_index; ++i) {
-        if (source_code.source_code[i] == '\n') {
+        if (source_code->source_code[i] == '\n') {
             last_linebreak = i;
             line_number++;
         }
@@ -50,8 +52,8 @@ void Error::print(source_code::SourceCode& source_code) {
     std::cout << "\n";
 
     // Print line where error occurred
-    for (std::size_t i = last_linebreak + 1; i < source_code.source_code.length() && source_code.source_code[i] != '\n'; ++i) {
-        std::cout << source_code.source_code[i];
+    for (std::size_t i = last_linebreak + 1; i < source_code->source_code.length() && source_code->source_code[i] != '\n'; ++i) {
+        std::cout << source_code->source_code[i];
     }
     std::cout << "\n";
 

@@ -16,10 +16,10 @@ void DeadCodeEliminationVisitor::visit(Function& node) {
     node.statements.resize(counter);
 }
 
-void DeadCodeEliminationVisitor::visit(SymbolTable& node) {}
-void DeadCodeEliminationVisitor::visit(AssignmentStatement& node) {}
-void DeadCodeEliminationVisitor::visit(ReturnStatement& node) {}
-void DeadCodeEliminationVisitor::visit(MultiplicativeExpression& node) {}
-void DeadCodeEliminationVisitor::visit(TerminalExpression& node) {}
+void DeadCodeEliminationVisitor::visit(SymbolTable&) {}
+void DeadCodeEliminationVisitor::visit(AssignmentStatement&) {}
+void DeadCodeEliminationVisitor::visit(ReturnStatement&) {}
+void DeadCodeEliminationVisitor::visit(MultiplicativeExpression&) {}
+void DeadCodeEliminationVisitor::visit(TerminalExpression&) {}
 
 } // namespace ast
