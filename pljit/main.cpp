@@ -32,7 +32,7 @@ int main([[maybe_unused]] int argc, char* argv[]) {
     pljit::PLjit pljit;
 
     auto handle = pljit.registerFunction(valid_source);
-    auto result = handle.execute(2,2,2,2);
+    //auto result = handle.execute(2,2,2,2);
 
     return 0;
 }
