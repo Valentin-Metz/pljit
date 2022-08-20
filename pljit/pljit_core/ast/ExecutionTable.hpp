@@ -16,6 +16,10 @@ class ExecutionTable {
     void insert(std::string_view identifier, int64_t value);
     void update(std::string_view identifier, int64_t value);
     int64_t get(std::string_view identifier);
+
+    /// Executes function with a variable amount of arguments
+    //template<std::pair<std::string_view, int64_t>... Arguments>
+    //int64_t execute(Arguments..., ...);
 };
 
 } // namespace ast

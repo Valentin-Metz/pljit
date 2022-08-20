@@ -2,7 +2,7 @@
 #define PLJIT_PLJIT_HPP
 
 #include <memory>
-#include <string>
+#include <string_view>
 
 namespace pljit {
 
@@ -20,7 +20,7 @@ class PLjit {
     ~PLjit();
 
     /// Registers a function by source code and returns a callable handle
-    FunctionHandle registerFunction(std::string source_code);
+    FunctionHandle registerFunction(std::string_view source_code);
 };
 
 } // namespace pljit

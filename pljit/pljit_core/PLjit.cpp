@@ -8,7 +8,7 @@ namespace pljit {
 PLjit::PLjit() = default;
 PLjit::~PLjit() = default;
 
-FunctionHandle PLjit::registerFunction(std::string source_code) {
+FunctionHandle PLjit::registerFunction(std::string_view source_code) {
     return functionStorage->registerFunction(std::move(source_code));
 }
 
