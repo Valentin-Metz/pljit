@@ -20,7 +20,9 @@ int64_t MultiplicativeExpression::execute(ExecutionTable& table) {
             if (m.multiplicativeOperator == Multiply) {
                 result *= expression->execute(table);
             } else {
-                result /= expression->execute(table);
+                int64_t divisor = expression->execute(table);
+                if (divisor == 0) throw pljit::Error({0, 0}, pljit::Error::Runtime, "Division by zero");
+                result /= divisor;
             }
         }
     }
