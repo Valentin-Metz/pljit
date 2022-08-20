@@ -29,8 +29,9 @@ class AST {
     // Optimizes the AST
     void optimize();
 
-    // The execution table must be copied for every execution
+    // The execution table manages variables during execution
     std::optional<const ExecutionTable> executionTable;
+
     void generateExecutionTable();
     ExecutionTable getExecutionTable();
 };
