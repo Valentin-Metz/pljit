@@ -1,11 +1,11 @@
+#include "pljit_core/PLjit.hpp"
 #include "pljit_core/ast/Ast.hpp"
+#include "pljit_core/error_management/Error.hpp"
 #include "pljit_core/lexer/Lexer.hpp"
 #include "pljit_core/parse_tree/ParseTree.hpp"
 #include "pljit_core/source_code_management/SourceCode.hpp"
 #include <fstream>
 #include <iostream>
-#include "pljit_core/PLjit.hpp"
-#include "pljit_core/error_management/Error.hpp"
 
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
@@ -32,7 +32,9 @@ int main([[maybe_unused]] int argc, char* argv[]) {
     pljit::PLjit pljit;
 
     auto handle = pljit.registerFunction(valid_source);
-    //auto result = handle.execute(2,2,2,2);
+
+    std::vector<int64_t> arguments{2, 2, 2};
+    auto result = handle.execute(arguments);
 
     return 0;
 }

@@ -16,7 +16,7 @@ void AssignmentStatement::accept(AstVisitor& visitor) {
 void AssignmentStatement::execute(ExecutionTable& table) {
     int64_t result = 0;
     for (auto& expression : expressions) {
-        if (expression->expressionType == Expression::Multiplicative) {
+        if (expression->expressionType == Expression::Terminal) {
             result += expression->execute(table);
         } else {
             MultiplicativeExpression& m = static_cast<MultiplicativeExpression&>(*expression.get());
