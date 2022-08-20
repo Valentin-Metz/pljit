@@ -18,7 +18,7 @@ int64_t ExecutionTable::get(std::string_view identifier) {
 }
 
 template <typename... Args>
-int64_t ExecutionTable::initialize(Args... args) {
+void ExecutionTable::initialize(Args... args) {
     insert(args...);
 }
 

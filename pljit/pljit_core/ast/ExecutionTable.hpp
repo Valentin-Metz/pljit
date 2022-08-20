@@ -19,7 +19,7 @@ class ExecutionTable {
 
     /// Executes function with a variable amount of arguments
     template <typename... Args>
-    int64_t initialize(Args... args);
+    void initialize(Args... args);
 };
 
 } // namespace ast
