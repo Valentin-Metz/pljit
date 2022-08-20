@@ -1,6 +1,7 @@
 #ifndef PLJIT_FUNCTIONHANDLE_HPP
 #define PLJIT_FUNCTIONHANDLE_HPP
 
+#include <cstdint>
 #include <variant>
 #include <vector>
 

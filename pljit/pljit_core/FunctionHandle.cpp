@@ -1,3 +1,4 @@
+#include "FunctionHandle.hpp"
 #include "FunctionStorage.hpp"
 #include "PLjit.hpp"
 #include "ast/Ast.hpp"
