@@ -1,7 +1,7 @@
 #include "UnaryExpression.hpp"
+#include "../../error_management/Error.hpp"
 #include "../../lexer/tokens/LexerArithmeticToken.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
-#include "../../error_management/CompilationError.hpp"
 
 namespace parse_tree {
 UnaryExpression::UnaryExpression(lexer::Lexer& l) : UnaryExpression(l.nextToken(), l) {}

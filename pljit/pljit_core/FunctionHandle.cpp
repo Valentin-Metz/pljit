@@ -1,7 +1,6 @@
 #include "FunctionStorage.hpp"
 #include "PLjit.hpp"
 #include "ast/Ast.hpp"
-#include "error_management/Error.hpp"
 #include "lexer/Lexer.hpp"
 #include "parse_tree/ParseTree.hpp"
 #include "source_code_management/SourceCode.hpp"

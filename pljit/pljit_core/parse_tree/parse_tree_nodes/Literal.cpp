@@ -1,7 +1,7 @@
 #include "Literal.hpp"
+#include "../../error_management/Error.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerLiteralToken.hpp"
-#include "../../error_management/CompilationError.hpp"
 
 namespace parse_tree {
 

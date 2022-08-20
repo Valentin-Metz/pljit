@@ -1,10 +1,10 @@
 #ifndef PLJIT_IDENTIFIER_HPP
 #define PLJIT_IDENTIFIER_HPP
 
+#include "../../error_management/Error.hpp"
 #include "../../lexer/Lexer.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerIdentifierToken.hpp"
-#include "../../error_management/CompilationError.hpp"
 #include "../ParseTreeVisitor.hpp"
 #include "TerminalSymbol.hpp"
 #include <optional>
