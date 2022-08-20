@@ -22,18 +22,21 @@ void FunctionHandle::compile() {
     parse_tree::ParseTree parse_tree{lexer};
 
     /// Construct abstract syntax tree
-    ast::AST ast{parse_tree, std::move(source_code)};
+    std::unique_ptr<ast::AST> ast = std::make_unique<ast::AST>(parse_tree, std::move(source_code));
 
-    /*
     /// Optimize abstract syntax tree
-    ast.optimize();
+    ast->optimize();
 
     /// Generate execution table
-    ast.generateExecutionTable();
+    ast->generateExecutionTable();
+
+    std::variant<std::string_view, std::unique_ptr<ast::AST>> v;
+    v.emplace<std::string_view>("x");
+    //v.emplace<std::unique_ptr<ast::AST>>(std::move(ast));
 
     /// Store the abstract syntax tree
-     */
-    //storage->functions[index].second.emplace<ast::AST>(parse_tree, std::move(source_code));
+    const std::variant<std::string_view, std::unique_ptr<ast::AST>>& variant = storage->functions[index].second;
+    //storage->functions[index].second.emplace<std::unique_ptr<ast::AST>>(std::move(ast));
 }
 
 template <typename... Args>
