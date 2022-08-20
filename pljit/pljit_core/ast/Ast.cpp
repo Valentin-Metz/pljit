@@ -1,7 +1,6 @@
 #include "Ast.hpp"
 #include "ast_core/AstVisitor.hpp"
 #include "ast_core/ExecutionTable.hpp"
-#include "optimization/AstOptimizationVisitor.hpp"
 #include "print/AstPrintVisitor.hpp"
 
 namespace ast {
@@ -19,8 +18,8 @@ void AST::print() {
 }
 
 void AST::optimize() {
-    AstOptimizationVisitor optimization_visitor;
-    this->accept(optimization_visitor);
+    //AstOptimizationVisitor optimization_visitor;
+    //this->accept(optimization_visitor);
 }
 
 void AST::generateExecutionTable() {

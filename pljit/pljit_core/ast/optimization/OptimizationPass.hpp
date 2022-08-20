@@ -3,7 +3,12 @@
 
 namespace ast {
 
+class AST;
+
 class OptimizationPass {
+    public:
+    virtual ~OptimizationPass() = default;
+    virtual void optimize(AST& ast) = 0;
 };
 
 } // namespace ast

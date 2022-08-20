@@ -1,0 +1,11 @@
+#ifndef PLJIT_CONSTANTPROPAGATIONOPTIMIZATIONPASS_HPP
+#define PLJIT_CONSTANTPROPAGATIONOPTIMIZATIONPASS_HPP
+
+namespace ast {
+
+class ConstantPropagationOptimizationPass {
+};
+
+} // namespace ast
+
+#endif //PLJIT_CONSTANTPROPAGATIONOPTIMIZATIONPASS_HPP
