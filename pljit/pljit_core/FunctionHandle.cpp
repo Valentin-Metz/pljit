@@ -36,7 +36,8 @@ void FunctionHandle::compile() {
 
 template <typename... Args>
 std::variant<std::int64_t, Error> FunctionHandle::execute(Args... args) {
-    compile();
+    /// Call compile() exactly once
+    std::call_once(*storage->functions[index].first, &FunctionHandle::compile, this);
 
     ast::AST& ast = *std::get<1>(storage->functions[index].second);
 
