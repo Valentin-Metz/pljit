@@ -10,6 +10,7 @@ void DeadCodeEliminationVisitor::visit(AST& node) {
 void DeadCodeEliminationVisitor::visit(Function& node) {
     std::size_t counter = 0;
     for (auto& statement : node.statements) {
+        counter++;
         if (statement->statementType == Statement::Return) break;
     }
     node.statements.resize(counter);
