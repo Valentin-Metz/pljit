@@ -40,8 +40,8 @@ void AstPrintVisitor::visit(SymbolTable& node) {
             }
             case SymbolTable::Constant: {
                 std::cout << "Constants -> " << symbol.first << "\n";
-                std::cout << symbol.first << " -> _" << std::get<2>(symbol.second) << "_" << unique_counter << "\n";
-                std::cout << "_" << std::get<2>(symbol.second) << "_" << unique_counter++ << " [label = \"" << std::get<2>(symbol.second) << "\"]\n";
+                std::cout << symbol.first << " -> \"" << std::get<2>(symbol.second) << "_" << unique_counter << "\"\n";
+                std::cout << "\"" << std::get<2>(symbol.second) << "_" << unique_counter++ << "\" [label = \"" << std::get<2>(symbol.second) << "\"]\n";
                 break;
             }
         }
@@ -96,8 +96,8 @@ void AstPrintVisitor::visit(MultiplicativeExpression& node) {
 
 void AstPrintVisitor::visit(TerminalExpression& node) {
     if (node.value.index() == 0) {
-        std::cout << "_" << std::get<int64_t>(node.value) << "_" << unique_counter << "\n";
-        std::cout << "_" << std::get<int64_t>(node.value) << "_" << unique_counter++ << " [label = \"" << std::get<int64_t>(node.value) << "\"]\n";
+        std::cout << "\"" << std::get<int64_t>(node.value) << "_" << unique_counter << "\"\n";
+        std::cout << "\"" << std::get<int64_t>(node.value) << "_" << unique_counter++ << "\" [label = \"" << std::get<int64_t>(node.value) << "\"]\n";
     } else {
         auto value = std::get<std::pair<int64_t, std::string_view>>(node.value);
         if (value.first == -1) {
