@@ -24,11 +24,9 @@ class AST {
 
     void accept(AstVisitor& visitor);
     void print();
-
-    private:
-    // Optimizes the AST
     void optimize();
 
+    private:
     // The execution table manages variables during execution
     std::optional<const ExecutionTable> executionTable;
 
