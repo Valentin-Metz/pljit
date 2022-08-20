@@ -10,7 +10,7 @@ namespace ast {
 class TerminalExpression : public Expression {
     public:
     /// Literal or signed identifier
-    const std::variant<int64_t, std::pair<int64_t, std::string_view>> value;
+    std::variant<int64_t, std::pair<int64_t, std::string_view>> value;
 
     TerminalExpression(std::variant<int64_t, std::pair<int64_t, std::string_view>> value);
     virtual void accept(AstVisitor& visitor) override;

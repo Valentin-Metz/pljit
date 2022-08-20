@@ -6,7 +6,7 @@
 #include <unordered_map>
 namespace ast {
 
-class ConstantPropagationVisitor : AstVisitor {
+class ConstantPropagationVisitor : public AstVisitor {
     private:
     std::unordered_map<std::string_view, std::int64_t> constant_identifiers;
 

@@ -5,7 +5,7 @@
 
 namespace ast {
 
-class DeadCodeEliminationVisitor : AstVisitor {
+class DeadCodeEliminationVisitor : public AstVisitor {
     public:
     ~DeadCodeEliminationVisitor() override = default;
     virtual void visit(AST& node) override;
