@@ -1,7 +1,7 @@
 #ifndef PLJIT_MULTIPLICATIVEEXPRESSION_HPP
 #define PLJIT_MULTIPLICATIVEEXPRESSION_HPP
 
-#include "../SymbolTable.hpp"
+#include "../ast_core/SymbolTable.hpp"
 #include "Expression.hpp"
 #include <memory>
 #include <vector>

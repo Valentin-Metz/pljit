@@ -1,7 +1,7 @@
 #ifndef PLJIT_ASTPRINTVISITOR_HPP
 #define PLJIT_ASTPRINTVISITOR_HPP
 
-#include "AstVisitor.hpp"
+#include "../ast_core/AstVisitor.hpp"
 #include <cstdlib>
 #include <memory>
 #include <vector>

@@ -2,8 +2,8 @@
 #define PLJIT_AST_HPP
 
 #include "../parse_tree/ParseTree.hpp"
-#include "ExecutionTable.hpp"
-#include "SymbolTable.hpp"
+#include "ast_core/ExecutionTable.hpp"
+#include "ast_core/SymbolTable.hpp"
 #include "ast_nodes/Function.hpp"
 namespace pljit {
 class FunctionHandle;

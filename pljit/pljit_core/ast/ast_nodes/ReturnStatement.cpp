@@ -1,6 +1,6 @@
 #include "ReturnStatement.hpp"
 #include "../../parse_tree/parse_tree_nodes/Statement.hpp"
-#include "../AstVisitor.hpp"
+#include "../ast_core/AstVisitor.hpp"
 #include "Expression.hpp"
 #include "MultiplicativeExpression.hpp"
 

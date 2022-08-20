@@ -2,8 +2,8 @@
 #define PLJIT_FUNCTION_HPP
 
 #include "../../source_code_management/SourceCode.hpp"
-#include "../SymbolTable.hpp"
-#include "../ExecutionTable.hpp"
+#include "../ast_core/ExecutionTable.hpp"
+#include "../ast_core/SymbolTable.hpp"
 #include "Statement.hpp"
 #include <memory>
 #include <vector>

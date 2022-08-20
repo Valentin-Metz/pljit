@@ -2,8 +2,8 @@
 #define PLJIT_ASSIGNMENTSTATEMENT_HPP
 
 #include "../../parse_tree/parse_tree_nodes/AssignmentExpression.hpp"
-#include "../ExecutionTable.hpp"
-#include "../SymbolTable.hpp"
+#include "../ast_core/ExecutionTable.hpp"
+#include "../ast_core/SymbolTable.hpp"
 #include "Statement.hpp"
 namespace ast {
 

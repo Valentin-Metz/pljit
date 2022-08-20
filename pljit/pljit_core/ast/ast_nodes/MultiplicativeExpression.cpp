@@ -1,5 +1,5 @@
 #include "MultiplicativeExpression.hpp"
-#include "../AstVisitor.hpp"
+#include "../ast_core/AstVisitor.hpp"
 #include "Statement.hpp"
 
 namespace ast {

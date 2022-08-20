@@ -1,5 +1,5 @@
 #include "TerminalExpression.hpp"
-#include "../AstVisitor.hpp"
+#include "../ast_core/AstVisitor.hpp"
 
 namespace ast {
 

@@ -1,5 +1,5 @@
 #include "AssignmentStatement.hpp"
-#include "../AstVisitor.hpp"
+#include "../ast_core/AstVisitor.hpp"
 #include "Expression.hpp"
 #include "MultiplicativeExpression.hpp"
 

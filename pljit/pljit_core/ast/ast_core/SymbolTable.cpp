@@ -1,5 +1,5 @@
 #include "SymbolTable.hpp"
-#include "../error_management/CompilationError.hpp"
+#include "../../error_management/CompilationError.hpp"
 #include "AstVisitor.hpp"
 
 namespace ast {

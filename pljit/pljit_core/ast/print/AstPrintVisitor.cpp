@@ -1,11 +1,11 @@
 #include "AstPrintVisitor.hpp"
-#include "Ast.hpp"
-#include "SymbolTable.hpp"
-#include "ast_nodes/AssignmentStatement.hpp"
-#include "ast_nodes/Function.hpp"
-#include "ast_nodes/MultiplicativeExpression.hpp"
-#include "ast_nodes/ReturnStatement.hpp"
-#include "ast_nodes/TerminalExpression.hpp"
+#include "../Ast.hpp"
+#include "../ast_core/SymbolTable.hpp"
+#include "../ast_nodes/AssignmentStatement.hpp"
+#include "../ast_nodes/Function.hpp"
+#include "../ast_nodes/MultiplicativeExpression.hpp"
+#include "../ast_nodes/ReturnStatement.hpp"
+#include "../ast_nodes/TerminalExpression.hpp"
 #include <iostream>
 #include <tuple>
 

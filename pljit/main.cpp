@@ -18,9 +18,9 @@ int main([[maybe_unused]] int argc, char* argv[]) {
 
     try {
         parse_tree::ParseTree parse_tree{l};
-        //parse_tree.print();
+        parse_tree.print();
         ast::AST ast{parse_tree, source_code};
-        //ast.print();
+        ast.print();
 
         //std::cout << "success" << std::endl;
     } catch (CompilationError e) {

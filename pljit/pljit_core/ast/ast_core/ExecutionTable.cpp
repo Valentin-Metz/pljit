@@ -1,5 +1,5 @@
 #include "ExecutionTable.hpp"
-#include "../error_management/RuntimeError.hpp"
+#include "../../error_management/RuntimeError.hpp"
 
 namespace ast {
 

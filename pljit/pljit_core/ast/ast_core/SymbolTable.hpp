@@ -1,7 +1,7 @@
 #ifndef PLJIT_SYMBOLTABLE_HPP
 #define PLJIT_SYMBOLTABLE_HPP
-#include "../parse_tree/ParseTree.hpp"
-#include "../source_code_management/SourceCodeReference.hpp"
+#include "../../parse_tree/ParseTree.hpp"
+#include "../../source_code_management/SourceCodeReference.hpp"
 #include <string_view>
 #include <tuple>
 #include <unordered_map>

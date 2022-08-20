@@ -1,7 +1,7 @@
 #ifndef PLJIT_EXPRESSION_HPP
 #define PLJIT_EXPRESSION_HPP
 
-#include "../ExecutionTable.hpp"
+#include "../ast_core/ExecutionTable.hpp"
 #include <cstdint>
 namespace ast {
 class AstVisitor;
