@@ -2,7 +2,7 @@
 #define PLJIT_FUNCTIONHANDLE_HPP
 
 #include <variant>
-#include <cstdint>
+#include <vector>
 
 namespace pljit {
 
@@ -22,8 +22,7 @@ class FunctionHandle {
     public:
     ~FunctionHandle();
 
-    template <typename... Args>
-    std::variant<std::int64_t, Error> execute(Args... args);
+    std::variant<std::int64_t, Error> execute(std::vector<std::int64_t> parameters);
 };
 
 } // namespace pljit

@@ -34,16 +34,18 @@ void FunctionHandle::compile() {
     storage->functions[index].second.emplace<std::unique_ptr<ast::AST>>(std::move(ast));
 }
 
-template <typename... Args>
-std::variant<std::int64_t, Error> FunctionHandle::execute(Args... args) {
+std::variant<std::int64_t, Error> FunctionHandle::execute(std::vector<std::int64_t> parameters) {
     /// Call compile() exactly once
     std::call_once(*storage->functions[index].first, &FunctionHandle::compile, this);
 
+    /// Load the AST
     ast::AST& ast = *std::get<1>(storage->functions[index].second);
 
-    /// Copy execution table and initialize it with parameters
+    /// Copy execution table
     ast::ExecutionTable execution_table = ast.getExecutionTable();
-    execution_table.initialize(args...);
+
+    /// Initialize the execution table with parameters
+    execution_table.initialize(parameters);
 
     /// Execute the program
     ast.function->execute(execution_table);

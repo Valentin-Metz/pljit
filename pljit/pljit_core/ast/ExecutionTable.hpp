@@ -8,7 +8,6 @@
 namespace ast {
 
 class ExecutionTable {
-    std::size_t parameter_counter = 0;
     const std::vector<std::string_view>& parameter_list;
 
     public:
@@ -21,7 +20,7 @@ class ExecutionTable {
     void update(std::string_view identifier, std::int64_t value);
     std::int64_t get(std::string_view identifier);
 
-    void initialize(std::int64_t value);
+    void initialize(std::vector<std::int64_t> parameters);
 };
 
 } // namespace ast
