@@ -10,7 +10,7 @@ class Error;
 class FunctionHandle {
     friend PLjit;
     friend FunctionStorage;
-    const FunctionStorage* storage;
+    FunctionStorage* storage;
     const std::size_t index;
     FunctionHandle(FunctionStorage* storage, std::size_t index);
     ~FunctionHandle();

@@ -30,13 +30,8 @@ void FunctionHandle::compile() {
     /// Generate execution table
     ast->generateExecutionTable();
 
-    std::variant<std::string_view, std::unique_ptr<ast::AST>> v;
-    v.emplace<std::string_view>("x");
-    //v.emplace<std::unique_ptr<ast::AST>>(std::move(ast));
-
     /// Store the abstract syntax tree
-    const std::variant<std::string_view, std::unique_ptr<ast::AST>>& variant = storage->functions[index].second;
-    //storage->functions[index].second.emplace<std::unique_ptr<ast::AST>>(std::move(ast));
+    storage->functions[index].second.emplace<std::unique_ptr<ast::AST>>(std::move(ast));
 }
 
 template <typename... Args>
