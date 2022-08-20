@@ -1,4 +1,5 @@
-CONST density = 2400;
+PARAM y;
+CONST x = 3000;
 BEGIN
-RETURN density
+RETURN x / y
 END.

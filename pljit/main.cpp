@@ -33,7 +33,7 @@ int main([[maybe_unused]] int argc, char* argv[]) {
 
     auto handle = pljit.registerFunction(valid_source);
 
-    auto result = handle.execute({1, 1, 1, 1});
+    auto result = handle.execute({0});
 
     if (result.index() == 0) {
         std::cout << std::get<0>(result) << std::endl;
