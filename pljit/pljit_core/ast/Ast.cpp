@@ -1,4 +1,6 @@
 #include "Ast.hpp"
+#include "ast/optimization/ConstantPropagationOptimizationPass.hpp"
+#include "ast/optimization/DeadCodeEliminationOptimizationPass.hpp"
 #include "ast_core/AstVisitor.hpp"
 #include "ast_core/ExecutionTable.hpp"
 #include "print/AstPrintVisitor.hpp"
@@ -18,8 +20,11 @@ void AST::print() {
 }
 
 void AST::optimize() {
-    //AstOptimizationVisitor optimization_visitor;
-    //this->accept(optimization_visitor);
+    DeadCodeEliminationOptimizationPass dead_code_elimination_optimization_pass;
+    dead_code_elimination_optimization_pass.optimize(*this);
+
+    ConstantPropagationOptimizationPass constant_propagation_optimization_pass;
+    constant_propagation_optimization_pass.optimize(*this);
 }
 
 void AST::generateExecutionTable() {
