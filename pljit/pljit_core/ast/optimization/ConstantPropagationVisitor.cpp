@@ -54,7 +54,7 @@ static void optimize_expressions(std::vector<std::unique_ptr<Expression>>& expre
                 auto& previousExpression = static_cast<TerminalExpression&>(*expressions[i - 1].get());
                 auto& currentExpression = static_cast<TerminalExpression&>(*containedExpressions[0].get());
 
-                previousExpression.value = std::get<0>(previousExpression.value) + std::get<0>(currentExpression.value);
+                previousExpression.value = std::get<0>(previousExpression.value) * std::get<0>(currentExpression.value);
                 expressions.erase(expressions.begin() + i);
                 --i;
             }
