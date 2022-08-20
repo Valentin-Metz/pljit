@@ -1,5 +1,6 @@
 #include "FunctionHandle.hpp"
 #include "FunctionStorage.hpp"
+#include "PLjit.hpp"
 #include "ast/Ast.hpp"
 #include "error_management/Error.hpp"
 #include "lexer/Lexer.hpp"
@@ -35,7 +36,7 @@ void FunctionHandle::compile() {
 }
 
 template <typename... Args>
-std::variant<int64_t, Error> FunctionHandle::execute(Args... args) {
+std::variant<std::int64_t, Error> FunctionHandle::execute(Args... args) {
     compile();
 
     ast::AST& ast = *std::get<1>(storage->functions[index].second);

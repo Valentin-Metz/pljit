@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include "pljit_core/PLjit.hpp"
+#include "pljit_core/FunctionHandle.hpp"
 #include <memory>
 #include <optional>
 
@@ -23,13 +24,17 @@ int main([[maybe_unused]] int argc, char* argv[]) {
         parse_tree::ParseTree parse_tree{l};
         //parse_tree.print();
         ast::AST ast{parse_tree, source_code};
-        ast.print();
+        //ast.print();
 
         //std::cout << "success" << std::endl;
     } catch (CompilationError e) {
         e.print(source_code);
         std::cout << "Terminated with error" << std::endl;
     }
+
+    pljit::PLjit pljit;
+
+    auto x = pljit.registerFunction(valid_source);
 
 
     return 0;
