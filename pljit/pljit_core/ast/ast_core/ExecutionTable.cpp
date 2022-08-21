@@ -1,5 +1,5 @@
 #include "ExecutionTable.hpp"
-#include "error_management/PLjit_Error.hpp"
+#include "include/PLjit_Error.hpp"
 
 namespace ast {
 

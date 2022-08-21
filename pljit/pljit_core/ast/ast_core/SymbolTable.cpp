@@ -1,6 +1,6 @@
 #include "SymbolTable.hpp"
-#include "../../error_management/PLjit_Error.hpp"
 #include "AstVisitor.hpp"
+#include "include/PLjit_Error.hpp"
 
 namespace ast {
 void SymbolTable::check_read(std::string_view identifier, source_code::SourceCodeReference r) {

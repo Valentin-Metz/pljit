@@ -1,4 +1,4 @@
-#include "PLjit_Error.hpp"
+#include "include/PLjit_Error.hpp"
 #include <iostream>
 
 namespace pljit {

@@ -1,9 +1,9 @@
 #include "StatementList.hpp"
-#include "../../error_management/PLjit_Error.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerKeywordToken.hpp"
 #include "../../lexer/tokens/LexerSeparatorToken.hpp"
 #include "Statement.hpp"
+#include "include/PLjit_Error.hpp"
 
 namespace parse_tree {
 

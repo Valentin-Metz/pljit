@@ -1,9 +1,9 @@
 #include "PrimaryExpression.hpp"
-#include "../../error_management/PLjit_Error.hpp"
 #include "../../lexer/tokens/LexerBracketToken.hpp"
 #include "../../lexer/tokens/LexerErrorToken.hpp"
 #include "../../lexer/tokens/LexerLiteralToken.hpp"
 #include "AdditiveExpression.hpp"
+#include "include/PLjit_Error.hpp"
 
 namespace parse_tree {
 
