@@ -2,9 +2,6 @@
 #include "FunctionStorage.hpp"
 #include "ast/Ast.hpp"
 #include "include/PLjit.hpp"
-#include "lexer/Lexer.hpp"
-#include "parse_tree/ParseTree.hpp"
-#include "source_code_management/SourceCode.hpp"
 
 namespace pljit {
 
@@ -35,6 +32,7 @@ void PLjit_FunctionHandle::compile() {
 }
 
 std::variant<std::int64_t, PLjit_Error> PLjit_FunctionHandle::execute(std::vector<std::int64_t> parameters) {
+    /// If compilation, optimization or execution fails we get an error describing the problem
     try {
         /// Call compile() exactly once
         std::call_once(*std::get<0>(storage->functions[index]), &PLjit_FunctionHandle::compile, this);
@@ -50,9 +48,15 @@ std::variant<std::int64_t, PLjit_Error> PLjit_FunctionHandle::execute(std::vecto
 
         /// Execute the program
         ast.function->execute(execution_table);
+
+        /// Return an std::int64_t in a variant, indicating success (as we sadly don't have support for https://en.cppreference.com/w/cpp/header/expected yet)
         return execution_table.result.value();
+
     } catch (PLjit_Error error) {
-        // todo: store source code in error and change ast so it stores a source code reference and change vector to permanently store source code as SourceCode
+        /// Set the a pointer to the source code to allow source-code-referencing error prints
+        error.set_source_code(std::get<1>(storage->functions[index]).get());
+
+        /// Return the PLjit_Error in a variant, indicating failure
         return error;
     }
 }

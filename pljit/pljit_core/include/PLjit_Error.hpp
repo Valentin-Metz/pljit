@@ -9,6 +9,7 @@
 namespace pljit {
 
 class PLjit_Error {
+    friend class PLjit_FunctionHandle;
     public:
     enum ErrorSource {
         Lexer,
