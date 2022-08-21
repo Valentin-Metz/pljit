@@ -1,4 +1,5 @@
 #include "include/PLjit_Error.hpp"
+#include "source_code_management/SourceCode.hpp"
 #include <iostream>
 
 namespace pljit {

@@ -1,11 +1,12 @@
 #ifndef PLJIT_PLJIT_ERROR_HPP
 #define PLJIT_PLJIT_ERROR_HPP
 
-#include "../source_code_management/SourceCode.hpp"
+//#include "../source_code_management/SourceCode.hpp"
 #include "../source_code_management/SourceCodeReference.hpp"
-#include <cstdlib>
 #include <string>
-#include <utility>
+namespace source_code {
+struct SourceCodeReference;
+}
 
 namespace pljit {
 
