@@ -62,6 +62,17 @@ TEST(AbstractSyntaxTreeTest, InvalidProgramsReturnError) {
 }
 
 TEST(AbstractSyntaxTreeTest, DivisionByZero) {
+    PLjit pljit;
+    auto handle = pljit.registerFunction("BEGIN\n"
+                                         "RETURN 1 / 0\n"
+                                         "END.");
+    auto result = handle.execute({});
+    EXPECT_EQ(result.index(), 1);
+
+    testing::internal::CaptureStdout();
+    std::get<1>(result).print();
+
+    EXPECT_EQ(testing::internal::GetCapturedStdout(), "Runtime error: Division by zero\n");
 }
 
 } // namespace ast
