@@ -58,6 +58,7 @@ AdditiveExpression::AdditiveExpression(std::unique_ptr<lexer::LexerToken> t, lex
         }
     }
 }
+
 void AdditiveExpression::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 
 } // namespace parse_tree
