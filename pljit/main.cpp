@@ -22,11 +22,11 @@ int main([[maybe_unused]] int argc, char* argv[]) {
     for (int i = 2; i < argc; ++i) {
         try {
             arguments.push_back(std::stoll(argv[i]));
-        } catch (const std::invalid_argument& ia) {
-            std::cerr << "Invalid argument: " << ia.what() << std::endl;
+        } catch (const std::invalid_argument&) {
+            std::cerr << "One of the given arguments was invalid (probably not a valid 64 bit int)" << std::endl;
             return 1;
         } catch (const std::out_of_range& oor) {
-            std::cerr << "Out of Range error: " << oor.what() << std::endl;
+            std::cerr << "One of the given arguments was out of range (too large/small for a 64 bit int) " << oor.what() << std::endl;
             return 1;
         }
     }
