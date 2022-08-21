@@ -6,6 +6,7 @@ using namespace source_code;
 using namespace parse_tree;
 
 extern std::string example_program;
+extern std::string factorial_calculation_program;
 extern std::vector<std::string> valid_programs;
 extern std::vector<std::string> invalid_programs;
 
@@ -18,6 +19,18 @@ TEST(ParseTreeTest, ExampleProgram) {
     EXPECT_EQ(parse_tree.root.variable_declaration->declaratorList.declaratorList.size(), 1);
     EXPECT_EQ(parse_tree.root.constant_declaration->initDeclaratorList.initDeclaratorList.size(), 1);
     EXPECT_EQ(parse_tree.root.compound_statement->statementList.statementList.size(), 2);
+    EXPECT_TRUE(parse_tree.root.terminator);
+}
+
+TEST(ParseTreeTest, FactorialProgram) {
+    SourceCode source_code{SourceCode(factorial_calculation_program)};
+    Lexer lexer{source_code};
+    ParseTree parse_tree{lexer};
+
+    EXPECT_FALSE(parse_tree.root.parameter_declaration);
+    EXPECT_FALSE(parse_tree.root.variable_declaration);
+    EXPECT_FALSE(parse_tree.root.constant_declaration);
+    EXPECT_EQ(parse_tree.root.compound_statement->statementList.statementList.size(), 1);
     EXPECT_TRUE(parse_tree.root.terminator);
 }
 
