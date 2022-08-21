@@ -48,31 +48,4 @@ TEST(AbstractSyntaxTreeTest, OptimizedResultEqualsUnoptimizedResult) {
     }
 }
 
-TEST(AbstractSyntaxTreeTest, InvalidProgramsReturnError) {
-    for (auto& string : invalid_programs) {
-        PLjit pljit;
-        auto handle = pljit.registerFunction(string);
-
-        for (int i = 0; i < 10; ++i) {
-            std::vector<int64_t> parameters(i, i);
-            auto result = handle.execute(parameters);
-            EXPECT_EQ(result.index(), 1);
-        }
-    }
-}
-
-TEST(AbstractSyntaxTreeTest, DivisionByZero) {
-    PLjit pljit;
-    auto handle = pljit.registerFunction("BEGIN\n"
-                                         "RETURN 1 / 0\n"
-                                         "END.");
-    auto result = handle.execute({});
-    EXPECT_EQ(result.index(), 1);
-
-    testing::internal::CaptureStdout();
-    std::get<1>(result).print();
-
-    EXPECT_EQ(testing::internal::GetCapturedStdout(), "Runtime error: Division by zero\n");
-}
-
 } // namespace ast

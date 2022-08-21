@@ -1,7 +1,7 @@
 set(TEST_SOURCES
         # add your source files here
         Tester.cpp
-        Lexer.cpp ParseTree.cpp AbstractSyntaxTree.cpp)
+        Lexer.cpp ParseTree.cpp AbstractSyntaxTree.cpp PLjit.cpp)
 
 add_executable(tester ${TEST_SOURCES})
 target_link_libraries(tester PUBLIC
