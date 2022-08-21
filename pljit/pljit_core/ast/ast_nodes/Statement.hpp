@@ -1,8 +1,8 @@
 #ifndef PLJIT_STATEMENT_HPP
 #define PLJIT_STATEMENT_HPP
-#include "../../parse_tree/parse_tree_nodes/AdditiveExpression.hpp"
-#include "../ast_core/ExecutionTable.hpp"
-#include "../ast_core/SymbolTable.hpp"
+#include "ast/ast_core/ExecutionTable.hpp"
+#include "ast/ast_core/SymbolTable.hpp"
+#include "parse_tree/parse_tree_nodes/AdditiveExpression.hpp"
 #include <memory>
 #include <vector>
 
@@ -13,6 +13,7 @@ class Statement;
 namespace ast {
 class Expression;
 
+/// A statement either returns or sets a value
 class Statement {
     public:
     virtual ~Statement();

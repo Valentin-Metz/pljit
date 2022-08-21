@@ -7,6 +7,7 @@
 #include <variant>
 namespace ast {
 
+/// A terminal expression contains either a literal or variable
 class TerminalExpression : public Expression {
     public:
     /// Literal or signed identifier

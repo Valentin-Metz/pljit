@@ -1,10 +1,10 @@
 #ifndef PLJIT_FUNCTION_HPP
 #define PLJIT_FUNCTION_HPP
 
-#include "../../source_code_management/SourceCode.hpp"
-#include "../ast_core/ExecutionTable.hpp"
-#include "../ast_core/SymbolTable.hpp"
 #include "Statement.hpp"
+#include "ast/ast_core/ExecutionTable.hpp"
+#include "ast/ast_core/SymbolTable.hpp"
+#include "source_code_management/SourceCode.hpp"
 #include <memory>
 #include <vector>
 
@@ -17,6 +17,7 @@ namespace ast {
 
 class Statement;
 
+/// A function contains the statements of our program
 class Function {
     public:
     std::vector<std::unique_ptr<Statement>> statements;

@@ -1,11 +1,12 @@
 #ifndef PLJIT_EXPRESSION_HPP
 #define PLJIT_EXPRESSION_HPP
 
-#include "../ast_core/ExecutionTable.hpp"
 #include <cstdint>
 namespace ast {
 class AstVisitor;
+class ExecutionTable;
 
+/// An expression evaluates to something
 class Expression {
     public:
     virtual ~Expression();

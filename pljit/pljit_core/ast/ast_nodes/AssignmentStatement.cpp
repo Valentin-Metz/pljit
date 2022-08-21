@@ -1,7 +1,6 @@
 #include "AssignmentStatement.hpp"
-#include "../ast_core/AstVisitor.hpp"
-#include "Expression.hpp"
 #include "MultiplicativeExpression.hpp"
+#include "ast/ast_core/AstVisitor.hpp"
 #include "utility.hpp"
 
 namespace ast {
@@ -14,6 +13,7 @@ AssignmentStatement::AssignmentStatement(const parse_tree::AssignmentExpression*
 void AssignmentStatement::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
+
 void AssignmentStatement::execute(ExecutionTable& table) {
     table.update(target, evaluate_expressions(expressions, table));
 }

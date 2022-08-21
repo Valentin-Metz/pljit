@@ -1,8 +1,8 @@
 #include "Statement.hpp"
-#include "../../parse_tree/parse_tree_nodes/Statement.hpp"
 #include "Expression.hpp"
 #include "MultiplicativeExpression.hpp"
 #include "TerminalExpression.hpp"
+#include "parse_tree/parse_tree_nodes/Statement.hpp"
 
 namespace ast {
 Statement::~Statement() {
@@ -14,7 +14,7 @@ void Statement::parseUnaryExpression(const parse_tree::UnaryExpression& unary_ex
 
     if (unary_expression.primaryExpression.value()->identifier) {
         symbol_table.check_read(unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference.resolve(source_code),
-                                  unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference);
+                                unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference);
         expressions.push_back(std::make_unique<TerminalExpression>(std::make_pair(sign, unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference.resolve(source_code))));
     }
     if (unary_expression.primaryExpression.value()->literal) {
