@@ -29,6 +29,7 @@ void PLjit_Error::print() {
     }
 
     std::size_t character_position = source_code_reference.byte_index - last_linebreak - 1;
+    if (last_linebreak + 1 > source_code_reference.byte_index) character_position = 0;
 
     // Human line numbers start at 1
     std::cout << (line_number + 1) << ":" << character_position << ": ";
