@@ -4,7 +4,7 @@
 #include <string>
 
 // Lightweight struct which don't want to allocate on the heap
-#include "source_code_management/SourceCodeReference.hpp"
+#include "../source_code_management/SourceCodeReference.hpp"
 
 namespace pljit {
 

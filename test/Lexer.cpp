@@ -1,5 +1,6 @@
 #include "lexer/Lexer.hpp"
 #include "lexer/tokens/LexerErrorToken.hpp"
+#include "lexer/tokens/LexerKeywordToken.hpp"
 #include <gtest/gtest.h>
 
 using namespace lexer;
@@ -9,7 +10,7 @@ extern std::string example_program;
 extern std::vector<std::string> valid_programs;
 extern std::vector<std::string> invalid_programs;
 
-TEST(LexerTest, ValidSource) {
+TEST(LexerTest, ExampleProgram) {
     SourceCode source_code{SourceCode(example_program)};
     Lexer lexer{source_code};
 
@@ -70,6 +71,39 @@ TEST(LexerTest, ValidProgramsBeginWithKeyword) {
         SourceCode source_code{string};
         Lexer lexer{source_code};
         EXPECT_EQ(lexer.nextToken()->token_type, LexerToken::Keyword);
+    }
+}
+
+TEST(LexerTest, ValidProgramsContainBeginReturnEndInOrder) {
+    for (auto& string : valid_programs) {
+        SourceCode source_code{string};
+        Lexer lexer{source_code};
+
+        bool begin_keyword = false;
+        bool return_keyword = false;
+        bool end_keyword = false;
+
+        for (auto token = lexer.nextToken(); token->token_type != LexerToken::Error; token = lexer.nextToken()) {
+            if (token->token_type == lexer::LexerToken::Keyword) {
+                LexerKeywordToken& keyword_token = static_cast<LexerKeywordToken&>(*token.get());
+
+                if (keyword_token.keyword_type == lexer::LexerKeywordToken::BEGIN) {
+                    EXPECT_FALSE(begin_keyword || return_keyword || end_keyword);
+                    begin_keyword = true;
+                }
+                if (keyword_token.keyword_type == lexer::LexerKeywordToken::RETURN) {
+                    EXPECT_TRUE(begin_keyword);
+                    EXPECT_FALSE(return_keyword || end_keyword);
+                    return_keyword = true;
+                }
+                if (keyword_token.keyword_type == lexer::LexerKeywordToken::END) {
+                    EXPECT_TRUE(begin_keyword && return_keyword);
+                    EXPECT_FALSE(end_keyword);
+                    end_keyword = true;
+                }
+            }
+        }
+        EXPECT_TRUE(begin_keyword && return_keyword && end_keyword);
     }
 }
 
