@@ -15,6 +15,8 @@ std::string example_program = "PARAM width, height, depth;\n"
 
 // Vector of valid programs
 std::vector<std::string> valid_programs;
+// Vector of invalid programs
+std::vector<std::string> invalid_programs;
 
 int main(int argc, char* argv[]) {
     // Read all files in folder "valid_source" into std::vector<std::string> valid_programs
@@ -22,6 +24,11 @@ int main(int argc, char* argv[]) {
     for (auto const& dir_entry : std::filesystem::directory_iterator{tester_location.substr(0, tester_location.size() - 10) + "valid_source"}) {
         std::ifstream ifs(dir_entry.path());
         valid_programs.push_back({(std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>())});
+    }
+    // Read all files in folder "invalid_source" into std::vector<std::string> invalid_programs
+    for (auto const& dir_entry : std::filesystem::directory_iterator{tester_location.substr(0, tester_location.size() - 10) + "invalid_source"}) {
+        std::ifstream ifs(dir_entry.path());
+        invalid_programs.push_back({(std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>())});
     }
 
     testing::InitGoogleTest(&argc, argv);
