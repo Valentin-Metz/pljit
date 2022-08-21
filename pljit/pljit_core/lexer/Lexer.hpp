@@ -1,12 +1,12 @@
 #ifndef PLJIT_LEXER_HPP
 #define PLJIT_LEXER_HPP
 
-#include "../source_code_management/SourceCode.hpp"
-#include "./tokens/LexerToken.hpp"
+#include "source_code_management/SourceCode.hpp"
+#include "tokens/LexerToken.hpp"
 #include <memory>
 namespace lexer {
 
-class Lexer{
+class Lexer {
     const source_code::SourceCode& source_code;
     std::size_t current_parser_position = 0;
 

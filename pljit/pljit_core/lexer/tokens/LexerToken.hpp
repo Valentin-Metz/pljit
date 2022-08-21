@@ -1,7 +1,7 @@
 #ifndef PLJIT_LEXERTOKEN_HPP
 #define PLJIT_LEXERTOKEN_HPP
 
-#include "../../source_code_management/SourceCodeReference.hpp"
+#include "source_code_management/SourceCodeReference.hpp"
 namespace lexer {
 
 class LexerToken {
@@ -23,6 +23,7 @@ class LexerToken {
 
     protected:
     LexerToken(source_code::SourceCodeReference source_code_reference, TokenType token_type) : source_code_reference(source_code_reference), token_type(token_type) {}
+
     public:
     virtual ~LexerToken() = default;
 };
