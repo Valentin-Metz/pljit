@@ -36,11 +36,17 @@ TEST(AbstractSyntaxTreeTest, OptimizedResultEqualsUnoptimizedResult) {
             try {
                 execution_table_unoptimized.initialize(parameters);
                 execution_table_optimized.initialize(parameters);
+            } catch (PLjit_Error) { // If one fails to compile, the other must, too
+                EXPECT_ANY_THROW(execution_table_unoptimized.initialize(parameters));
+                EXPECT_ANY_THROW(execution_table_optimized.initialize(parameters));
+            }
 
+            try {
                 ast_unoptimized.function->execute(execution_table_unoptimized);
                 ast_optimized.function->execute(execution_table_optimized);
-            } catch (pljit::PLjit_Error) { // Incorrect number of parameters
-                continue;
+            } catch (pljit::PLjit_Error) { // If one fails to execute, the other must, too
+                EXPECT_ANY_THROW(ast_unoptimized.function->execute(execution_table_unoptimized));
+                EXPECT_ANY_THROW(ast_optimized.function->execute(execution_table_optimized));
             }
 
             EXPECT_EQ(execution_table_unoptimized.result, execution_table_optimized.result);
