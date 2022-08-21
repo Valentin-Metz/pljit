@@ -1,10 +1,11 @@
 #include "Function.hpp"
-#include "../../parse_tree/parse_tree_nodes/Statement.hpp"
-#include "../ast_core/AstVisitor.hpp"
 #include "AssignmentStatement.hpp"
 #include "ReturnStatement.hpp"
+#include "ast/ast_core/AstVisitor.hpp"
+#include "parse_tree/parse_tree_nodes/Statement.hpp"
 
 namespace ast {
+
 Function::Function(const parse_tree::StatementList& statement_list, SymbolTable& symbol_table, source_code::SourceCode& source_code) {
     bool contains_return_statement = false;
     for (auto& statement : statement_list.statementList) {
@@ -23,6 +24,7 @@ Function::Function(const parse_tree::StatementList& statement_list, SymbolTable&
 void Function::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
+
 void Function::execute(ExecutionTable& table) {
     for (auto& statement : statements) {
         statement->execute(table);

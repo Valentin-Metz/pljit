@@ -2,6 +2,7 @@
 #include "../ast_core/AstVisitor.hpp"
 #include "Expression.hpp"
 #include "MultiplicativeExpression.hpp"
+#include "utility.hpp"
 
 namespace ast {
 
@@ -14,22 +15,7 @@ void AssignmentStatement::accept(AstVisitor& visitor) {
     visitor.visit(*this);
 }
 void AssignmentStatement::execute(ExecutionTable& table) {
-    int64_t result = 0;
-    for (auto& expression : expressions) {
-        if (expression->expressionType == Expression::Terminal) {
-            result += expression->execute(table);
-        } else {
-            MultiplicativeExpression& m = static_cast<MultiplicativeExpression&>(*expression.get());
-            if (m.multiplicativeOperator == MultiplicativeExpression::Multiply) {
-                result *= expression->execute(table);
-            } else {
-                int64_t divisor = expression->execute(table);
-                if (divisor == 0) throw pljit::PLjit_Error({0, 0}, pljit::PLjit_Error::Runtime, "Division by zero");
-                result /= divisor;
-            }
-        }
-    }
-    table.update(target, result);
+    table.update(target, evaluate_expressions(expressions, table));
 }
 
 } // namespace ast
