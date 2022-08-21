@@ -54,16 +54,16 @@ TEST(PLjitTest, FactorialCalculation) {
 
 TEST(PLjitTest, ParamterVarConstLiteral) {
     PLjit pljit;
-    auto handle = pljit.registerFunction("PARAM leet;\n"
+    auto handle = pljit.registerFunction("PARAM leet, notLeetButOk;\n"
                                          "VAR leetAgain;\n"
                                          "CONST alsoLeet = 1337;\n"
                                          "BEGIN\n"
                                          "leetAgain := leet + alsoLeet + 1337;\n"
-                                         "RETURN leetAgain * 1337\n"
+                                         "RETURN leetAgain * 1337 / leet / notLeetButOk\n"
                                          "END.");
-    auto result = handle.execute({1337});
+    auto result = handle.execute({1337, 3});
 
     EXPECT_EQ(result.index(), 0);
-    EXPECT_EQ(std::get<0>(result), 5362707);
+    EXPECT_EQ(std::get<0>(result), 1337);
 }
 
