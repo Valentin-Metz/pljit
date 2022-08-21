@@ -1,12 +1,10 @@
 #ifndef PLJIT_PLJIT_ERROR_HPP
 #define PLJIT_PLJIT_ERROR_HPP
 
-//#include "../source_code_management/SourceCode.hpp"
-#include "../source_code_management/SourceCodeReference.hpp"
 #include <string>
-namespace source_code {
-struct SourceCodeReference;
-}
+
+// Lightweight struct which don't want to allocate on the heap
+#include "../source_code_management/SourceCodeReference.hpp"
 
 namespace pljit {
 
