@@ -17,6 +17,7 @@ namespace ast {
 /// Abstract syntax tree
 class AST {
     FRIEND_TEST(AbstractSyntaxTreeTest, OptimizedResultEqualsUnoptimizedResult);
+    FRIEND_TEST(AbstractSyntaxTreeTest, ExecutionTableContainsAllSymbols);
     friend class pljit::PLjit_FunctionHandle;
 
     // The execution table is used to evaluate an ast with user-given parameters

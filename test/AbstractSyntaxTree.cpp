@@ -54,4 +54,26 @@ TEST(AbstractSyntaxTreeTest, OptimizedResultEqualsUnoptimizedResult) {
     }
 }
 
+TEST(AbstractSyntaxTreeTest, SymbolTableContainsAllSymbols) {
+    SourceCode source_code{example_program};
+    Lexer lexer{source_code};
+    ParseTree parse_tree{lexer};
+    AST ast{parse_tree, source_code};
+
+    ASSERT_EQ(ast.symbolTable.table.size(), 5);
+}
+
+TEST(AbstractSyntaxTreeTest, ExecutionTableContainsAllSymbols) {
+    SourceCode source_code{example_program};
+    Lexer lexer{source_code};
+    ParseTree parse_tree{lexer};
+    AST ast{parse_tree, source_code};
+
+    ast.generateExecutionTable();
+
+    ExecutionTable execution_table = ast.getExecutionTable();
+
+    ASSERT_EQ(execution_table.table.size(), 5);
+}
+
 } // namespace ast
