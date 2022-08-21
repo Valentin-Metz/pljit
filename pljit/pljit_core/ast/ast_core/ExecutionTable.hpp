@@ -1,6 +1,5 @@
 #ifndef PLJIT_EXECUTIONTABLE_HPP
 #define PLJIT_EXECUTIONTABLE_HPP
-#include "gtest/gtest.h"
 #include <optional>
 #include <string_view>
 #include <unordered_map>
@@ -11,7 +10,6 @@ namespace ast {
 /// Class for evaluation of AST nodes
 /// Stores variables used during execution
 class ExecutionTable {
-    FRIEND_TEST(AbstractSyntaxTreeTest, OptimizedResultEqualsUnoptimizedResult);
     // Parameter identifiers of the program
     const std::vector<std::string_view>& parameter_list;
 
