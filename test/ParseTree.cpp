@@ -1,4 +1,4 @@
-#include "pljit_core/lexer/Lexer.hpp"
+#include "lexer/Lexer.hpp"
 #include <gtest/gtest.h>
 
 using namespace lexer;

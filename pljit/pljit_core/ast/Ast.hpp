@@ -4,9 +4,11 @@
 #include "ast_core/ExecutionTable.hpp"
 #include "ast_core/SymbolTable.hpp"
 #include "ast_nodes/Function.hpp"
-#include "parse_tree/ParseTree.hpp"
 namespace pljit {
 class PLjit_FunctionHandle;
+}
+namespace parse_tree {
+class ParseTree;
 }
 
 namespace ast {
