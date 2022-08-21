@@ -48,7 +48,7 @@ int main([[maybe_unused]] int argc, char* argv[]) {
         // Otherwise, we display the error
         std::get<1>(result).print();
 
-        //Exit program indicating failure
+        // Exit program indicating failure
         return 1;
     }
 }
