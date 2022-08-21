@@ -53,7 +53,7 @@ TEST(ParseTreeTest, AssignmentWithoutSemicolonThrows) {
                            "END."};
     Lexer lexer{source_code};
     try {
-    ParseTree parse_tree{lexer};
+        ParseTree parse_tree{lexer};
     } catch (PLjit_Error&) {
         SUCCEED();
         return;
@@ -65,6 +65,19 @@ TEST(ParseTreeTest, InitializingVariableThrows) {
     SourceCode source_code{"VAR x = 1337;\n"
                            "BEGIN\n"
                            "RETURN x\n"
+                           "END."};
+    Lexer lexer{source_code};
+    try {
+        ParseTree parse_tree{lexer};
+    } catch (PLjit_Error&) {
+        SUCCEED();
+        return;
+    }
+    FAIL();
+}
+
+TEST(ParseTreeTest, MissingReturnStatementThrows) {
+    SourceCode source_code{"BEGIN\n"
                            "END."};
     Lexer lexer{source_code};
     try {

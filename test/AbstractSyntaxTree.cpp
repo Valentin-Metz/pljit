@@ -56,6 +56,33 @@ TEST(AbstractSyntaxTreeTest, OptimizedResultEqualsUnoptimizedResult) {
     }
 }
 
+TEST(AbstractSyntaxTreeTest, OptimizedAstPrinstAreSmaller) {
+    for (auto& string : valid_programs) {
+        SourceCode source_code{string};
+        Lexer lexer{source_code};
+        ParseTree parse_tree{lexer};
+        AST ast_unoptimized{parse_tree, source_code};
+        AST ast_optimized{parse_tree, source_code};
+
+        ast_optimized.optimize();
+
+
+        std::stringstream buffer;
+        std::streambuf* sbuf = std::cout.rdbuf();
+        std::cout.rdbuf(buffer.rdbuf());
+
+        ast_unoptimized.print();
+        std::size_t unoptimized_length = buffer.view().size();
+        buffer.str("");
+
+        ast_optimized.print();
+        std::size_t optimized_length = buffer.view().size();
+        std::cout.rdbuf(sbuf);
+
+        EXPECT_TRUE(optimized_length <= unoptimized_length);
+    }
+}
+
 TEST(AbstractSyntaxTreeTest, SymbolTableContainsAllSymbols) {
     SourceCode source_code{example_program};
     Lexer lexer{source_code};
