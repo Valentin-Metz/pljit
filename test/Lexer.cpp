@@ -2,23 +2,19 @@
 #include <fstream>
 #include <iostream>
 #include <gtest/gtest.h>
-std::string valid_source_code = "PARAM width, height, depth;\n"
-                                "VAR volume;\n"
-                                "CONST density = 2400;\n\n"
-                                "BEGIN\n"
-                                "volume := width * height * depth;\n"
-                                "RETURN density * volume\n"
-                                "END.";
 
 using namespace lexer;
 using namespace source_code;
+
+extern std::string example_program;
+extern std::vector<std::string> valid_programs;
 
 TEST(LexerTest, LexerValidSource) {
     std::ifstream ifs("valid_source/example_program.txt");
     std::string content((std::istreambuf_iterator<char>(ifs)),
                         (std::istreambuf_iterator<char>()));
 
-    SourceCode c{SourceCode(valid_source_code)};
+    SourceCode c{SourceCode(example_program)};
     Lexer l{c};
 
     // PARAM width, height, depth;\n
