@@ -21,6 +21,16 @@ TEST(ParseTreeTest, ExampleProgram) {
     EXPECT_TRUE(parse_tree.root.terminator);
 }
 
+TEST(ParseTreeTest, ValidProgramsEndWithTerminator) {
+    for (auto& string : valid_programs) {
+        SourceCode source_code{string};
+        Lexer lexer{source_code};
+        ParseTree parse_tree{lexer};
+
+        EXPECT_TRUE(parse_tree.root.terminator);
+    }
+}
+
 TEST(ParseTreeTest, ExampleProgramPrint) {
     SourceCode source_code{SourceCode(example_program)};
     Lexer lexer{source_code};
