@@ -22,7 +22,7 @@ std::string leet_program = "PARAM leet, notLeetButOk;\n"
                            "CONST alsoLeet = 1337;\n"
                            "BEGIN\n"
                            "leetAgain := leet + alsoLeet + 1337 + leet;\n"
-                           "RETURN leetAgain * 1337 / leet / ( notLeetButOk + 1)\n"
+                           "RETURN leetAgain * 1337 / leet / ( notLeetButOk + (3 - 2))\n"
                            "END.";
 
 // Vector of valid programs
