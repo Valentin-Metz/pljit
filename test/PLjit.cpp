@@ -50,7 +50,7 @@ TEST(PLjitTest, FactorialCalculation) {
     auto result = handle.execute({});
 
     EXPECT_EQ(result.index(), 0);
-    EXPECT_EQ(std::get<0>(result), 3628800);
+    EXPECT_EQ(std::get<0>(result), 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1);
 }
 
 TEST(PLjitTest, ParamterVarConstLiteral) {
@@ -64,11 +64,23 @@ TEST(PLjitTest, ParamterVarConstLiteral) {
 
 TEST(PLjitTest, MultithreadedCalculation) {
     PLjit pljit;
-    auto handle_factorial = pljit.registerFunction(factorial_calculation_program);
-    auto handle_leet = pljit.registerFunction(leet_program);
+    auto handle = pljit.registerFunction(leet_program);
 
-    auto execute = [](PLjit_FunctionHandle a, PLjit_FunctionHandle b){
-        a.execute({});
-        b.execute({1337, 3});
+    std::atomic<int64_t> result_sum = 0;
+
+    auto execute = [&result_sum](PLjit_FunctionHandle handle) {
+        int64_t result = std::get<0>(handle.execute({1337, 3}));
+        EXPECT_EQ(result, 1337);
+        result_sum += result;
     };
+
+    std::vector<std::unique_ptr<std::thread>> threads;
+    for (int i = 0; i < 1337; ++i) {
+        threads.push_back(std::make_unique<std::thread>(execute, handle));
+    }
+    for (auto& thread : threads) {
+        thread->join();
+    }
+
+    EXPECT_EQ(result_sum, 1337 * 1337);
 }
