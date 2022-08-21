@@ -10,6 +10,7 @@ using namespace ast;
 using namespace pljit;
 
 extern std::string example_program;
+extern std::string factorial_calculation_program;
 extern std::string leet_program;
 extern std::vector<std::string> valid_programs;
 extern std::vector<std::string> invalid_programs;
@@ -44,9 +45,7 @@ TEST(PLjitTest, DivisionByZero) {
 
 TEST(PLjitTest, FactorialCalculation) {
     PLjit pljit;
-    auto handle = pljit.registerFunction("BEGIN\n"
-                                         "RETURN 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1\n"
-                                         "END.");
+    auto handle = pljit.registerFunction(factorial_calculation_program);
     auto result = handle.execute({});
 
     EXPECT_EQ(result.index(), 0);

@@ -2,6 +2,6 @@ PARAM leet, notLeetButOk;
 VAR leetAgain;
 CONST alsoLeet = 1337;
 BEGIN
-leetAgain := leet + alsoLeet + 1337;
-RETURN leetAgain * 1337 / leet / notLeetButOk
+leetAgain := leet + alsoLeet + 1337 + leet;
+RETURN leetAgain * 1337 / leet / ( notLeetButOk + 1)
 END.

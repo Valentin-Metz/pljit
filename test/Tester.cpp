@@ -13,12 +13,16 @@ std::string example_program = "PARAM width, height, depth;\n"
                               "RETURN density * volume\n"
                               "END.";
 
+std::string factorial_calculation_program = "BEGIN\n"
+                                            "RETURN 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1\n"
+                                            "END.";
+
 std::string leet_program = "PARAM leet, notLeetButOk;\n"
                            "VAR leetAgain;\n"
                            "CONST alsoLeet = 1337;\n"
                            "BEGIN\n"
-                           "leetAgain := leet + alsoLeet + 1337;\n"
-                           "RETURN leetAgain * 1337 / leet / notLeetButOk\n"
+                           "leetAgain := leet + alsoLeet + 1337 + leet;\n"
+                           "RETURN leetAgain * 1337 / leet / ( notLeetButOk + 1)\n"
                            "END.";
 
 // Vector of valid programs
