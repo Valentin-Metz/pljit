@@ -51,3 +51,19 @@ TEST(PLjitTest, FactorialCalculation) {
     EXPECT_EQ(result.index(), 0);
     EXPECT_EQ(std::get<0>(result), 3628800);
 }
+
+TEST(PLjitTest, ParamterVarConstLiteral) {
+    PLjit pljit;
+    auto handle = pljit.registerFunction("PARAM leet;\n"
+                                         "VAR leetAgain;\n"
+                                         "CONST alsoLeet = 1337;\n"
+                                         "BEGIN\n"
+                                         "leetAgain := leet + alsoLeet + 1337;\n"
+                                         "RETURN leetAgain * 1337\n"
+                                         "END.");
+    auto result = handle.execute({1337});
+
+    EXPECT_EQ(result.index(), 0);
+    EXPECT_EQ(std::get<0>(result), 5362707);
+}
+
