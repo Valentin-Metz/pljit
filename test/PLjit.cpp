@@ -1,6 +1,7 @@
 #include "include/PLjit.hpp"
 #include "ast/Ast.hpp"
 #include "include/PLjit_FunctionHandle.hpp"
+#include <thread>
 #include <gtest/gtest.h>
 
 using namespace source_code;
@@ -59,4 +60,15 @@ TEST(PLjitTest, ParamterVarConstLiteral) {
 
     EXPECT_EQ(result.index(), 0);
     EXPECT_EQ(std::get<0>(result), 1337);
+}
+
+TEST(PLjitTest, MultithreadedCalculation) {
+    PLjit pljit;
+    auto handle_factorial = pljit.registerFunction(factorial_calculation_program);
+    auto handle_leet = pljit.registerFunction(leet_program);
+
+    auto execute = [](PLjit_FunctionHandle a, PLjit_FunctionHandle b){
+        a.execute({});
+        b.execute({1337, 3});
+    };
 }
