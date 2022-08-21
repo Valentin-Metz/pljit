@@ -59,10 +59,13 @@ TEST(PLjitTest, DivisionByZero) {
 
     EXPECT_EQ(result.index(), 1);
 
-    testing::internal::CaptureStdout();
+    std::stringstream buffer;
+    std::streambuf* sbuf = std::cout.rdbuf();
+    std::cout.rdbuf(buffer.rdbuf());
     std::get<1>(result).print();
+    std::cout.rdbuf(sbuf);
 
-    EXPECT_EQ(testing::internal::GetCapturedStdout(), "Runtime error: Division by zero\n");
+    EXPECT_EQ(buffer.view(), "Runtime error: Division by zero\n");
 }
 
 TEST(PLjitTest, FactorialCalculation) {
