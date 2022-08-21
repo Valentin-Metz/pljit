@@ -1,8 +1,8 @@
 #include "SymbolTable.hpp"
 #include "AstVisitor.hpp"
-#include "include/PLjit_Error.hpp"
 
 namespace ast {
+
 void SymbolTable::check_read(std::string_view identifier, source_code::SourceCodeReference r) {
     auto result = table.find(identifier);
     /// Contained in table?
@@ -58,6 +58,8 @@ SymbolTable::SymbolTable(parse_tree::ParseTree& parse_tree, source_code::SourceC
         }
     }
 }
+
+SymbolTable::~SymbolTable() = default;
 
 void SymbolTable::accept(AstVisitor& visitor) {
     visitor.visit(*this);

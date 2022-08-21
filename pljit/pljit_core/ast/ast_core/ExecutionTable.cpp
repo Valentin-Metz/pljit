@@ -16,6 +16,7 @@ void ExecutionTable::update(std::string_view identifier, int64_t value) {
 int64_t ExecutionTable::get(std::string_view identifier) {
     return table.find(identifier)->second;
 }
+
 void ExecutionTable::initialize(std::vector<std::int64_t> parameters) {
     if (parameters.size() > parameter_list.size()) throw pljit::PLjit_Error({0, 0}, pljit::PLjit_Error::Runtime, "Too many arguments");
     if (parameters.size() < parameter_list.size()) throw pljit::PLjit_Error({0, 0}, pljit::PLjit_Error::Runtime, "Not enough arguments");
