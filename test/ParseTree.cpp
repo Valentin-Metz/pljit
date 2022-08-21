@@ -9,6 +9,18 @@ extern std::string example_program;
 extern std::vector<std::string> valid_programs;
 extern std::vector<std::string> invalid_programs;
 
+TEST(ParseTreeTest, ExampleProgram) {
+    SourceCode source_code{SourceCode(example_program)};
+    Lexer lexer{source_code};
+    ParseTree parse_tree{lexer};
+
+    EXPECT_EQ(parse_tree.root.parameter_declaration->declaratorList.declaratorList.size(), 3);
+    EXPECT_EQ(parse_tree.root.variable_declaration->declaratorList.declaratorList.size(), 1);
+    EXPECT_EQ(parse_tree.root.constant_declaration->initDeclaratorList.initDeclaratorList.size(), 1);
+    EXPECT_EQ(parse_tree.root.compound_statement->statementList.statementList.size(), 2);
+    EXPECT_TRUE(parse_tree.root.terminator);
+}
+
 TEST(ParseTreeTest, ExampleProgramPrint) {
     SourceCode source_code{SourceCode(example_program)};
     Lexer lexer{source_code};
