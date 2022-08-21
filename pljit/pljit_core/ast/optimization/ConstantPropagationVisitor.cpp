@@ -44,6 +44,7 @@ static void optimize_expressions(std::vector<std::unique_ptr<Expression>>& expre
                 auto& previousExpression = static_cast<TerminalExpression&>(*expressions[i - 1].get());
                 auto& currentExpression = static_cast<TerminalExpression&>(*expressions[i].get());
 
+                // Addition
                 previousExpression.value = std::get<0>(previousExpression.value) + std::get<0>(currentExpression.value);
                 expressions.erase(expressions.begin() + i);
                 --i;
@@ -55,8 +56,10 @@ static void optimize_expressions(std::vector<std::unique_ptr<Expression>>& expre
                 auto& currentExpression = static_cast<TerminalExpression&>(*containedExpressions[0].get());
 
                 if (static_cast<MultiplicativeExpression&>(*expressions[i]).multiplicativeOperator == MultiplicativeExpression::Multiply) {
+                    // Multiplication
                     previousExpression.value = std::get<0>(previousExpression.value) * std::get<0>(currentExpression.value);
                 } else {
+                    // Division
                     if (std::get<0>(currentExpression.value) == 0) throw pljit::PLjit_Error({0, 0}, pljit::PLjit_Error::Runtime, "Division by zero");
                     previousExpression.value = std::get<0>(previousExpression.value) / std::get<0>(currentExpression.value);
                 }

@@ -4,6 +4,7 @@
 #include "OptimizationPass.hpp"
 namespace ast {
 
+/// Dead code elimination utilizing visitor pattern
 class DeadCodeEliminationOptimizationPass : public OptimizationPass {
     public:
     ~DeadCodeEliminationOptimizationPass() override = default;

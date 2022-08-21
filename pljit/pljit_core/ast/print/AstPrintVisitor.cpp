@@ -1,11 +1,9 @@
 #include "AstPrintVisitor.hpp"
-#include "../Ast.hpp"
-#include "../ast_core/SymbolTable.hpp"
-#include "../ast_nodes/AssignmentStatement.hpp"
-#include "../ast_nodes/Function.hpp"
-#include "../ast_nodes/MultiplicativeExpression.hpp"
-#include "../ast_nodes/ReturnStatement.hpp"
-#include "../ast_nodes/TerminalExpression.hpp"
+#include "ast/Ast.hpp"
+#include "ast/ast_nodes/AssignmentStatement.hpp"
+#include "ast/ast_nodes/MultiplicativeExpression.hpp"
+#include "ast/ast_nodes/ReturnStatement.hpp"
+#include "ast/ast_nodes/TerminalExpression.hpp"
 #include <iostream>
 #include <tuple>
 
@@ -113,6 +111,7 @@ void AstPrintVisitor::visit(TerminalExpression& node) {
         }
     }
 }
+
 void AstPrintVisitor::printExpressions(std::vector<std::unique_ptr<Expression>>& expressions) {
     for (auto& expression : expressions) {
         std::cout << "PLUS_" << unique_counter << " [color=orange]\n";

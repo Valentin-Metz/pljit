@@ -4,6 +4,7 @@
 #include "OptimizationPass.hpp"
 namespace ast {
 
+/// Constant propagation utilizing visitor pattern
 class ConstantPropagationOptimizationPass : public OptimizationPass {
     public:
     ~ConstantPropagationOptimizationPass() override = default;
