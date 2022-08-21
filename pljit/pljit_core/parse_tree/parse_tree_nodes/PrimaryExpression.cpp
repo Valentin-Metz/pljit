@@ -1,9 +1,7 @@
 #include "PrimaryExpression.hpp"
-#include "../../lexer/tokens/LexerBracketToken.hpp"
-#include "../../lexer/tokens/LexerErrorToken.hpp"
-#include "../../lexer/tokens/LexerLiteralToken.hpp"
 #include "AdditiveExpression.hpp"
-#include "include/PLjit_Error.hpp"
+#include "lexer/tokens/LexerBracketToken.hpp"
+#include "lexer/tokens/LexerLiteralToken.hpp"
 
 namespace parse_tree {
 
@@ -16,12 +14,12 @@ PrimaryExpression::PrimaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer
             break;
         }
         case lexer::LexerToken::Literal: {
-            literal.emplace(std::make_pair(t->source_code_reference, static_cast<lexer::LexerLiteralToken*>(t.get())->value));
+            literal.emplace(std::make_pair(t->source_code_reference, static_cast<lexer::LexerLiteralToken&>(*t.get()).value));
             break;
         }
         case lexer::LexerToken::Bracket: {
-            lexer::LexerBracketToken* b = static_cast<lexer::LexerBracketToken*>(t.get());
-            if (b->bracket_type == lexer::LexerBracketToken::OPEN) {
+            lexer::LexerBracketToken& b = static_cast<lexer::LexerBracketToken&>(*t.get());
+            if (b.bracket_type == lexer::LexerBracketToken::OPEN) {
                 openBracket.emplace(t->source_code_reference);
                 std::optional<std::unique_ptr<lexer::LexerToken>> closing_bracket;
                 additiveExpression.emplace(std::make_unique<AdditiveExpression>(l, closing_bracket));
@@ -34,7 +32,9 @@ PrimaryExpression::PrimaryExpression(std::unique_ptr<lexer::LexerToken> t, lexer
             throw pljit::PLjit_Error(t->source_code_reference, pljit::PLjit_Error::ParseTree, "Expected identifier, literal or additive-expression in brackets");
     }
 }
-void PrimaryExpression::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+
 PrimaryExpression::~PrimaryExpression() = default;
+
+void PrimaryExpression::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 
 } // namespace parse_tree

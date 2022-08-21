@@ -1,9 +1,9 @@
 #ifndef PLJIT_LITERAL_HPP
 #define PLJIT_LITERAL_HPP
 
-#include "../../lexer/Lexer.hpp"
-#include "../ParseTreeVisitor.hpp"
 #include "TerminalSymbol.hpp"
+#include "lexer/Lexer.hpp"
+#include "parse_tree/ParseTreeVisitor.hpp"
 #include <cstdint>
 namespace parse_tree {
 

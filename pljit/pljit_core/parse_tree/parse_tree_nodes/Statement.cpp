@@ -1,11 +1,10 @@
 #include "Statement.hpp"
-#include "../../lexer/tokens/LexerErrorToken.hpp"
-#include "../../lexer/tokens/LexerKeywordToken.hpp"
 #include "AssignmentExpression.hpp"
 #include "TerminalSymbol.hpp"
-#include "include/PLjit_Error.hpp"
+#include "lexer/tokens/LexerKeywordToken.hpp"
 
 namespace parse_tree {
+
 using namespace lexer;
 
 Statement::Statement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator) {
@@ -31,7 +30,9 @@ Statement::Statement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::Lexer
             throw pljit::PLjit_Error(t->source_code_reference, pljit::PLjit_Error::ParseTree, "Expected identifier or 'RETURN'");
     }
 }
-void Statement::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
+
 Statement::~Statement() = default;
+
+void Statement::accept(const ParseTreeVisitor& visitor) const { visitor.visit(*this); }
 
 } // namespace parse_tree

@@ -1,11 +1,11 @@
 #ifndef PLJIT_PARSETREE_MULTIPLICATIVEEXPRESSION_HPP
 #define PLJIT_PARSETREE_MULTIPLICATIVEEXPRESSION_HPP
 
-#include "../../lexer/Lexer.hpp"
-#include "../ParseTreeVisitor.hpp"
 #include "ArithmeticSymbol.hpp"
 #include "TerminalSymbol.hpp"
 #include "UnaryExpression.hpp"
+#include "lexer/Lexer.hpp"
+#include "parse_tree/ParseTreeVisitor.hpp"
 #include <memory>
 #include <optional>
 namespace parse_tree {

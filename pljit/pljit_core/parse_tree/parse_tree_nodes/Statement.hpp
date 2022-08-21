@@ -1,8 +1,8 @@
 #ifndef PLJIT_PARSETREE_STATEMENT_HPP
 #define PLJIT_PARSETREE_STATEMENT_HPP
 
-#include "../../lexer/Lexer.hpp"
-#include "../ParseTreeVisitor.hpp"
+#include "lexer/Lexer.hpp"
+#include "parse_tree/ParseTreeVisitor.hpp"
 #include <optional>
 namespace parse_tree {
 
@@ -11,10 +11,10 @@ class AssignmentExpression;
 
 class Statement {
     public:
+    Statement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator);
+    ~Statement();
     std::optional<std::unique_ptr<const AssignmentExpression>> assignmentExpression;
     std::optional<std::pair<std::unique_ptr<const TerminalSymbol>, std::unique_ptr<const AdditiveExpression>>> additiveExpression;
-    ~Statement();
-    Statement(lexer::Lexer& l, std::optional<std::unique_ptr<lexer::LexerToken>>& separator);
     void accept(const ParseTreeVisitor& visitor) const;
 };
 

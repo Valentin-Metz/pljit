@@ -7,9 +7,9 @@ namespace parse_tree {
 
 class VariableDeclaration {
     public:
+    VariableDeclaration(TerminalSymbol keyword, lexer::Lexer& l);
     const TerminalSymbol keyword;
     const DeclaratorList declaratorList;
-    VariableDeclaration(TerminalSymbol keyword, lexer::Lexer& l);
     void accept(const ParseTreeVisitor& visitor) const;
 };
 
