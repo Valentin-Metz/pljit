@@ -8,8 +8,9 @@ using namespace source_code;
 
 extern std::string example_program;
 extern std::vector<std::string> valid_programs;
+extern std::vector<std::string> invalid_programs;
 
-TEST(LexerTest, LexerValidSource) {
+TEST(LexerTest, ValidSource) {
     std::ifstream ifs("valid_source/example_program.txt");
     std::string content((std::istreambuf_iterator<char>(ifs)),
                         (std::istreambuf_iterator<char>()));
@@ -63,9 +64,31 @@ TEST(LexerTest, LexerValidSource) {
     EXPECT_EQ(l.nextToken()->token_type, LexerToken::Error);
 }
 
-TEST(LexerTest, LexerEmptySource) {
+TEST(LexerTest, EmptySource) {
     SourceCode c{SourceCode("")};
     Lexer l{c};
-
     EXPECT_EQ(l.nextToken()->token_type, LexerToken::Error);
+}
+
+TEST(LexerTest, ValidProgramsBeginWithKeyword) {
+    for (auto& string : valid_programs) {
+        SourceCode c{string};
+        Lexer l{c};
+        EXPECT_EQ(l.nextToken()->token_type, LexerToken::Keyword);
+    }
+}
+
+TEST(LexerTest, ValidProgramsEndWithTerminator) {
+    for (auto& string : valid_programs) {
+        SourceCode c{string};
+        Lexer l{c};
+
+        auto previous_token = l.nextToken()->token_type;
+        auto current_token = l.nextToken()->token_type;
+        while (current_token != LexerToken::Error) {
+            previous_token = current_token;
+            current_token = l.nextToken()->token_type;
+        }
+        EXPECT_EQ(previous_token, LexerToken::Terminator);
+    }
 }
