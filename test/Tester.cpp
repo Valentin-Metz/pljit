@@ -13,6 +13,14 @@ std::string example_program = "PARAM width, height, depth;\n"
                               "RETURN density * volume\n"
                               "END.";
 
+std::string leet_program = "PARAM leet, notLeetButOk;\n"
+                           "VAR leetAgain;\n"
+                           "CONST alsoLeet = 1337;\n"
+                           "BEGIN\n"
+                           "leetAgain := leet + alsoLeet + 1337;\n"
+                           "RETURN leetAgain * 1337 / leet / notLeetButOk\n"
+                           "END.";
+
 // Vector of valid programs
 std::vector<std::string> valid_programs;
 // Vector of invalid programs

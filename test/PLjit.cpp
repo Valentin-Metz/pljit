@@ -10,6 +10,7 @@ using namespace ast;
 using namespace pljit;
 
 extern std::string example_program;
+extern std::string leet_program;
 extern std::vector<std::string> valid_programs;
 extern std::vector<std::string> invalid_programs;
 
@@ -54,16 +55,9 @@ TEST(PLjitTest, FactorialCalculation) {
 
 TEST(PLjitTest, ParamterVarConstLiteral) {
     PLjit pljit;
-    auto handle = pljit.registerFunction("PARAM leet, notLeetButOk;\n"
-                                         "VAR leetAgain;\n"
-                                         "CONST alsoLeet = 1337;\n"
-                                         "BEGIN\n"
-                                         "leetAgain := leet + alsoLeet + 1337;\n"
-                                         "RETURN leetAgain * 1337 / leet / notLeetButOk\n"
-                                         "END.");
+    auto handle = pljit.registerFunction(leet_program);
     auto result = handle.execute({1337, 3});
 
     EXPECT_EQ(result.index(), 0);
     EXPECT_EQ(std::get<0>(result), 1337);
 }
-

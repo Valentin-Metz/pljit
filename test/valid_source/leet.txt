@@ -4,4 +4,4 @@ CONST alsoLeet = 1337;
 BEGIN
 leetAgain := leet + alsoLeet + 1337;
 RETURN leetAgain * 1337 / leet / notLeetButOk
-END."
+END.
