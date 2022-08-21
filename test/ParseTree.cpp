@@ -4,6 +4,7 @@
 using namespace lexer;
 using namespace source_code;
 using namespace parse_tree;
+using namespace pljit;
 
 extern std::string example_program;
 extern std::string factorial_calculation_program;
@@ -42,6 +43,37 @@ TEST(ParseTreeTest, ValidProgramsEndWithTerminator) {
 
         EXPECT_TRUE(parse_tree.root.terminator);
     }
+}
+
+TEST(ParseTreeTest, AssignmentWithoutSemicolonThrows) {
+    SourceCode source_code{"VAR x;\n"
+                           "BEGIN\n"
+                           "x := 1337\n"
+                           "RETURN x\n"
+                           "END."};
+    Lexer lexer{source_code};
+    try {
+    ParseTree parse_tree{lexer};
+    } catch (PLjit_Error&) {
+        SUCCEED();
+        return;
+    }
+    FAIL();
+}
+
+TEST(ParseTreeTest, InitializingVariableThrows) {
+    SourceCode source_code{"VAR x = 1337;\n"
+                           "BEGIN\n"
+                           "RETURN x\n"
+                           "END."};
+    Lexer lexer{source_code};
+    try {
+        ParseTree parse_tree{lexer};
+    } catch (PLjit_Error&) {
+        SUCCEED();
+        return;
+    }
+    FAIL();
 }
 
 TEST(ParseTreeTest, ExampleProgramPrint) {
