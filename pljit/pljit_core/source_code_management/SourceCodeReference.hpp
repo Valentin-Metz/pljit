@@ -1,10 +1,10 @@
 #ifndef PLJIT_SOURCECODEREFERENCE_HPP
 #define PLJIT_SOURCECODEREFERENCE_HPP
 
-#include "SourceCode.hpp"
-#include <cstdlib>
 #include <string_view>
 namespace source_code {
+
+class SourceCode;
 
 struct SourceCodeReference {
     std::size_t byte_index;
