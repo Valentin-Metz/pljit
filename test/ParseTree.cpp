@@ -8,7 +8,7 @@ extern std::string example_program;
 extern std::vector<std::string> valid_programs;
 extern std::vector<std::string> invalid_programs;
 
-TEST(LexerTest, ValidSource) {
+TEST(ParseTreeTest, ValidSource) {
     SourceCode c{SourceCode(example_program)};
     Lexer l{c};
 
@@ -56,33 +56,4 @@ TEST(LexerTest, ValidSource) {
     EXPECT_EQ(l.nextToken()->token_type, LexerToken::Keyword);
     EXPECT_EQ(l.nextToken()->token_type, LexerToken::Terminator);
     EXPECT_EQ(l.nextToken()->token_type, LexerToken::Error);
-}
-
-TEST(LexerTest, EmptySource) {
-    SourceCode c{SourceCode("")};
-    Lexer l{c};
-    EXPECT_EQ(l.nextToken()->token_type, LexerToken::Error);
-}
-
-TEST(LexerTest, ValidProgramsBeginWithKeyword) {
-    for (auto& string : valid_programs) {
-        SourceCode c{string};
-        Lexer l{c};
-        EXPECT_EQ(l.nextToken()->token_type, LexerToken::Keyword);
-    }
-}
-
-TEST(LexerTest, ValidProgramsEndWithTerminator) {
-    for (auto& string : valid_programs) {
-        SourceCode c{string};
-        Lexer l{c};
-
-        auto previous_token = l.nextToken()->token_type;
-        auto current_token = l.nextToken()->token_type;
-        while (current_token != LexerToken::Error) {
-            previous_token = current_token;
-            current_token = l.nextToken()->token_type;
-        }
-        EXPECT_EQ(previous_token, LexerToken::Terminator);
-    }
 }
