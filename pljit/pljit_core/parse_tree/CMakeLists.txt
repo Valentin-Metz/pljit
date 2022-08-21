@@ -1,9 +1,9 @@
 set(PARSE_TREE_SOURCES
         ParseTree.hpp
         ParseTree.cpp
-        Visitor/ParseTreeVisitor.hpp
-        Visitor/ParseTreePrintVisitor.cpp
-        Visitor/ParseTreePrintVisitor.hpp
+        visitor/ParseTreeVisitor.hpp
+        visitor/ParseTreePrintVisitor.cpp
+        visitor/ParseTreePrintVisitor.hpp
         parse_tree_nodes/FunctionDefinition.cpp
         parse_tree_nodes/FunctionDefinition.hpp
         parse_tree_nodes/ConstantDeclaration.hpp

@@ -2,7 +2,7 @@
 #define PLJIT_PARSETREE_STATEMENT_HPP
 
 #include "lexer/Lexer.hpp"
-#include "parse_tree/Visitor/ParseTreeVisitor.hpp"
+#include "parse_tree/visitor/ParseTreeVisitor.hpp"
 #include <optional>
 namespace parse_tree {
 

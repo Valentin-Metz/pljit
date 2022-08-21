@@ -1,5 +1,5 @@
 #include "ParseTree.hpp"
-#include "parse_tree/Visitor/ParseTreePrintVisitor.hpp"
+#include "parse_tree/visitor/ParseTreePrintVisitor.hpp"
 
 namespace parse_tree {
 
