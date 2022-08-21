@@ -31,6 +31,7 @@ class PLjit_Error {
 
     public:
     explicit PLjit_Error(source_code::SourceCodeReference source_code_reference, ErrorSource error_source, std::string error_message);
+    ~PLjit_Error();
 
     /// The error content can be printed to std::out, displaying the source of the error in a user-friendly way
     void print();

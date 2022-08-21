@@ -4,28 +4,43 @@
 #include <fstream>
 #include <iostream>
 
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
+/// Reads the location of a source.txt file from commandline with arguments to be passed to it right after
+/// Usage: ./pljit source_code.txt 1 2 3 4
 int main([[maybe_unused]] int argc, char* argv[]) {
+    // Ensure we get a source.txt
+    if (argc <= 1) {
+        std::cout << "Please supply a source.txt file as first argument" << std::endl;
+    }
+
+    // Read source.txt
     std::ifstream ifs(argv[1]);
     std::string valid_source((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
 
-    //source_code::SourceCode source_code{valid_source};
-
-    //lexer::Lexer l{source_code};
-
-    pljit::PLjit pljit;
-
-    auto handle = pljit.registerFunction(valid_source);
-
-    auto result = handle.execute({1});
-
-    if (result.index() == 0) {
-        std::cout << std::get<0>(result) << std::endl;
-    } else {
-        std::get<1>(result).print();
+    // Parse arguments
+    std::vector<std::int64_t> arguments;
+    for (int i = 2; i < argc; ++i) {
+        arguments.push_back(std::stoll(argv[i]));
     }
 
-    return 0;
+    // Construct PLjit
+    pljit::PLjit pljit;
+    // Register the source code
+    auto handle = pljit.registerFunction(valid_source);
+    // Execute the source code
+    auto result = handle.execute(arguments);
+
+    // Check the result
+    if (result.index() == 0) {
+        // On success, we print the received result
+        std::cout << std::get<0>(result) << std::endl;
+
+        // Exit program indicating success
+        return 0;
+    } else {
+        // Otherwise, we display the error
+        std::get<1>(result).print();
+
+        //Exit program indicating failure
+        return 1;
+    }
 }
-//---------------------------------------------------------------------------
