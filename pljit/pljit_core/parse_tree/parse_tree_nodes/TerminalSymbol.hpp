@@ -1,7 +1,7 @@
 #ifndef PLJIT_TERMINALSYMBOL_HPP
 #define PLJIT_TERMINALSYMBOL_HPP
 
-#include "parse_tree/ParseTreeVisitor.hpp"
+#include "parse_tree/Visitor/ParseTreeVisitor.hpp"
 #include "source_code_management/SourceCodeReference.hpp"
 namespace parse_tree {
 

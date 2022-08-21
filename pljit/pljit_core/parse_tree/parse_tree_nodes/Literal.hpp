@@ -3,7 +3,7 @@
 
 #include "TerminalSymbol.hpp"
 #include "lexer/Lexer.hpp"
-#include "parse_tree/ParseTreeVisitor.hpp"
+#include "parse_tree/Visitor/ParseTreeVisitor.hpp"
 #include <cstdint>
 namespace parse_tree {
 

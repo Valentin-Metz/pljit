@@ -1,23 +1,11 @@
 #include "ParseTreePrintVisitor.hpp"
-#include "parse_tree_nodes/AdditiveExpression.hpp"
-#include "parse_tree_nodes/ArithmeticSymbol.hpp"
-#include "parse_tree_nodes/AssignmentExpression.hpp"
-#include "parse_tree_nodes/CompoundStatement.hpp"
-#include "parse_tree_nodes/ConstantDeclaration.hpp"
-#include "parse_tree_nodes/DeclaratorList.hpp"
-#include "parse_tree_nodes/FunctionDefinition.hpp"
-#include "parse_tree_nodes/Identifier.hpp"
-#include "parse_tree_nodes/InitDeclarator.hpp"
-#include "parse_tree_nodes/InitDeclaratorList.hpp"
-#include "parse_tree_nodes/Literal.hpp"
-#include "parse_tree_nodes/MultiplicativeExpression.hpp"
-#include "parse_tree_nodes/ParameterDeclaration.hpp"
-#include "parse_tree_nodes/PrimaryExpression.hpp"
-#include "parse_tree_nodes/Statement.hpp"
-#include "parse_tree_nodes/StatementList.hpp"
-#include "parse_tree_nodes/TerminalSymbol.hpp"
-#include "parse_tree_nodes/UnaryExpression.hpp"
-#include "parse_tree_nodes/VariableDeclaration.hpp"
+#include "parse_tree/parse_tree_nodes/AdditiveExpression.hpp"
+#include "parse_tree/parse_tree_nodes/AssignmentExpression.hpp"
+#include "parse_tree/parse_tree_nodes/CompoundStatement.hpp"
+#include "parse_tree/parse_tree_nodes/ConstantDeclaration.hpp"
+#include "parse_tree/parse_tree_nodes/DeclaratorList.hpp"
+#include "parse_tree/parse_tree_nodes/FunctionDefinition.hpp"
+#include "parse_tree/parse_tree_nodes/Statement.hpp"
 #include <iostream>
 
 namespace parse_tree {
@@ -159,10 +147,10 @@ void ParseTreePrintVisitor::visit(const MultiplicativeExpression& node) const {
     std::cout << "MultiplicativeExpression_" << node.multiplicativeOperator.first.source_code_reference.byte_index << "\n";
 
     std::cout << "MultiplicativeExpression_" << node.multiplicativeOperator.first.source_code_reference.byte_index << " -> ";
-    if (node.multiplicativeOperator.second== ArithmeticSymbol::MULTIPLY){
-        std::cout <<"ArithmeticSymbol_MULTIPLY_";
-    } else{
-        std::cout <<"ArithmeticSymbol_DIVIDE_";
+    if (node.multiplicativeOperator.second == ArithmeticSymbol::MULTIPLY) {
+        std::cout << "ArithmeticSymbol_MULTIPLY_";
+    } else {
+        std::cout << "ArithmeticSymbol_DIVIDE_";
     }
     node.multiplicativeOperator.first.accept(*this);
 

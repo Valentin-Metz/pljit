@@ -6,7 +6,7 @@
 #include "lexer/Lexer.hpp"
 #include "lexer/tokens/LexerErrorToken.hpp"
 #include "lexer/tokens/LexerIdentifierToken.hpp"
-#include "parse_tree/ParseTreeVisitor.hpp"
+#include "parse_tree/Visitor/ParseTreeVisitor.hpp"
 #include <optional>
 namespace parse_tree {
 

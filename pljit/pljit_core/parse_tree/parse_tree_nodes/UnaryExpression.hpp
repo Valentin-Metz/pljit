@@ -5,7 +5,7 @@
 #include "PrimaryExpression.hpp"
 #include "TerminalSymbol.hpp"
 #include "lexer/Lexer.hpp"
-#include "parse_tree/ParseTreeVisitor.hpp"
+#include "parse_tree/Visitor/ParseTreeVisitor.hpp"
 #include <optional>
 namespace parse_tree {
 
