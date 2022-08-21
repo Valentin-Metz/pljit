@@ -10,6 +10,7 @@ PLjit_Error::PLjit_Error(source_code::SourceCodeReference source_code_reference,
 void PLjit_Error::set_source_code(source_code::SourceCode* source_code_pointer) { source_code = source_code_pointer; }
 
 void PLjit_Error::print() {
+    // At runtime, we don't have precise source-code-mapping anymore
     if (error_source == Runtime) {
         std::cout << "Runtime error: " << error_message << std::endl;
         return;
