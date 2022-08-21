@@ -1,6 +1,6 @@
-#include "pljit_core/include/FunctionHandle.hpp"
 #include "pljit_core/include/PLjit.hpp"
 #include "pljit_core/include/PLjit_Error.hpp"
+#include "pljit_core/include/PLjit_FunctionHandle.hpp"
 #include <fstream>
 #include <iostream>
 

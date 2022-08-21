@@ -6,13 +6,13 @@
 #include "ast_core/SymbolTable.hpp"
 #include "ast_nodes/Function.hpp"
 namespace pljit {
-class FunctionHandle;
+class PLjit_FunctionHandle;
 }
 
 namespace ast {
 
 class AST {
-    friend class pljit::FunctionHandle;
+    friend class pljit::PLjit_FunctionHandle;
 
     public:
     SymbolTable symbolTable;

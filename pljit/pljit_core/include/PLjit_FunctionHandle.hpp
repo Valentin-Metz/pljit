@@ -1,5 +1,5 @@
-#ifndef PLJIT_FUNCTIONHANDLE_HPP
-#define PLJIT_FUNCTIONHANDLE_HPP
+#ifndef PLJIT_PLJIT_FUNCTIONHANDLE_HPP
+#define PLJIT_PLJIT_FUNCTIONHANDLE_HPP
 
 #include <cstdint>
 #include <variant>
@@ -11,21 +11,21 @@ class PLjit;
 class FunctionStorage;
 class PLjit_Error;
 
-class FunctionHandle {
+class PLjit_FunctionHandle {
     friend PLjit;
     friend FunctionStorage;
     FunctionStorage* storage;
     const std::size_t index;
-    FunctionHandle(FunctionStorage* storage, std::size_t index);
+    PLjit_FunctionHandle(FunctionStorage* storage, std::size_t index);
 
     void compile();
 
     public:
-    ~FunctionHandle();
+    ~PLjit_FunctionHandle();
 
     std::variant<std::int64_t, PLjit_Error> execute(std::vector<std::int64_t> parameters);
 };
 
 } // namespace pljit
 
-#endif //PLJIT_FUNCTIONHANDLE_HPP
+#endif //PLJIT_PLJIT_FUNCTIONHANDLE_HPP

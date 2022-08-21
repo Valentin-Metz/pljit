@@ -13,17 +13,17 @@ class AST;
 
 namespace pljit {
 
-class FunctionHandle;
+class PLjit_FunctionHandle;
 
 class FunctionStorage {
     friend class PLjit;
-    friend class FunctionHandle;
+    friend class PLjit_FunctionHandle;
 
     /// Stores functions either as source or once compiled as an AST
     /// The once_flag ensures that we only compile once
     std::vector<std::pair<std::unique_ptr<std::once_flag>, std::variant<std::string_view, std::unique_ptr<ast::AST>>>> functions;
 
-    FunctionHandle registerFunction(std::string_view source_code);
+    PLjit_FunctionHandle registerFunction(std::string_view source_code);
 };
 
 } // namespace pljit

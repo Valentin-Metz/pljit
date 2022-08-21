@@ -1,4 +1,4 @@
-#include "include/FunctionHandle.hpp"
+#include "include/PLjit_FunctionHandle.hpp"
 #include "FunctionStorage.hpp"
 #include "ast/Ast.hpp"
 #include "include/PLjit.hpp"
@@ -8,10 +8,10 @@
 
 namespace pljit {
 
-FunctionHandle::FunctionHandle(FunctionStorage* storage, std::size_t index) : storage(storage), index(index) {}
-FunctionHandle::~FunctionHandle() = default;
+PLjit_FunctionHandle::PLjit_FunctionHandle(FunctionStorage* storage, std::size_t index) : storage(storage), index(index) {}
+PLjit_FunctionHandle::~PLjit_FunctionHandle() = default;
 
-void FunctionHandle::compile() {
+void PLjit_FunctionHandle::compile() {
     /// Generate source code
     source_code::SourceCode source_code{std::move(std::get<std::string_view>(storage->functions[index].second))};
 
@@ -34,10 +34,10 @@ void FunctionHandle::compile() {
     storage->functions[index].second.emplace<std::unique_ptr<ast::AST>>(std::move(ast));
 }
 
-std::variant<std::int64_t, PLjit_Error> FunctionHandle::execute(std::vector<std::int64_t> parameters) {
+std::variant<std::int64_t, PLjit_Error> PLjit_FunctionHandle::execute(std::vector<std::int64_t> parameters) {
     try {
         /// Call compile() exactly once
-        std::call_once(*storage->functions[index].first, &FunctionHandle::compile, this);
+        std::call_once(*storage->functions[index].first, &PLjit_FunctionHandle::compile, this);
 
         /// Load the AST
         ast::AST& ast = *std::get<1>(storage->functions[index].second);

@@ -6,7 +6,7 @@
 
 namespace pljit {
 
-class FunctionHandle;
+class PLjit_FunctionHandle;
 class FunctionStorage;
 
 /// PL/0 just-in-time compiler
@@ -20,7 +20,7 @@ class PLjit {
     ~PLjit();
 
     /// Registers a function by source code and returns a callable handle
-    FunctionHandle registerFunction(std::string_view source_code);
+    PLjit_FunctionHandle registerFunction(std::string_view source_code);
 };
 
 } // namespace pljit
