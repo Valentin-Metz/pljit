@@ -1,9 +1,9 @@
 #ifndef PLJIT_CONSTANTDECLARATION_HPP
 #define PLJIT_CONSTANTDECLARATION_HPP
 
-#include "../../lexer/Lexer.hpp"
 #include "InitDeclaratorList.hpp"
 #include "TerminalSymbol.hpp"
+#include "lexer/Lexer.hpp"
 namespace parse_tree {
 
 class ConstantDeclaration {

@@ -1,9 +1,9 @@
 #ifndef PLJIT_INITDECLARATOR_HPP
 #define PLJIT_INITDECLARATOR_HPP
 
-#include "../../lexer/Lexer.hpp"
 #include "Identifier.hpp"
 #include "Literal.hpp"
+#include "lexer/Lexer.hpp"
 namespace parse_tree {
 
 class InitDeclarator {

@@ -1,8 +1,6 @@
 #include "AdditiveExpression.hpp"
-#include "../../lexer/tokens/LexerArithmeticToken.hpp"
-#include "../../lexer/tokens/LexerBracketToken.hpp"
-#include "../../lexer/tokens/LexerErrorToken.hpp"
-#include "include/PLjit_Error.hpp"
+#include "lexer/tokens/LexerArithmeticToken.hpp"
+#include "lexer/tokens/LexerBracketToken.hpp"
 #include <memory>
 
 namespace parse_tree {

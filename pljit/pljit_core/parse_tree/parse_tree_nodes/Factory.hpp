@@ -1,8 +1,8 @@
 #ifndef PLJIT_FACTORY_HPP
 #define PLJIT_FACTORY_HPP
 
-#include "../../lexer/Lexer.hpp"
 #include "TerminalSymbol.hpp"
+#include "lexer/Lexer.hpp"
 namespace parse_tree {
 
 /// This factory produces nodes for terminals which do not get their own node-type according to the assignment
@@ -11,12 +11,6 @@ class Factory {
     enum SeparatorType {
         COMMA,
         SEMICOLON
-    };
-    enum ArithmeticOperatorType {
-        PLUS,
-        MINUS,
-        MULTIPLY,
-        DIVIDE,
     };
     static std::pair<const SeparatorType, const TerminalSymbol> produceSeparator(lexer::Lexer& l);
     static const TerminalSymbol produceDeclarator(lexer::Lexer& l);

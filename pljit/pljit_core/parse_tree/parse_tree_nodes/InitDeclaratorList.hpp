@@ -1,10 +1,10 @@
 #ifndef PLJIT_INITDECLARATORLIST_HPP
 #define PLJIT_INITDECLARATORLIST_HPP
 
-#include "../../lexer/Lexer.hpp"
 #include "InitDeclarator.hpp"
 #include "Literal.hpp"
 #include "TerminalSymbol.hpp"
+#include "lexer/Lexer.hpp"
 #include <vector>
 namespace parse_tree {
 

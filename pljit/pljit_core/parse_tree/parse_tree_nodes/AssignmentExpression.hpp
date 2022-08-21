@@ -1,9 +1,9 @@
 #ifndef PLJIT_ASSIGNMENTEXPRESSION_HPP
 #define PLJIT_ASSIGNMENTEXPRESSION_HPP
 
-#include "../../lexer/Lexer.hpp"
 #include "AdditiveExpression.hpp"
 #include "Identifier.hpp"
+#include "lexer/Lexer.hpp"
 namespace parse_tree {
 
 class AssignmentExpression {

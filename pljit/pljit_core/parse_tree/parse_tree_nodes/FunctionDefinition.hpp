@@ -1,12 +1,12 @@
 #ifndef PLJIT_FUNCTIONDEFINITION_HPP
 #define PLJIT_FUNCTIONDEFINITION_HPP
 
-#include "../../lexer/Lexer.hpp"
 #include "CompoundStatement.hpp"
 #include "ConstantDeclaration.hpp"
 #include "ParameterDeclaration.hpp"
 #include "TerminalSymbol.hpp"
 #include "VariableDeclaration.hpp"
+#include "lexer/Lexer.hpp"
 #include <optional>
 namespace parse_tree {
 

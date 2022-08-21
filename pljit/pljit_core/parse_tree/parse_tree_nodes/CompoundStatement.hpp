@@ -1,9 +1,9 @@
 #ifndef PLJIT_COMPOUNDSTATEMENT_HPP
 #define PLJIT_COMPOUNDSTATEMENT_HPP
 
-#include "../../lexer/Lexer.hpp"
 #include "StatementList.hpp"
 #include "TerminalSymbol.hpp"
+#include "lexer/Lexer.hpp"
 namespace parse_tree {
 
 class CompoundStatement {
