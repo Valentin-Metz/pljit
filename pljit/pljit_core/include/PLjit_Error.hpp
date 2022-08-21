@@ -10,12 +10,7 @@
 namespace pljit {
 
 class PLjit_Error {
-    source_code::SourceCode* source_code = 0;
-    void set_source_code(source_code::SourceCode* source_code_pointer);
-
     public:
-    const source_code::SourceCodeReference source_code_reference;
-
     enum ErrorSource {
         Lexer,
         ParseTree,
@@ -23,10 +18,17 @@ class PLjit_Error {
         AST,
         Runtime,
     };
-    const ErrorSource error_source;
 
+    private:
+    const source_code::SourceCodeReference source_code_reference;
+
+    const ErrorSource error_source;
     const std::string error_message;
 
+    source_code::SourceCode* source_code = 0;
+    void set_source_code(source_code::SourceCode* source_code_pointer);
+
+    public:
     explicit PLjit_Error(source_code::SourceCodeReference source_code_reference, ErrorSource error_source, std::string error_message);
 
     void print();

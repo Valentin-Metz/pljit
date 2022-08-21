@@ -1,1 +1,1 @@
-add_library(source_code_management SourceCodeReference.cpp SourceCodeReference.hpp)
+add_library(source_code_management SourceCodeReference.cpp SourceCodeReference.hpp SourceCode.cpp)
