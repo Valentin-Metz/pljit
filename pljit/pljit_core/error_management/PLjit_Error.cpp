@@ -1,5 +1,6 @@
 #include "include/PLjit_Error.hpp"
 #include "source_code_management/SourceCode.hpp"
+#include <cassert>
 #include <iostream>
 
 namespace pljit {
@@ -12,6 +13,9 @@ PLjit_Error::~PLjit_Error() = default;
 void PLjit_Error::set_source_code(source_code::SourceCode* source_code_pointer) { source_code = source_code_pointer; }
 
 void PLjit_Error::print() {
+    // This should always be set before print() gets called
+    assert(source_code);
+
     // If an error occurs at runtime, we can no longer offer precise source-code mappings
     if (error_source == Runtime) {
         std::cout << "Runtime error: " << error_message << std::endl;
