@@ -1,7 +1,6 @@
 #include "AssignmentStatement.hpp"
 #include "MultiplicativeExpression.hpp"
 #include "ast/ast_core/AstVisitor.hpp"
-#include "utility.hpp"
 
 namespace ast {
 
@@ -15,7 +14,7 @@ void AssignmentStatement::accept(AstVisitor& visitor) {
 }
 
 void AssignmentStatement::execute(ExecutionTable& table) {
-    table.update(target, evaluate_expressions(expressions, table));
+    table.update(target, Expression::evaluate_expressions(expressions, table));
 }
 
 } // namespace ast

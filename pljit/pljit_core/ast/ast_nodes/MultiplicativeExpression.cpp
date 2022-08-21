@@ -1,7 +1,6 @@
 #include "MultiplicativeExpression.hpp"
 #include "Statement.hpp"
 #include "ast/ast_core/AstVisitor.hpp"
-#include "utility.hpp"
 
 namespace ast {
 
@@ -14,7 +13,7 @@ void MultiplicativeExpression::accept(AstVisitor& visitor) {
 }
 
 int64_t MultiplicativeExpression::execute(ExecutionTable& table) {
-    return evaluate_expressions(expressions, table);
+    return Expression::evaluate_expressions(expressions, table);
 }
 
 } // namespace ast

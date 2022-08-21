@@ -2,7 +2,6 @@
 #include "MultiplicativeExpression.hpp"
 #include "ast/ast_core/AstVisitor.hpp"
 #include "parse_tree/parse_tree_nodes/Statement.hpp"
-#include "utility.hpp"
 
 namespace ast {
 
@@ -15,7 +14,7 @@ void ReturnStatement::accept(AstVisitor& visitor) {
 }
 
 void ReturnStatement::execute(ExecutionTable& table) {
-    table.result.emplace(evaluate_expressions(expressions, table));
+    table.result.emplace(Expression::evaluate_expressions(expressions, table));
 }
 
 } // namespace ast
