@@ -68,7 +68,12 @@ TEST(PLjitTest, MultithreadedCalculation) {
 
     std::atomic<int64_t> result_sum = 0;
 
-    auto execute = [&result_sum](PLjit_FunctionHandle handle) {
+    auto original_handle = [&result_sum, &handle]() {
+        int64_t result = std::get<0>(handle.execute({1337, 3}));
+        EXPECT_EQ(result, 1337);
+        result_sum += result;
+    };
+    auto copy_handle = [&result_sum](PLjit_FunctionHandle handle) {
         int64_t result = std::get<0>(handle.execute({1337, 3}));
         EXPECT_EQ(result, 1337);
         result_sum += result;
@@ -76,11 +81,12 @@ TEST(PLjitTest, MultithreadedCalculation) {
 
     std::vector<std::unique_ptr<std::thread>> threads;
     for (int i = 0; i < 1337; ++i) {
-        threads.push_back(std::make_unique<std::thread>(execute, handle));
+        threads.push_back(std::make_unique<std::thread>(original_handle));
+        threads.push_back(std::make_unique<std::thread>(copy_handle, handle));
     }
     for (auto& thread : threads) {
         thread->join();
     }
 
-    EXPECT_EQ(result_sum, 1337 * 1337);
+    EXPECT_EQ(result_sum, 1337 * 1337 * 2);
 }
