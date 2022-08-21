@@ -8,6 +8,7 @@
 
 namespace pljit {
 
+/// This class is used to indicate an error that occurred at any stage of our program - from compilation to execution
 class PLjit_Error {
     friend class PLjit_FunctionHandle;
     public:
@@ -31,6 +32,7 @@ class PLjit_Error {
     public:
     explicit PLjit_Error(source_code::SourceCodeReference source_code_reference, ErrorSource error_source, std::string error_message);
 
+    /// The error content can be printed to std::out, displaying the source of the error in a user-friendly way
     void print();
 };
 

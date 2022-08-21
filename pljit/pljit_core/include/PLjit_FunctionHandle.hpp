@@ -11,6 +11,7 @@ class PLjit;
 class FunctionStorage;
 class PLjit_Error;
 
+/// Lightweight and cheap to copy handle to a function
 class PLjit_FunctionHandle {
     friend PLjit;
     friend FunctionStorage;
@@ -23,6 +24,7 @@ class PLjit_FunctionHandle {
     public:
     ~PLjit_FunctionHandle();
 
+    /// Can be used to execute the stored source-code which will be compiled just-in-time
     std::variant<std::int64_t, PLjit_Error> execute(std::vector<std::int64_t> parameters);
 };
 
