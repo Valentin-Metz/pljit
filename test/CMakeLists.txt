@@ -3,7 +3,8 @@ set(TEST_SOURCES
         Lexer.cpp
         ParseTree.cpp
         AbstractSyntaxTree.cpp
-        PLjit.cpp)
+        PLjit.cpp
+        )
 
 add_executable(tester ${TEST_SOURCES})
 target_link_libraries(tester PUBLIC

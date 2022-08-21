@@ -4,7 +4,8 @@ set(PLJIT_SOURCES
         execution/PLjit_FunctionHandle.cpp
         include/PLjit_FunctionHandle.hpp
         execution/FunctionStorage.cpp
-        execution/FunctionStorage.hpp)
+        execution/FunctionStorage.hpp
+        )
 
 add_subdirectory(source_code_management)
 add_subdirectory(error_management)
