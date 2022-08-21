@@ -12,7 +12,7 @@ PLjit_Error::~PLjit_Error() = default;
 void PLjit_Error::set_source_code(source_code::SourceCode* source_code_pointer) { source_code = source_code_pointer; }
 
 void PLjit_Error::print() {
-    // At runtime, we don't have precise source-code-mapping anymore
+    // If an error occurs at runtime, we can no longer offer precise source-code mappings
     if (error_source == Runtime) {
         std::cout << "Runtime error: " << error_message << std::endl;
         return;

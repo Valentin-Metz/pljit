@@ -15,9 +15,10 @@ class PLjit_Error;
 class PLjit_FunctionHandle {
     friend PLjit;
     friend FunctionStorage;
-    FunctionStorage* storage;
-    const std::size_t index;
     PLjit_FunctionHandle(FunctionStorage* storage, std::size_t index);
+
+    FunctionStorage* const storage;
+    const std::size_t index;
 
     void compile();
 
