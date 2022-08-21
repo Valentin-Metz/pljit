@@ -78,6 +78,23 @@ TEST(AbstractSyntaxTreeTest, ExecutionTableContainsAllSymbols) {
     ASSERT_EQ(execution_table.table.size(), 5);
 }
 
+TEST(AbstractSyntaxTreeTest, IdentifierDeclaredTwiceThrows) {
+    SourceCode source_code{"PARAM x;\n"
+                           "CONST x = 1337;\n"
+                           "BEGIN\n"
+                           "RETURN 1\n"
+                           "END."};
+    Lexer lexer{source_code};
+    ParseTree parse_tree{lexer};
+    try {
+        AST ast{parse_tree, source_code};
+    } catch (PLjit_Error&) {
+        SUCCEED();
+        return;
+    }
+    FAIL();
+}
+
 TEST(ParseTreeTest, ExampleProgramPrint) {
     SourceCode source_code{SourceCode(example_program)};
     Lexer lexer{source_code};
