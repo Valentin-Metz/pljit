@@ -2,6 +2,7 @@
 #include "FunctionStorage.hpp"
 #include "ast/Ast.hpp"
 #include "include/PLjit.hpp"
+#include <cassert>
 
 namespace pljit {
 
@@ -9,6 +10,9 @@ PLjit_FunctionHandle::PLjit_FunctionHandle(FunctionStorage* storage, std::size_t
 PLjit_FunctionHandle::~PLjit_FunctionHandle() = default;
 
 void PLjit_FunctionHandle::compile() {
+    // This function should only be called once
+    assert(!std::get<2>(storage->functions[index]));
+
     /// Get stored source code
     source_code::SourceCode& source_code = *std::get<1>(storage->functions[index]);
 
@@ -32,12 +36,15 @@ void PLjit_FunctionHandle::compile() {
 }
 
 std::variant<std::int64_t, PLjit_Error> PLjit_FunctionHandle::execute(std::vector<std::int64_t> parameters) {
+    assert(storage);
+    assert(std::get<0>(storage->functions[index]) && std::get<1>(storage->functions[index]));
     /// If compilation, optimization or execution fails we get an error describing the problem
     try {
         /// Call compile() exactly once
         std::call_once(*std::get<0>(storage->functions[index]), &PLjit_FunctionHandle::compile, this);
 
         /// Load the AST
+        assert(std::get<2>(storage->functions[index]));
         ast::AST& ast = *std::get<2>(storage->functions[index]);
 
         /// Copy execution table
