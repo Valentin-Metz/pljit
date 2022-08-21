@@ -16,15 +16,36 @@ extern std::string leet_program;
 extern std::vector<std::string> valid_programs;
 extern std::vector<std::string> invalid_programs;
 
+TEST(PLjitTest, ValidProgramsSucceed) {
+    for (auto& string : valid_programs) {
+        PLjit pljit;
+        auto handle = pljit.registerFunction(string);
+
+        bool succeeded_once = false;
+        for (int i = 0; i < 10; ++i) {
+            for (int j = 0; j < 10; ++j) {
+                std::vector<int64_t> parameters(i, j);
+                auto result = handle.execute(parameters);
+                if (result.index() == 0) {
+                    succeeded_once = true;
+                }
+            }
+        }
+        EXPECT_TRUE(succeeded_once);
+    }
+}
+
 TEST(PLjitTest, InvalidProgramsReturnError) {
     for (auto& string : invalid_programs) {
         PLjit pljit;
         auto handle = pljit.registerFunction(string);
 
         for (int i = 0; i < 10; ++i) {
-            std::vector<int64_t> parameters(i, i);
-            auto result = handle.execute(parameters);
-            EXPECT_EQ(result.index(), 1);
+            for (int j = 0; j < 10; ++j) {
+                std::vector<int64_t> parameters(i, j);
+                auto result = handle.execute(parameters);
+                EXPECT_EQ(result.index(), 1);
+            }
         }
     }
 }
