@@ -1,4 +1,6 @@
-#include "../pljit/pljit_core/lexer/Lexer.hpp"
+#include "pljit_core/lexer/Lexer.hpp"
+#include <fstream>
+#include <iostream>
 #include <gtest/gtest.h>
 std::string valid_source_code = "PARAM width, height, depth;\n"
                                 "VAR volume;\n"
@@ -12,6 +14,10 @@ using namespace lexer;
 using namespace source_code;
 
 TEST(LexerTest, LexerValidSource) {
+    std::ifstream ifs("valid_source/example_program.txt");
+    std::string content((std::istreambuf_iterator<char>(ifs)),
+                        (std::istreambuf_iterator<char>()));
+
     SourceCode c{SourceCode(valid_source_code)};
     Lexer l{c};
 
