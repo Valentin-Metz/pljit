@@ -28,28 +28,30 @@ TEST(AbstractSyntaxTreeTest, OptimizedResultEqualsUnoptimizedResult) {
         ast_optimized.generateExecutionTable();
 
         for (int i = 0; i < 10; ++i) {
-            auto execution_table_unoptimized = ast_unoptimized.getExecutionTable();
-            auto execution_table_optimized = ast_unoptimized.getExecutionTable();
+            for (int j = 0; j < 10; ++j) {
+                auto execution_table_unoptimized = ast_unoptimized.getExecutionTable();
+                auto execution_table_optimized = ast_unoptimized.getExecutionTable();
 
-            std::vector<int64_t> parameters(i, i);
+                std::vector<int64_t> parameters(i, j);
 
-            try {
-                execution_table_unoptimized.initialize(parameters);
-                execution_table_optimized.initialize(parameters);
-            } catch (PLjit_Error) { // If one fails to compile, the other must, too
-                EXPECT_ANY_THROW(execution_table_unoptimized.initialize(parameters));
-                EXPECT_ANY_THROW(execution_table_optimized.initialize(parameters));
+                try {
+                    execution_table_unoptimized.initialize(parameters);
+                    execution_table_optimized.initialize(parameters);
+                } catch (PLjit_Error) { // If one fails to compile, the other must, too
+                    EXPECT_ANY_THROW(execution_table_unoptimized.initialize(parameters));
+                    EXPECT_ANY_THROW(execution_table_optimized.initialize(parameters));
+                }
+
+                try {
+                    ast_unoptimized.function->execute(execution_table_unoptimized);
+                    ast_optimized.function->execute(execution_table_optimized);
+                } catch (pljit::PLjit_Error) { // If one fails to execute, the other must, too
+                    EXPECT_ANY_THROW(ast_unoptimized.function->execute(execution_table_unoptimized));
+                    EXPECT_ANY_THROW(ast_optimized.function->execute(execution_table_optimized));
+                }
+
+                EXPECT_EQ(execution_table_unoptimized.result, execution_table_optimized.result);
             }
-
-            try {
-                ast_unoptimized.function->execute(execution_table_unoptimized);
-                ast_optimized.function->execute(execution_table_optimized);
-            } catch (pljit::PLjit_Error) { // If one fails to execute, the other must, too
-                EXPECT_ANY_THROW(ast_unoptimized.function->execute(execution_table_unoptimized));
-                EXPECT_ANY_THROW(ast_optimized.function->execute(execution_table_optimized));
-            }
-
-            EXPECT_EQ(execution_table_unoptimized.result, execution_table_optimized.result);
         }
     }
 }
