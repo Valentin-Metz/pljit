@@ -1,6 +1,7 @@
 #include "pljit_core/include/PLjit.hpp"
 #include "pljit_core/include/PLjit_Error.hpp"
 #include "pljit_core/include/PLjit_FunctionHandle.hpp"
+#include <exception>
 #include <fstream>
 #include <iostream>
 
@@ -19,7 +20,15 @@ int main([[maybe_unused]] int argc, char* argv[]) {
     // Parse arguments
     std::vector<std::int64_t> arguments;
     for (int i = 2; i < argc; ++i) {
-        arguments.push_back(std::stoll(argv[i]));
+        try {
+            arguments.push_back(std::stoll(argv[i]));
+        } catch (const std::invalid_argument& ia) {
+            std::cerr << "Invalid argument: " << ia.what() << std::endl;
+            return 1;
+        } catch (const std::out_of_range& oor) {
+            std::cerr << "Out of Range error: " << oor.what() << std::endl;
+            return 1;
+        }
     }
 
     // Construct PLjit
