@@ -3,6 +3,7 @@
 #include "MultiplicativeExpression.hpp"
 #include "TerminalExpression.hpp"
 #include "parse_tree/parse_tree_nodes/Statement.hpp"
+#include <cassert>
 
 namespace ast {
 Statement::~Statement() {
@@ -13,14 +14,17 @@ void Statement::parseUnaryExpression(const parse_tree::UnaryExpression& unary_ex
     if (unary_expression.modifier && unary_expression.modifier.value().second == ArithmeticSymbol::MINUS) sign *= -1;
 
     if (unary_expression.primaryExpression.value()->identifier) {
+        assert(!(unary_expression.primaryExpression.value()->literal || unary_expression.primaryExpression.value()->additiveExpression));
         symbol_table.check_read(unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference.resolve(source_code),
                                 unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference);
         expressions.push_back(std::make_unique<TerminalExpression>(std::make_pair(sign, unary_expression.primaryExpression.value()->identifier.value().identifier.source_code_reference.resolve(source_code))));
     }
     if (unary_expression.primaryExpression.value()->literal) {
+        assert(!(unary_expression.primaryExpression.value()->identifier || unary_expression.primaryExpression.value()->additiveExpression));
         expressions.push_back(std::make_unique<TerminalExpression>(unary_expression.primaryExpression.value()->literal.value().literal.second * sign));
     }
     if (unary_expression.primaryExpression.value()->additiveExpression) {
+        assert(!(unary_expression.primaryExpression.value()->identifier || unary_expression.primaryExpression.value()->literal));
         Statement::parseAdditiveExpression(*unary_expression.primaryExpression.value()->additiveExpression.value(), symbol_table, source_code, expressions, sign);
     }
 }

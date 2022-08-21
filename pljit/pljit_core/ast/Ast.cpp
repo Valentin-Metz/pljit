@@ -4,6 +4,7 @@
 #include "optimization/ConstantPropagationOptimizationPass.hpp"
 #include "optimization/DeadCodeEliminationOptimizationPass.hpp"
 #include "print/AstPrintVisitor.hpp"
+#include <cassert>
 
 namespace ast {
 
@@ -32,7 +33,7 @@ void AST::generateExecutionTable() {
     for (auto& entry : symbolTable.table) {
         t.insert(entry.first, std::get<2>(entry.second));
     }
-    ASSERT_EQ(symbolTable.table.size(), t.table.size());
+    assert(symbolTable.table.size() == t.table.size());
     executionTable.emplace(t);
 }
 
