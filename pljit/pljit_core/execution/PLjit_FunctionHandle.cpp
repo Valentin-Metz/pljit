@@ -36,7 +36,7 @@ void PLjit_FunctionHandle::compile() {
 }
 
 std::variant<std::int64_t, PLjit_Error> PLjit_FunctionHandle::execute(std::vector<std::int64_t> parameters) {
-    assert(storage);
+    assert(storage && index < storage->functions.size());
     assert(std::get<0>(storage->functions[index]) && std::get<1>(storage->functions[index]));
     /// If compilation, optimization or execution fails we get an error describing the problem
     try {
