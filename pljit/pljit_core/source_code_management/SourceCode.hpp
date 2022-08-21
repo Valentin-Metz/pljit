@@ -9,16 +9,13 @@ class SourceCode {
     const std::string_view source_code;
     explicit SourceCode(std::string_view source_code);
 
-    // Behave like the contained string if required
+    // Behave as the contained string if required
     operator const std::string_view&() const;
 
-    // We don't want to copy source code around
+    // We don't want to copy or move source code around
     SourceCode(const SourceCode&) = delete;
     SourceCode& operator=(SourceCode&) = delete;
-
-    // Moving is allowed
-    SourceCode(SourceCode&&);
-    // But if we override source code we are probably doing something wrong
+    SourceCode(SourceCode&&) = delete;
     SourceCode& operator=(SourceCode&& other) = delete;
 };
 
