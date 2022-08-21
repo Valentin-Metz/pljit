@@ -12,8 +12,8 @@ PLjit_FunctionHandle::PLjit_FunctionHandle(FunctionStorage* storage, std::size_t
 PLjit_FunctionHandle::~PLjit_FunctionHandle() = default;
 
 void PLjit_FunctionHandle::compile() {
-    /// Generate source code
-    source_code::SourceCode source_code{std::move(std::get<std::string_view>(storage->functions[index].second))};
+    /// Get stored source code
+    source_code::SourceCode& source_code = *std::get<1>(storage->functions[index]);
 
     /// Parse source code
     lexer::Lexer lexer{source_code};
@@ -22,7 +22,7 @@ void PLjit_FunctionHandle::compile() {
     parse_tree::ParseTree parse_tree{lexer};
 
     /// Construct abstract syntax tree
-    std::unique_ptr<ast::AST> ast = std::make_unique<ast::AST>(parse_tree, std::move(source_code));
+    std::unique_ptr<ast::AST> ast = std::make_unique<ast::AST>(parse_tree, source_code);
 
     /// Optimize abstract syntax tree
     ast->optimize();
@@ -31,16 +31,16 @@ void PLjit_FunctionHandle::compile() {
     ast->generateExecutionTable();
 
     /// Store the abstract syntax tree
-    storage->functions[index].second.emplace<std::unique_ptr<ast::AST>>(std::move(ast));
+    std::get<2>(storage->functions[index]) = std::move(ast);
 }
 
 std::variant<std::int64_t, PLjit_Error> PLjit_FunctionHandle::execute(std::vector<std::int64_t> parameters) {
     try {
         /// Call compile() exactly once
-        std::call_once(*storage->functions[index].first, &PLjit_FunctionHandle::compile, this);
+        std::call_once(*std::get<0>(storage->functions[index]), &PLjit_FunctionHandle::compile, this);
 
         /// Load the AST
-        ast::AST& ast = *std::get<1>(storage->functions[index].second);
+        ast::AST& ast = *std::get<2>(storage->functions[index]);
 
         /// Copy execution table
         ast::ExecutionTable execution_table = ast.getExecutionTable();
@@ -52,6 +52,7 @@ std::variant<std::int64_t, PLjit_Error> PLjit_FunctionHandle::execute(std::vecto
         ast.function->execute(execution_table);
         return execution_table.result.value();
     } catch (PLjit_Error error) {
+        // todo: store source code in error and change ast so it stores a source code reference and change vector to permanently store source code as SourceCode
         return error;
     }
 }
