@@ -4,6 +4,7 @@
 #include "ast_core/ExecutionTable.hpp"
 #include "ast_core/SymbolTable.hpp"
 #include "ast_nodes/Function.hpp"
+#include "gtest/gtest.h"
 namespace pljit {
 class PLjit_FunctionHandle;
 }
@@ -15,6 +16,7 @@ namespace ast {
 
 /// Abstract syntax tree
 class AST {
+    FRIEND_TEST(AbstractSyntaxTreeTest, OptimizedResultEqualsUnoptimizedResult);
     friend class pljit::PLjit_FunctionHandle;
 
     // The execution table is used to evaluate an ast with user-given parameters
