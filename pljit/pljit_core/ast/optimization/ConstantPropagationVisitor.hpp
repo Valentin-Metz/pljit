@@ -2,6 +2,7 @@
 #define PLJIT_CONSTANTPROPAGATIONVISITOR_HPP
 
 #include "ast/ast_core/AstVisitor.hpp"
+#include <cstdint>
 #include <string_view>
 #include <unordered_map>
 namespace ast {

@@ -1,5 +1,6 @@
 #ifndef PLJIT_EXECUTIONTABLE_HPP
 #define PLJIT_EXECUTIONTABLE_HPP
+#include <cstdint>
 #include <optional>
 #include <string_view>
 #include <unordered_map>

@@ -21,12 +21,14 @@ void PLjit_FunctionHandle::compile() {
 
     /// Construct parse tree
     parse_tree::ParseTree parse_tree{lexer};
+    parse_tree.print();
 
     /// Construct abstract syntax tree
     std::unique_ptr<ast::AST> ast = std::make_unique<ast::AST>(parse_tree, source_code);
 
     /// Optimize abstract syntax tree
     ast->optimize();
+    ast->print();
 
     /// Generate execution table
     ast->generateExecutionTable();
