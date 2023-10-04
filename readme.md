@@ -6,7 +6,7 @@ This is a C++ JIT-compiler for the [PL/0](https://en.wikipedia.org/wiki/PL/0) pr
 
 - Lexer (with error checking)
 - Parse tree for semantic analysis
-- Abstract Syntax Tree with dead code elimination and constant folding
+- Abstract syntax tree with dead code elimination and constant folding
 
 ### Usage:
 
